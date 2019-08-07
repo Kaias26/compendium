@@ -19,7 +19,7 @@
 
 				echo "<tr>";
 					echo "<td class='cell-min-width'>" . $row['type'] . "</td>";
-					echo "<td><a class='openModal' href='/traits/" . $row['id'] . "'>" . $row['name'] . "</a></td>";
+					echo "<td><a class='openModal' href='/trait/" . $row['id'] . "'>" . $row['name'] . "</a></td>";
 					echo "<td class='text-center'>";
 						echo "<div class='input-group'>";
 							echo "<input type='text' id='text_" . $row['id'] . "' class='form-control' value='" . $macro . "' />";
