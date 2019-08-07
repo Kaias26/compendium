@@ -1,0 +1,55 @@
+<footer class="footer">
+	<div class="container text-center">
+		<span class="text-center text-muted">Le donjon de Naheulbeuk - &copy;<a href="http://www.naheulbeuk.com/" target="_blank">Pen of Chaos</a> <br> Compendium pour Roll20 - &copy;<a href="http://www.naheulbeuk-online.org/" target="_blank">Naheulbeuk Online</a> <?php print date("Y");?></span>
+	</div>
+</footer>
+
+<!-- Bootstrap core JavaScript  -->
+<script src="/js/jquery-3.4.1.min.js"></script>
+<script src="/js/popper.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/jquery.dataTables.min.js"></script>
+<script>
+	$(document).ready( function () {
+		$('#myDatatable').DataTable({
+			"language": {
+				"url": "/js/datatables/french.json"
+			},
+			"columnDefs": [
+				{ "orderable": false, "targets": -1 }
+			],
+			"paging": false,
+			//"info": false
+		} );
+
+		$('#myDatatable').on( "click", "button", function() {
+			var $this = $( this );
+			var $text_id = $this.data( "id" );
+			var $input = $( "#text_" + $text_id );
+
+			$input.select();
+			document.execCommand("copy");
+			$input.blur();
+
+			$this.html( '<i class="fa fa-check"></i>' ).removeClass( "btn-default" ).addClass( "btn-success" );
+			setTimeout( function() {
+				$this.removeClass( "btn-success" ).addClass( "btn-default" ).html( '<i class="fa fa-copy"></i>' );
+			}, 1000);
+
+		});
+
+		$('.openModal').on( "click", function() {
+			event.preventDefault();
+			var _href = $( this ).attr('href');
+			var _target = $( ".modal-content" );
+
+			$.ajax( {
+				url: _href,
+				success: function(result){
+					_target.html( result );
+					$('#myModal').modal('show');
+				}
+			});
+		});
+	} );
+</script>

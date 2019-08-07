@@ -1,0 +1,7 @@
+Options +FollowSymlinks
+RewriteEngine On
+
+RewriteRule ^faq$ /index.php?folder=faq [L]
+RewriteRule ^spell/([0-9]*)$ /modals/spell.php?id=$1 [L,QSA]
+RewriteRule ^trait/([0-9]*)$ /modals/trait.php?id=$1 [L,QSA]
+RewriteRule ^([a-zA-Z]*)\/([a-zA-Z]*)\/?([a-zA-Z]*)$ /index.php?folder=$1&group=$2&subgroup=$3 [L]
