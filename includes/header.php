@@ -39,7 +39,7 @@
 				<li class="nav-item dropdown <?php if( $folder == "objets" ) {?>active<?php }?>">
 					<a class="nav-link dropdown-toggle" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#"><i class="fas fa-toolbox"></i> Objets</a>
 					<div class="dropdown-menu" aria-labelledby="dropdown04">
-						<a class="dropdown-item <?php if( $group == "armement" ) {?>active<?php }?>" href="/objets/traitsspeciaux">Armement</a>
+						<a class="dropdown-item <?php if( $group == "armement" ) {?>active<?php }?>" href="/objets/armement">Armement</a>
 						<a class="dropdown-item <?php if( $group == "protections" ) {?>active<?php }?>" href="/objets/protections">Protections</a>
 						<a class="dropdown-item <?php if( $group == "accessoires" ) {?>active<?php }?>" href="/objets/accessoires">Accessoires</a>
 						<a class="dropdown-item <?php if( $group == "materiel" ) {?>active<?php }?>" href="/objets/materiel">Matériel</a>
