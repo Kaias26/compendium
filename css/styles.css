@@ -20,4 +20,4 @@ body {
 
 #myDatatable input { max-width: 100px!important;  }
 #myDatatable .cell-min-width { width: 1%; white-space: nowrap; }
-#myDatatable td:last-child { width:140px!important; }
+#myDatatable td:last-child { width:150px!important; }
