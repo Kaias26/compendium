@@ -1,6 +1,6 @@
 <div class="starter-template">
-	<h1 class="mt-5">Les traits particuliers</h1>
-	<p class="lead">Liste des traits particuliers pour les monstres.</p>
+	<h1 class="mt-5">Les traits spéciaux</h1>
+	<p class="lead">Liste des traits spéciaux pour les monstres.</p>
 </div>
 
 <div class="container">
