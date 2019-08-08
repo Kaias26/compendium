@@ -18,6 +18,5 @@ body {
   text-align: center;
 }
 
-#myDatatable input { max-width: 100px!important;  }
+#myDatatable input { width: 100px!important;  }
 #myDatatable .cell-min-width { width: 1%; white-space: nowrap; }
-#myDatatable td:last-child { width:150px!important; }

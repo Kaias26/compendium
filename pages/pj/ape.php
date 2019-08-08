@@ -39,6 +39,7 @@
 			<th scope="col">Note</th>
 			<th scope="col">Effet</th>
 			<th scope="col">Roll20</th>
+			<th scope="col"></th>
 		</tr>
 		</thead>
 		<tbody>
@@ -52,13 +53,11 @@
 					echo "<td>" . $row['name'] . "</td>";
 					echo "<td>" . $row['note'] . "</td>";
 					echo "<td>" . $row['effet'] . "</td>";
-					echo "<td>";
-						echo "<div class='input-group'>";
-							echo "<input type='text' id='text_" . $row['id'] . "' class='' value='" . $macro . "' />";
-							echo "<span class='input-group-btn'>";
-								echo "<button type='button' class='btn btn-default' data-id='" . $row['id'] . "' title='Copier'><i class='fa fa-copy'></i></button>";
-							echo "</span>";
-						echo "</div>";
+					echo "<td class='cell-min-width'>";
+						echo "<input type='text' id='text_" . $row['id'] . "' class='' value='" . $macro . "' />";
+					echo "</td>";
+					echo "<td class='cell-min-width'>";
+						echo "<button type='button' class='btn btn-default' data-id='" . $row['id'] . "' title='Copier'><i class='fa fa-copy'></i></button>";
 					echo "</td>";
 				echo "</tr>";
 			}

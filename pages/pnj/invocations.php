@@ -23,6 +23,7 @@
 		<tr>
 			<th scope="col">Nom</th>
 			<th scope="col">Roll20</th>
+			<th scope="col"></th>
 		</tr>
 		</thead>
 		<tbody>
@@ -31,15 +32,15 @@
 
 				echo "<tr>";
 					echo "<td>" . $row['name'] . "</td>";
-					echo "<td>";
-						if( $row['roll20'] != "" ) {
-						echo "<div class='input-group'>";
-							echo "<input type='text' id='text_" . $row['id'] . "' class='' value='" . $row['roll20'] . "' />";
-							echo "<span class='input-group-btn'>";
-								echo "<button type='button' class='btn btn-default' data-id='" . $row['id'] . "' title='Copier'><i class='fa fa-copy'></i></button>";
-							echo "</span>";
-						echo "</div>";
-						}
+					echo "<td class='cell-min-width'>";
+					if( $row['roll20'] != "" ) {
+						echo "<input type='text' id='text_" . $row['id'] . "' class='form-control' value='" . $row['roll20'] . "' />";
+					}
+					echo "</td>";
+					echo "<td class='cell-min-width'>";
+					if( $row['roll20'] != "" ) {
+						echo "<button type='button' class='btn btn-default' data-id='" . $row['id'] . "' title='Copier'><i class='fa fa-copy'></i></button></td>";
+					}
 					echo "</td>";
 				echo "</tr>";
 			}

@@ -16,7 +16,7 @@
 				"url": "/js/datatables/french.json"
 			},
 			"columnDefs": [
-				{ "orderable": false, "targets": -1 }
+				{ "orderable": false, "targets": [ -1, -2 ] }
 			],
 			"paging": false,
 			//"info": false

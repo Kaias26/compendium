@@ -10,6 +10,7 @@
 			<th scope="col">Type</th>
 			<th scope="col">Nom</th>
 			<th scope="col">Roll20</th>
+			<th scope="col"></th>
 		</tr>
 		</thead>
 		<tbody>
@@ -20,13 +21,11 @@
 				echo "<tr>";
 					echo "<td class='cell-min-width'>" . $row['type'] . "</td>";
 					echo "<td><a class='openModal' href='/trait/" . $row['id'] . "'>" . $row['name'] . "</a></td>";
-					echo "<td class='text-center'>";
-						echo "<div class='input-group'>";
-							echo "<input type='text' id='text_" . $row['id'] . "' class='form-control' value='" . $macro . "' />";
-							echo "<span class='input-group-btn'>";
-								echo "<button type='button' class='btn btn-default' data-id='" . $row['id'] . "' title='Copier'><i class='fa fa-copy'></i></button>";
-							echo "</span>";
-						echo "</div>";
+					echo "<td class='cell-min-width'>";
+						echo "<input type='text' id='text_" . $row['id'] . "' class='form-control' value='" . $macro . "' />";
+					echo "</td>";
+					echo "<td class='cell-min-width'>";
+							echo "<button type='button' class='btn btn-default' data-id='" . $row['id'] . "' title='Copier'><i class='fa fa-copy'></i></button>";
 					echo "</td>";
 				echo "</tr>";
 			}
