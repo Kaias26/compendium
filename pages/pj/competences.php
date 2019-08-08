@@ -1,6 +1,6 @@
 <div class="starter-template">
 	<h1 class="mt-5">Les compétences</h1>
-	<p class="lead">Liste de compétences pour les personnages joueurs.<br>Source : <a href="http://www.naheulbeuk.com/jdr-docs/ecran-resumecompetences.pdf" target="_bank">http://www.naheulbeuk.com/jdr-docs/ecran-resumecompetences.pdf</a></p>
+	<p class="lead">Liste des compétences pour les personnages joueurs.<br>Source : <a href="http://www.naheulbeuk.com/jdr-docs/ecran-resumecompetences.pdf" target="_bank">http://www.naheulbeuk.com/jdr-docs/ecran-resumecompetences.pdf</a></p>
 </div>
 
 <div class="container">
