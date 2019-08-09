@@ -9,7 +9,7 @@
 	</button>
 </div>
 <div class="modal-body">
-	<?php if( $aRows[ 0 ]['niveau'] != "" or $aRows[ 0 ]['apprentissage'] != "" ) { ?>
+	<?php if( (isSet( $aRows[ 0 ]['niveau'] ) ) and ( $aRows[ 0 ]['niveau'] != "" or $aRows[ 0 ]['apprentissage'] != "" ) ) { ?>
 	<p>
 		<?php if( $aRows[ 0 ]['niveau'] != "") { ?><b>Niveau :</b> <?php echo $aRows[ 0 ]['niveau'] ?><br><?php } ?>
 		<?php if( $aRows[ 0 ]['apprentissage'] != "") { ?><b>Apprentissage :</b> <?php echo $aRows[ 0 ]['apprentissage'] ?><?php } ?>
@@ -17,6 +17,9 @@
 	<?php } ?>
 	<?php if( $aRows[ 0 ]['utilisation'] != "" or $aRows[ 0 ]['echec'] != "" ) { ?>
 	<p>
+		<?php if( isSet( $aRows[ 0 ]['par'] ) )  { ?>
+			<b>Utilisable par :</b> <?php echo $aRows[ 0 ]['par'] ?><br>
+		<?php } ?>
 		<i class="fa fa-hourglass"></i>
 		<?php if( $aRows[ 0 ]['utilisation'] != "") { ?><b>Utilisation :</b> <?php echo $aRows[ 0 ]['utilisation'] ?><br><?php } ?>
 		<?php if( $aRows[ 0 ]['echec'] != "") { ?><b>En cas d'échec, </b> <?php echo $aRows[ 0 ]['echec'] ?><?php } ?>

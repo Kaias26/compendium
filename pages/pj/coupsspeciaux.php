@@ -21,7 +21,9 @@
 	<table class="table table-hover table-striped" id="myDatatable">
 		<thead class="thead-dark">
 		<tr>
+			<?php if( $subgroup != "universel" ) {?>
 			<th scope="col">Niveau</th>
+			<?php }?>
 			<th scope="col">Nom</th>
 			<th scope="col">Effet</th>
 			<th scope="col">Roll20</th>
@@ -34,7 +36,9 @@
 				$macro = '{"repeating_coupsspeciaux_rowID_coupspecial_nom":"' . $row['name'] . '", "repeating_coupsspeciaux_rowID_coupspecial_jet":"' . $row['jet'] . '", "repeating_coupsspeciaux_rowID_coupspecial_mod":"' . $row['mod'] . '","repeating_coupsspeciaux_rowID_coupspecial_degats":"' . $row['degats'] . '", "repeating_coupsspeciaux_rowID_coupspecial_degats_arme":"' . $row['degats_arme'] . '", "repeating_coupsspeciaux_rowID_coupspecial_utilisation":"' . $row['utilisation'] . '", "repeating_coupsspeciaux_rowID_coupspecial_echec":"' . $row['echec'] . '", "repeating_coupsspeciaux_rowID_coupspecial_effet":"' . $row['effet'] . '", "repeating_coupsspeciaux_rowID_coupspecial_note":"' . $row['note'] . '", "repeating_coupsspeciaux_rowID_coupspecial_condition":"' . $row['condition'] . '", "repeating_coupsspeciaux_rowID_coupspecial_critique":"' . $row['critique'] . '", "repeating_coupsspeciaux_rowID_coupspecial_fumble":"' . $row['fumble'] . '"}';
 
 				echo "<tr>";
-					echo "<td class='cell-min-width'>" . sprintf( '%02d', $row['niveau'] ) . "</td>";
+					if( $subgroup != "universel" ) {
+						echo "<td class='cell-min-width'>" . sprintf( '%02d', $row['niveau'] ) . "</td>";
+					}
 					echo "<td class='cell-min-width'><a class='openModal' href='/coupspecial/" . $row['id'] . "'>" . $row['name'] . "</a></td>";
 					echo "<td>" . $row['effet'] . "</td>";
 					echo "<td class='cell-min-width'>";
