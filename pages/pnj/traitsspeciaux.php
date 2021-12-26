@@ -3,11 +3,21 @@
 	<p class="lead">Liste des traits spéciaux pour les monstres.</p>
 </div>
 
+<ul class="nav nav-tabs">
+	<li class="nav-item">
+		<a class="nav-link <?php if( $subgroup == "niveaux" ) {?>active<?php }?>" href="/pnj/traitsspeciaux/niveaux">A niveaux de puissance</a>
+	</li>
+	<li class="nav-item">
+		<a class="nav-link <?php if( $subgroup == "simples" ) {?>active<?php }?>" href="/pnj/traitsspeciaux/simples">Simples</a>
+	</li>
+</ul>
+
+<?php if( isset( $subgroup ) and $subgroup != "" ) {?>
+<br>
 <div class="container">
 	<table class="table table-hover table-striped" id="myDatatable">
 		<thead class="thead-dark">
 		<tr>
-			<th scope="col">Type</th>
 			<th scope="col">Nom</th>
 			<th scope="col">Roll20</th>
 			<th scope="col"></th>
@@ -19,7 +29,6 @@
 				$macro = '{"repeating_traits_rowID_trait_nom":"' . $row['name'] . '","repeating_traits_rowID_trait_effet":"' . $row['effet'] . '"}';
 
 				echo "<tr>";
-					echo "<td class='cell-min-width'>" . $row['type'] . "</td>";
 					echo "<td><a class='openModal' href='/trait/" . $row['id'] . "'>" . $row['name'] . "</a></td>";
 					echo "<td class='cell-min-width'>";
 						echo "<input type='text' id='text_" . $row['id'] . "' class='form-control' value='" . $macro . "' />";
@@ -34,3 +43,4 @@
 	</table>
 	<br>
 </div>
+<?php }?>
