@@ -15,8 +15,8 @@
 				</div>
 				<ul class="list-group list-group-flush">
 					<li class="list-group-item"><a href="/grimoires/mage" class="card-link">Mage</a></li>
-					<li class="list-group-item"><a href="/grimoires/paladin" class="card-link">Prêtre</a></li>
-					<li class="list-group-item"><a href="/grimoires/pretre" class="card-link">Paladin</a></li>
+					<li class="list-group-item"><a href="/grimoires/pretre" class="card-link">Prêtre</a></li>
+					<li class="list-group-item"><a href="/grimoires/paladin" class="card-link">Paladin</a></li>
 				</ul>
 			</div>
 		</div>
