@@ -37,7 +37,7 @@
 		<tbody>
 			<?php
 			foreach ($aRows as $row ) {
-				$macro = '{"repeating_conditions_rowID_condition_provenance":"' . $row['provenance'] . '", "repeating_conditions_rowID_condition_nom":"' . $row['name'] . '","repeating_conditions_rowID_condition_effet":"' . $row['effet'] . '","repeating_conditions_rowID_condition_actif":"0"}';
+				$macro = '{"repeating_conditions_rowID_condition_provenance":"' . $row['provenance'] . '", "repeating_conditions_rowID_condition_nom":"' . $row['name'] . '","repeating_conditions_rowID_condition_effet":"' . $row['mod'] . '","repeating_conditions_rowID_condition_actif":"1"}';
 
 				echo "<tr>";
 					if( $subgroup == "mutations" OR $subgroup == "poisons" ) {
