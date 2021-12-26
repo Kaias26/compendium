@@ -11,3 +11,7 @@
 <link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet">
 <link href="/css/fa/css/all.css" rel="stylesheet">
 <link href="/css/styles.css" rel="stylesheet" >
+
+<script type="text/javascript">
+	var dataTables_options = {};
+</script>

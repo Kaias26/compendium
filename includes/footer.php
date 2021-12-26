@@ -11,7 +11,7 @@
 <script src="/js/jquery.dataTables.min.js"></script>
 <script>
 	$(document).ready( function () {
-		$('#myDatatable').DataTable({
+		var dataTable_defaults = {
 			"language": {
 				"url": "/js/datatables/french.json"
 			},
@@ -19,8 +19,12 @@
 				{ "orderable": false, "targets": [ -1, -2 ] }
 			],
 			"paging": false,
-			//"info": false
-		} );
+			"info": false
+		};
+
+		var datatable_settings = $.extend( {}, dataTable_defaults, dataTables_options );
+
+		var myTable = $('#myDatatable').DataTable( datatable_settings );
 
 		$('#myDatatable').on( "click", "button", function() {
 			var $this = $( this );
@@ -37,6 +41,11 @@
 			}, 1000);
 
 		});
+
+		// Order by the grouping
+		$('#myDatatable tbody').on( 'click', 'tr.group', function () {
+			myTable.order( dataTables_options.order ).draw();
+		} );
 
 		$('.openModal').on( "click", function() {
 			event.preventDefault();
