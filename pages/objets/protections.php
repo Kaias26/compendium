@@ -28,8 +28,8 @@
 			<th scope="col">Emplacement</th>
 			<th scope="col">Nom</th>
 			<th scope="col">Prix</th>
-			<th scope="col">PR Phy</th>
-			<th scope="col">PR Mag.</th>
+			<th scope="col">PR&nbsp;Phy</th>
+			<th scope="col">PR&nbsp;Mag.</th>
 			<th scope="col">Effets</th>
 			<th scope="col">Rup</th>
 			<th scope="col">Roll20</th>
@@ -51,10 +51,10 @@
 				echo "<tr>";
 					echo "<td>" . $row['type'] . "</td>";
 					echo "<td>" . $row['emplacement'] . "</td>";
-					echo "<td class='cell-min-width'>" . $row['name'] . "</td>";
-					echo "<td class='cell-min-width'>" . $row['prix'] . "</td>";
-					echo "<td class='cell-min-width'>" . $row['PRPhy'] . "</td>";
-					echo "<td class='cell-min-width'>" . $row['PRMag'] . "</td>";
+					echo "<td class='cell-min-width'><div class='d-none'>" . $row['type'] . "</div>" . $row['name'] . "</td>";
+					echo "<td class='cell-min-width text-center'>" . $row['prix'] . "</td>";
+					echo "<td class='cell-min-width text-center'>" . $row['PRPhy'] . "</td>";
+					echo "<td class='cell-min-width text-center'>" . $row['PRMag'] . "</td>";
 					echo "<td>" . $_effet . "</td>";
 					echo "<td class='cell-min-width'>" . $row['rup'] . "</td>";
 					echo "<td class='cell-min-width'>";
@@ -75,27 +75,15 @@
 	var groupColumn = 0;
 
 	var dataTables_options = {
-		"columnDefs": [
+		rowGroup: {
+	        dataSrc: groupColumn
+	    },
+	    "columnDefs": [
 			{ "targets": groupColumn,"visible": false },
 			{ "targets": 1,"visible": false },
 			{ "orderable": false, "targets": [ -1, -2 ] }
 		],
-		"drawCallback": function ( settings ) {
-            var api = this.api();
-            var rows = api.rows( {page:'current'} ).nodes();
-            var last = null;
-
-            api.column( groupColumn, {page:'current'} ).data().each( function ( group, i ) {
-                if ( last !== group ) {
-                    $(rows).eq( i ).before(
-                        '<tr class="group"><td colspan="8">'+group+'</td></tr>'
-                    );
-
-                    last = group;
-                }
-            } );
-        },
-		"order": [[ groupColumn, "asc" ], [ 3, "asc" ]],
+		"order": [[ 0, "asc" ], [ 3, "asc" ]],
 		"initComplete": function (settings, json) {
 			var $column = this.api().column( 1 );
 			var $div = $('<div class="dataTables_length" id="myDatatable_length"><label id="myDatatable_typefilter">Type : </label></div>')
