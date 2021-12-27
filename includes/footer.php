@@ -18,7 +18,8 @@
 				{ "orderable": false, "targets": [ -1, -2 ] }
 			],
 			"paging": false,
-			"info": false
+			"info": false,
+			"responsive": true
 		};
 
 		var datatable_settings = $.extend( {}, dataTable_defaults, dataTables_options );

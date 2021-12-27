@@ -27,3 +27,6 @@ body {
     background-color: #79a2ff !important;
     cursor:pointer;
 }
+#myDatatable .dtr-data .form-control {
+	display: inline;
+}
