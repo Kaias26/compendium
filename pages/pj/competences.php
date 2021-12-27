@@ -5,7 +5,7 @@
 
 <div class="container">
 	<table class="table table-hover table-striped" id="myDatatable">
-		<thead class="thead-dark">
+		<thead class="table-dark">
 		<tr>
 			<th scope="col">Nom</th>
 			<th scope="col">Effet</th>

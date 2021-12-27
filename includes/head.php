@@ -8,7 +8,7 @@
 
 <!-- Bootstrap core CSS -->
 <link href="/css/bootstrap/bootstrap.min.css" rel="stylesheet">
-<link href="/css/jquery.dataTables.min.css" rel="stylesheet">
+<link href="/css/datatables/datatables.min.css" rel="stylesheet">
 <link href="/css/fa/css/all.css" rel="stylesheet">
 <link href="/css/styles.css" rel="stylesheet" >
 

@@ -22,7 +22,7 @@
 <br>
 <div class="container">
 	<table class="table table-hover table-striped" id="myDatatable">
-		<thead class="thead-dark">
+		<thead class="table-dark">
 		<tr>
 			<?php if( $subgroup == "mutations" OR $subgroup == "poisons" ) {?>
 			<th scope="col">Provenance</th>

@@ -43,8 +43,8 @@
 <br>
 <div class="container">
 	<table class="table table-hover table-striped" id="myDatatable">
-		<thead class="thead-dark">
-		<tr>
+		<thead>
+		<tr class="table-dark">
 			<th scope="col">Niveau</th>
 			<th scope="col">Nom</th>
 			<th scope="col">Type</th>

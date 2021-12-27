@@ -6,9 +6,8 @@
 
 <!-- Bootstrap core JavaScript  -->
 <script src="/js/jquery-3.4.1.min.js"></script>
-<script src="/js/popper.min.js"></script>
 <script src="/js/bootstrap/bootstrap.bundle.min.js"></script>
-<script src="/js/jquery.dataTables.min.js"></script>
+<script src="/js/datatables/datatables.min.js"></script>
 <script>
 	$(document).ready( function () {
 		var dataTable_defaults = {
