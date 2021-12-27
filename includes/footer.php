@@ -1,13 +1,13 @@
 <footer class="footer">
 	<div class="container text-center">
-		<span class="text-center text-muted">Le donjon de Naheulbeuk - &copy;<a href="http://www.naheulbeuk.com/" target="_blank">Pen of Chaos</a> <br> Compendium pour Roll20 - &copy;<a href="http://www.naheulbeuk-online.org/" target="_blank">Naheulbeuk Online</a> <?php print date("Y");?></span>
+		<span class="text-center text-muted">Le donjon de Naheulbeuk - &copy;<a href="https://www.naheulbeuk.com/" target="_blank">Pen of Chaos</a> <br> Compendium pour Roll20 - &copy;<a href="https://www.naheulbeuk-online.org/" target="_blank">Naheulbeuk Online</a> <?php print date("Y");?></span>
 	</div>
 </footer>
 
 <!-- Bootstrap core JavaScript  -->
 <script src="/js/jquery-3.4.1.min.js"></script>
 <script src="/js/popper.min.js"></script>
-<script src="/js/bootstrap.min.js"></script>
+<script src="/js/bootstrap/bootstrap.bundle.min.js"></script>
 <script src="/js/jquery.dataTables.min.js"></script>
 <script>
 	$(document).ready( function () {
