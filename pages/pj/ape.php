@@ -1,6 +1,6 @@
 <div class="starter-template">
 	<h1 class="mt-5">Les APE</h1>
-	<p class="lead">Liste des Aptitudes Parfois Étranges pour les personnages joueurs.<br>Source : <a href="http://naheulbeuk.com/jdr-docs/supplement-APE-jdrddn.zip" target="_bank">http://naheulbeuk.com/jdr-docs/supplement-APE-jdrddn.zip</a></p>
+	<p class="lead">Liste des Aptitudes Parfois Étranges pour les personnages joueurs.<br>Source : <a href="https://www.naheulbeuk.com/doc-personnages.htm" target="_bank">https://www.naheulbeuk.com/doc-personnages.htm</a></p>
 </div>
 
 <ul class="nav nav-tabs">
