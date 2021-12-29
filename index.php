@@ -1,4 +1,11 @@
-﻿<?php include("includes/config.php");?>
+﻿<?php session_start(); 
+
+	ini_set('display_errors', 1);
+	ini_set('display_startup_errors', 1);
+	error_reporting(E_ALL);
+?>
+
+<?php include("includes/config.php");?>
 <?php include("includes/framework.php");?>
 <!doctype html>
 <html lang="en">

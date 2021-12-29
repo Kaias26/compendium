@@ -1,0 +1,266 @@
+:root {
+	--primary-color: #02044A;
+	--secondery-color: #25CC88;
+	--shadow-color: #9d9fb3
+}
+
+.title__container {
+	width: 100%;
+	height: 4.5rem;
+	padding: 0.6rem 1.5rem;
+	padding-bottom: 2rem;
+	border-bottom: 1px solid #42434e
+}
+
+.title__container h1 {
+	letter-spacing: 2px;
+	color: white;
+	font-size: 1.25rem;
+	margin-bottom: 0.4rem
+}
+
+.title__container p {
+	color: var(--shadow-color);
+	font-size: 0.75rem
+}
+
+.body__container {
+	display: flex
+}
+
+.left__container {
+	display: flex;
+	justify-content: center;
+	border-right: 1px solid #42434e;
+	padding: 1.25rem 0;
+	padding-right: 1.8rem
+}
+
+.side__titles {
+	flex-direction: column;
+	align-items: center;
+	justify-content: center
+}
+
+.title__name {
+	padding: 0.6rem 0.1rem;
+	margin-bottom: 0.25rem
+}
+
+.title__name h3 {
+	margin-bottom: 0.20rem;
+	text-align: right;
+	color: #000000;
+	font-size: 0.8rem;
+	letter-spacing: 1px
+}
+
+.title__name p {
+	text-align: right;
+	color: var(--shadow-color);
+	font-size: 0.75rem
+}
+
+.progress__bar__container {
+	padding-top: 0.6rem
+}
+
+.progress__bar__container ul .active {
+	background-color: var(--secondery-color)
+}
+
+.progress__bar__container ul li {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	list-style: none;
+	background: var(--shadow-color);
+	padding: 0.5rem 0.6rem;
+	margin-bottom: 2.2rem;
+	border-radius: 50%;
+	font-size: 1.4rem;
+	color: #000000;
+	margin-left: 2rem
+}
+
+.progress__bar__container ul li::before {
+	content: '';
+	width: 1px;
+	height: 11vh;
+	position: absolute;
+	background-color: var(--shadow-color)
+}
+
+.progress__bar__container ul .active::before {
+	content: '';
+	width: 1px;
+	height: 11vh;
+	position: absolute;
+	background-color: var(--secondery-color)
+}
+
+.right__container {
+	padding: 1.5rem 1.5rem
+}
+
+.right__container fieldset {
+	border: none
+}
+
+.sub__title__container {
+	padding: 1rem 0 1.2rem 0;
+	border-bottom: 1px solid #42434e
+}
+
+.sub__title__container h2 {
+	letter-spacing: 2px;
+	color: #000000;
+	margin: 0.4rem 0;
+	font-size: 1.5rem;
+}
+
+.sub__title__container p {
+	font-size: 0.75rem;
+	color: #000000;
+}
+
+.active__form {
+	display: none
+}
+
+.nxt__btn:hover {
+	transform: scale(1.03);
+	background: #1cd68c;
+	cursor: pointer
+}
+
+.prev__btn {
+	margin: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: none;
+	border: none;
+	color: #000000;
+	font-size: 18px;
+	cursor: pointer
+}
+
+.descriptionTitle h3 {
+	color: #000000;
+	margin-bottom: 4px
+}
+
+.descriptionTitle p {
+	font-size: 0.75rem;
+	color: var(--shadow-color)
+}
+
+
+
+@media only screen and (max-width: 600px) {
+
+	.body__container {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		margin: 0;
+		padding: 0
+	}
+
+	.right__container {
+		margin: 0
+	}
+
+	.title__container {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		padding: 0.5rem
+	}
+
+	.left__container {
+		display: flex;
+		flex-direction: column;
+		margin: 0;
+		padding: 0;
+		border: none
+	}
+
+	.descriptionTitle h3 {
+		font-size: 1rem
+	}
+
+	.descriptionTitle p {
+		font-size: 0.6rem
+	}
+
+	.side__titles {
+		display: none;
+		flex-direction: row;
+		justify-content: space-evenly
+	}
+
+	.title__name h3 {
+		font-size: 0.75rem
+	}
+
+	.title__name p {
+		font-size: 0.5rem
+	}
+
+	.progress__bar__container {
+		margin-bottom: 0
+	}
+
+	.progress__bar__container ul {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		justify-content: center;
+		margin-bottom: 0;
+		padding: 0 2rem
+	}
+
+	.progress__bar__container ul::before {
+		height: 5vh;
+	}
+
+	.progress__bar__container ul li {
+		margin: 10px;
+		padding: 10px;
+	}
+	.progress__bar__container ul li::before {
+		transform: rotate(90deg)
+	}
+}
+#dice_placeholder {
+	height: 80px;
+	width: 80px;
+	margin: 50px auto;
+	border: 1px solid gray;
+	border-radius: 10px;
+	font-size:60px;
+	line-height: 70px;
+}
+#dice_button {
+	background-color: rgb(82, 186, 179);
+	border-radius: 6px;
+	border: none;
+	color: rgb(255, 255, 255);
+	padding: 10px;
+	text-transform: uppercase;
+	width: 200px;
+	cursor: pointer;
+	margin: auto;
+}
+span.fa {
+	color: #ffffff;
+	z-index: 2;
+}
+label.btn {
+	width: 130px;
+	margin-bottom: 10px;
+}

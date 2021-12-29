@@ -8,6 +8,11 @@
 <script src="/js/jquery-3.4.1.min.js"></script>
 <script src="/js/bootstrap/bootstrap.bundle.min.js"></script>
 <script src="/js/datatables/datatables.min.js"></script>
+
+<?php if( $folder == 'charactersheet' ) {?>
+	<script src="/js/charactersheet.js"></script>
+<?php }?>
+
 <script>
 	$(document).ready( function () {
 		var dataTable_defaults = {
