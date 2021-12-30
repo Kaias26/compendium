@@ -1,4 +1,4 @@
-<form method="post" action="/charactersheet/charactersheet">
+<form method="post" action="/charactersheet/charactersheet" id="charactersheet">
 	<input type="hidden" name="step" value="1">
 	<fieldset id="form1">
 		<div class="sub__title__container ">
@@ -94,10 +94,10 @@
 					</div>
 				</div>
 			</div>
-
-			<div class="buttons">				
-				<button class="nxt__btn btn btn-success float-end" type="submit" name="btnNext" value="1"> Suivant</button>
-			</div>
 		</div>
 	</fieldset>
 </form>
+
+<div class="buttons">				
+	<button class="nxt__btn btn btn-success float-end" type="submit" name="btnStep" value="2" form="charactersheet"> Suivant</button>
+</div>
