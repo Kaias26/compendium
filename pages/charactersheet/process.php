@@ -9,6 +9,11 @@
 		$_SESSION[ 'post' ][ 'dice_charisme' ]= '';
 		$_SESSION[ 'post' ][ 'dice_adresse' ]= '';
 		$_SESSION[ 'post' ][ 'dice_force' ] = '';
+
+		$_SESSION[ 'post' ][ 'origine' ] = '';
+		$_SESSION[ 'post' ][ 'metier' ] = '';
+
+		$_SESSION[ 'post' ][ 'competences' ] = '';
 	}	
 
 	// Post du formulaire
@@ -17,12 +22,52 @@
 			$_SESSION['post'][$key] = $value;
 		}
 
-		if( isset( $_POST[ 'btnNext' ] ) and $_SESSION[ 'step' ] < 5 ) {
-			$_SESSION[ 'step' ] = $_SESSION[ 'step' ] + 1;
+		if( isset( $_POST[ 'btnStep' ] ) ) {
+			$_SESSION[ 'step' ] = $_POST[ 'btnStep' ];
+		}
+	}
+
+	if( $_SESSION[ 'step' ] == 3 ) {
+		$origine_id_naissance = $aOrigines[ $_SESSION['post']['origine'] ]->competencesNaissance;
+		$sql = "SELECT c.name, cf.value
+				FROM `compendium` as c
+				INNER JOIN `compendium_fields` as cf ON cf.idCompendium = c.id
+				WHERE c.id in ( $origine_id_naissance )
+                and cf.key = 'effet'
+				ORDER BY name ASC";
+		if (!$result_origine = $conn->query($sql)) {
+			echo "Désolé, le site web subit des problèmes.";
+			echo "Error: " . $conn->error  . "\n";
+			exit;
 		}
 
-		if( isset( $_POST[ 'btnBack' ] ) and $_SESSION[ 'step' ] > 1 ) {
-			$_SESSION[ 'step' ] = $_SESSION[ 'step' ] - 1;
+		$metier_id_naissance = $aJobs[ $_SESSION['post']['metier'] ]->competencesNaissance;
+		$sql = "SELECT c.name, cf.value
+				FROM `compendium` as c
+				INNER JOIN `compendium_fields` as cf ON cf.idCompendium = c.id
+				WHERE c.id in ( $metier_id_naissance )
+				and c.id not in ( $origine_id_naissance )
+                and cf.key = 'effet'
+				ORDER BY name ASC";
+		if (!$result_metier = $conn->query($sql)) {
+			echo "Désolé, le site web subit des problèmes.";
+			echo "Error: " . $conn->error  . "\n";
+			exit;
+		}
+
+		$origine_id_auChoix = $aOrigines[ $_SESSION['post']['origine'] ]->competencesAuChoix;
+		$metier_id_auChoix = $aJobs[ $_SESSION['post']['metier'] ]->competencesAuChoix;
+		$sql = "SELECT c.id, c.name, cf.value
+				FROM `compendium` as c
+				INNER JOIN `compendium_fields` as cf ON cf.idCompendium = c.id
+				WHERE c.id in ( $origine_id_auChoix,$metier_id_auChoix )
+				and c.id not in ( $metier_id_naissance,$origine_id_naissance )
+                and cf.key = 'effet'
+				ORDER BY name ASC";				
+		if (!$result_auChoix = $conn->query($sql)) {
+			echo "Désolé, le site web subit des problèmes.";
+			echo "Error: " . $conn->error  . "\n";
+			exit;
 		}
 	}
 ?>
