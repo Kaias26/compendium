@@ -29,6 +29,9 @@
 
 	if( $_SESSION[ 'step' ] == 3 ) {
 		$origine_id_naissance = $aOrigines[ $_SESSION['post']['origine'] ]->competencesNaissance;
+		$origine_id_auChoix = $aOrigines[ $_SESSION['post']['origine'] ]->competencesAuChoix;
+
+		// Affichage des compétences de l'Origine 
 		$sql = "SELECT c.name, cf.value
 				FROM `compendium` as c
 				INNER JOIN `compendium_fields` as cf ON cf.idCompendium = c.id
@@ -42,6 +45,9 @@
 		}
 
 		$metier_id_naissance = $aJobs[ $_SESSION['post']['metier'] ]->competencesNaissance;
+		$metier_id_auChoix = $aJobs[ $_SESSION['post']['metier'] ]->competencesAuChoix;
+
+		// Affichage des compétences du Métier 
 		$sql = "SELECT c.name, cf.value
 				FROM `compendium` as c
 				INNER JOIN `compendium_fields` as cf ON cf.idCompendium = c.id
@@ -54,13 +60,16 @@
 			echo "Error: " . $conn->error  . "\n";
 			exit;
 		}
+		
+		// Affichage des compétences Au choix
+		if( $aOrigines[ $_SESSION['post']['origine'] ]->id == 0 and $aJobs[ $_SESSION['post']['metier'] ]->id != 23 ) {			
+			$origine_id_auChoix = 0;
+		}
 
-		$origine_id_auChoix = $aOrigines[ $_SESSION['post']['origine'] ]->competencesAuChoix;
-		$metier_id_auChoix = $aJobs[ $_SESSION['post']['metier'] ]->competencesAuChoix;
 		$sql = "SELECT c.id, c.name, cf.value
 				FROM `compendium` as c
 				INNER JOIN `compendium_fields` as cf ON cf.idCompendium = c.id
-				WHERE c.id in ( $origine_id_auChoix,$metier_id_auChoix )
+				WHERE c.id in ( $origine_id_auChoix, $metier_id_auChoix )
 				and c.id not in ( $metier_id_naissance,$origine_id_naissance )
                 and cf.key = 'effet'
 				ORDER BY name ASC";				

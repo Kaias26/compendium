@@ -31,4 +31,11 @@ $(document).ready( function () {
 	var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
 		return new bootstrap.Tooltip(tooltipTriggerEl)
 	});
+
+	$('input[data-checklimit]').on('change', function(evt) {
+		var _limit = $(this).data( 'checklimit' );
+		if($(this).siblings(':checked').length >= _limit) {
+			this.checked = false;
+		}
+	});
 });
