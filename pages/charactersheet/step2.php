@@ -78,14 +78,15 @@
 			foreach( $aOrigines as $oOrigine ) {
 				$disabled = "";
 				$checked = "";
-				$class = "btn-outline-primary";
-				
-				if( $oOrigine->isAvailable() == false ) {
-					$disabled = "disabled";
-					$class = "btn-outline-danger";
-				}
+				$class = "btn-outline-primary";				
+
 				if( $oOrigine->id == $_SESSION[ 'post' ][ 'origine' ] ) {
 					$checked = "checked";
+				}
+				if( $oOrigine->isAvailable() == false ) {
+					$disabled = "disabled";
+					$checked = "";
+					$class = "btn-outline-danger";
 				}
 				echo '<input type="radio" required class="btn-check" name="origine" id="origine-' . $oOrigine->id . '" autocomplete="off" value="' . $oOrigine->id . '"' . $disabled .' ' . $checked .'>';
 				echo '<label class="btn '. $class . '" for="origine-' . $oOrigine->id . '" data-bs-toggle="tooltip" data-bs-placement="top" title="' . $oOrigine->tooltip. '">' . $oOrigine->label . '</label>';
@@ -101,13 +102,14 @@
 				$checked = "";
 				$class = "btn-outline-primary";
 
-				if( $oMetier->isAvailable() == false ) {
-					$disabled = "disabled";
-					$class = "btn-outline-danger";
-				}
 				if( $oMetier->id == $_SESSION[ 'post' ][ 'metier' ] ) {
 					$checked = "checked";
 				}
+				if( $oMetier->isAvailable() == false ) {
+					$disabled = "disabled";
+					$checked = "";
+					$class = "btn-outline-danger";
+				}				
 				echo '<input type="radio" required class="btn-check" name="metier" id="metier-' . $oMetier->id . '" autocomplete="off" value="' . $oMetier->id . '"' . $disabled .' ' . $checked .'>';
 				echo '<label class="btn '. $class . '" for="metier-' . $oMetier->id . '" data-bs-toggle="tooltip" data-bs-placement="top" title="' . $oMetier->tooltip. '">' . $oMetier->label . '</label>';
 				echo ' ';
@@ -122,13 +124,14 @@
 				$checked = "";
 				$class = "btn-outline-primary";
 
-				if( $oMetier->isAvailable() == false ) {
-					$disabled = "disabled";
-					$class = "btn-outline-danger";
-				}
 				if( $oMetier->id == $_SESSION[ 'post' ][ 'metier' ] ) {
 					$checked = "checked";
 				}
+				if( $oMetier->isAvailable() == false ) {
+					$disabled = "disabled";
+					$checked = "";
+					$class = "btn-outline-danger";
+				}				
 				echo '<input type="radio" required class="btn-check" name="metier" id="metier-' . $oMetier->id . '" autocomplete="off" value="' . $oMetier->id . '"' . $disabled .' ' . $checked .'>';
 				echo '<label class="btn '. $class . '" for="metier-' . $oMetier->id . '" data-bs-toggle="tooltip" data-bs-placement="top" title="' . $oMetier->tooltip. '">' . $oMetier->label . '</label>';
 				echo ' ';
@@ -143,13 +146,14 @@
 				$checked = "";
 				$class = "btn-outline-primary";
 
-				if( $oMetier->isAvailable() == false ) {
-					$disabled = "disabled";
-					$class = "btn-outline-danger";
-				}
 				if( $oMetier->id == $_SESSION[ 'post' ][ 'metier' ] ) {
 					$checked = "checked";
 				}
+				if( $oMetier->isAvailable() == false ) {
+					$disabled = "disabled";
+					$checked = "";
+					$class = "btn-outline-danger";
+				}				
 				echo '<input type="radio" required class="btn-check" name="metier" id="metier-' . $oMetier->id . '" autocomplete="off" value="' . $oMetier->id . '"' . $disabled .' ' . $checked .'>';
 				echo '<label class="btn '. $class . '" for="metier-' . $oMetier->id . '" data-bs-toggle="tooltip" data-bs-placement="top" title="' . $oMetier->tooltip. '">' . $oMetier->label . '</label>';
 				echo ' ';
