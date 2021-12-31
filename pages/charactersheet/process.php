@@ -10,8 +10,8 @@
 		$_SESSION[ 'post' ][ 'dice_adresse' ]= '';
 		$_SESSION[ 'post' ][ 'dice_force' ] = '';
 
-		$_SESSION[ 'post' ][ 'origine' ] = '';
-		$_SESSION[ 'post' ][ 'metier' ] = '';
+		$_SESSION[ 'post' ][ 'origine' ] = -1;
+		$_SESSION[ 'post' ][ 'metier' ] = -1;
 
 		$_SESSION[ 'post' ][ 'competences' ] = '';
 	}	
