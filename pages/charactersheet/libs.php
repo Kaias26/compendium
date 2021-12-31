@@ -55,7 +55,7 @@ $humain->ev = [30, "1D6"];
 $humain->ea = [0,null];
 $humain->at = [8,null];
 $humain->prd = [10,null];
-$humain->competencesNaissance = "null";
+$humain->competencesNaissance = "0";
 $humain->competencesAuChoix = "1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,45,46,47,48,49";
 $humain->poids = [0];
 
@@ -516,7 +516,7 @@ $officier->ea = [0,null];
 $officier->at = [9,"Fixe"];
 $officier->prd = [10,"Fixe"];
 $officier->competencesNaissance = "13,33,32,3,15";
-$officier->competencesAuChoix = "null";
+$officier->competencesAuChoix = "0";
 
 $eclaireur = new Metier();
 $eclaireur->id = 13;
@@ -531,7 +531,7 @@ $eclaireur->ea = [0,null];
 $eclaireur->at = [11,"Fixe"];
 $eclaireur->prd = [9,"Fixe"];
 $eclaireur->competencesNaissance = "15,19,47,23,35,21,38";
-$eclaireur->competencesAuChoix = "null";
+$eclaireur->competencesAuChoix = "0";
 
 $soldatLourd = new Metier();
 $soldatLourd->id = 14;
@@ -546,7 +546,7 @@ $soldatLourd->ea = [0,null];
 $soldatLourd->at = [10,"Fixe"];
 $soldatLourd->prd = [11,"Fixe"];
 $soldatLourd->competencesNaissance = "10,7,30,14,49";
-$soldatLourd->competencesAuChoix = "null";
+$soldatLourd->competencesAuChoix = "0";
 
 $medecin = new Metier();
 $medecin->id = 15;
@@ -561,7 +561,7 @@ $medecin->ea = [0,null];
 $medecin->at = [9,"Fixe"];
 $medecin->prd = [11,"Fixe"];
 $medecin->competencesNaissance = "22,39,3,35,15,18,43";
-$medecin->competencesAuChoix = "null";
+$medecin->competencesAuChoix = "0";
 
 $armurierArtificer = new Metier();
 $armurierArtificer->id = 16;
@@ -576,7 +576,7 @@ $armurierArtificer->ea = [0,null];
 $armurierArtificer->at = [9,"Fixe"];
 $armurierArtificer->prd = [10,null];
 $armurierArtificer->competencesNaissance = "22,11,20,45,21,24";
-$armurierArtificer->competencesAuChoix = "null";
+$armurierArtificer->competencesAuChoix = "0";
 
 $volontaire = new Metier();
 $volontaire->id = 17;
@@ -590,8 +590,8 @@ $volontaire->ev = [0,null];
 $volontaire->ea = [0,null];
 $volontaire->at = [0,null];
 $volontaire->prd = [0,null];
-$volontaire->competencesNaissance = "null";
-$volontaire->competencesAuChoix = "null";
+$volontaire->competencesNaissance = "0";
+$volontaire->competencesAuChoix = "0";
 
 $aSoldats=[ $officier, $eclaireur, $soldatLourd, $medecin, $armurierArtificer, $volontaire ];
 
