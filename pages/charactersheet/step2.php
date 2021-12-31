@@ -4,6 +4,9 @@
 			<p>Etape 2/5</p>
 			<h2>L'origine et le métier du héros, </h2>
 			<p>Les caractéristiques du personnage (page précédente) déterminent son origine et son métier.</p>
+			<p>Vous devez en premier lieu définir  son Origine : c'est ainsi qu'il héritera de ses compétences, ses qualités et ses défauts.<br>
+				Vous pourrez ensuite choisir un métier (ou pas) et ajouter encore des compétences.<br>
+				Un héros sans métier aura moins de compétences à gérer et sera donc plus limité, et puis c'est un peu moins la classe quand on se présente.</p>
 			<p>
 				<a class="btn btn-info" data-bs-toggle="collapse" href="#collapseTips" role="button" aria-expanded="false" aria-controls="collapseTips">
 					Conseils
@@ -12,6 +15,7 @@
 			<div class="collapse" id="collapseTips">
 				<div class="card card-body">
 					<p>N’hésitez pas à vous reporter au Manuel des <a href="http://www.naheulbeuk.com/jdr-docs/origines-metiers-naheulbeuk-jdr.pdf" target="_blank">Origines et Métiers</a> afin de voir les valeurs minimum et maximum requises pour votre personnage...ou laissez le destin décider.</p>
+					<p>Si le héros est un Humain sans métier, il peut choisir 2 compétences dans la liste de toutes les compétences !</p>
 				</div>
 			</div>
 		</div>
@@ -159,6 +163,10 @@
 				echo ' ';
 			}
 			?>
+
+			<p>Ou encore ne pas choisir de métier et attendre qu'une occasion se présente (avec l'accord du MJ) :</p>			
+			<input type="radio" required class="btn-check" name="metier" id="metier-23" autocomplete="off" value="23" <?php if( $_SESSION[ 'post' ][ 'metier' ] == 23 or $_SESSION[ 'post' ][ 'metier' ] == -1 ) { echo 'checked'; } ?>>
+			<label class="btn btn-outline-primary" for="metier-23" data-bs-toggle="tooltip" data-bs-placement="top" title="">Sans métier</label>
 		</div>
 	</fieldset>
 </form>

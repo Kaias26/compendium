@@ -670,9 +670,23 @@ $chaman->at = [10,"Fixe"];
 $chaman->prd = [9,"Fixe"];
 $chaman->competencesNaissance = "9,14,10,15,46,49,58,59,60,61";
 $chaman->competencesAuChoix = "23,30,35,38,47,28";
+$jobless = new Metier();
+$jobless->id = 23;
+$jobless->label = "Sans métier";
+$jobless->courage = ["Non", "Non"];
+$jobless->intelligence = ["Non", "Non"];
+$jobless->charisme = ["Non", "Non"];
+$jobless->adresse = ["Non", "Non"];
+$jobless->force = ["Non", "Non"];
+$jobless->ev = [0,null];
+$jobless->ea = [0,null];
+$jobless->at = [0,null];
+$jobless->prd = [0,null];
+$jobless->competencesNaissance = "0";
+$jobless->competencesAuChoix = "0";
 
 $aSupplements = [ $bourreau, $sbire, $nainDeLaMafia, $amazoneSylderienne, $chaman ] ;
 
-$aJobs = [ $guerrier, $ninja, $voleur, $pretre, $mage, $paladin, $ranger, $menestrel, $pirate, $marchand, $ingenieur, $bourgeois, $officier, $eclaireur, $soldatLourd, $medecin, $armurierArtificer, $volontaire, $bourreau, $sbire, $nainDeLaMafia, $amazoneSylderienne, $chaman ];
+$aJobs = [ $guerrier, $ninja, $voleur, $pretre, $mage, $paladin, $ranger, $menestrel, $pirate, $marchand, $ingenieur, $bourgeois, $officier, $eclaireur, $soldatLourd, $medecin, $armurierArtificer, $volontaire, $bourreau, $sbire, $nainDeLaMafia, $amazoneSylderienne, $chaman, $jobless ];
 
 ?>
