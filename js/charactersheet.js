@@ -1,15 +1,20 @@
 var dice = {
 	sides: 6,
+	bonus: 0,
+	throw: 1,
 	roll: function () {
-		var randomNumber = Math.floor(Math.random() * this.sides) + 1;
-		return randomNumber;
+		var randomNumber = 0;
+		for( i = 0; i < this.throw; i++ ) {
+			randomNumber += Math.floor(Math.random() * this.sides) + 1;
+		}
+		return randomNumber + this.bonus;
 	}
 }
 
 //Prints dice roll to the page
 function printNumber(number) {
 	var placeholder = document.getElementById( 'dice_placeholder' );
-	placeholder.innerHTML = number + 7;
+	placeholder.innerHTML = number;
 }
 
 $(document).ready( function () {
@@ -17,9 +22,13 @@ $(document).ready( function () {
 
 	$button.on( 'click', function() {
 		var x = 0;
+		dice.throw = $(this).data( 'dicethrows' );
+		dice.bonus = $(this).data( 'dicebonus' );
+		dice.sides = $(this).data( 'dicesides' );
+
 		var intervalID = setInterval(() => {
-			var result = dice.roll();
-			printNumber(result);
+			result = dice.roll();	
+			printNumber( result );
 
 			if( ++x === 20 ) {
 				window.clearInterval(intervalID);

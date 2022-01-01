@@ -24,7 +24,7 @@
 				<!-- Dice roll -->
 				<div class="col-md text-center">
 					<p id="dice_placeholder"></p>
-					<button id="dice_button" type="button">Lancer 1D6+7</button>
+					<button id="dice_button" data-dicethrows="1" data-dicebonus="7" data-dicesides="6" type="button">Lancer 1D6+7</button>
 				</div>
 				<div class="col-md">
 					<div class="row">
