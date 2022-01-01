@@ -28,7 +28,11 @@
 						<p>Repoussez le mauvais sort</p>
 					</div>
 					<div class="title__name">
-						<h3>Or et Équipement</h3>
+						<h3>Or</h3>
+						<p>Votre richesse de départ</p>
+					</div>
+					<div class="title__name">
+						<h3>Équipement et Matériel</h3>
 						<p>Votre richesse de départ</p>
 					</div>
 				</div>
@@ -46,8 +50,11 @@
 						<li <?php if( $_SESSION[ 'step' ] >= 4 ) { ?>class="active"<?php } ?> id="icon4">
 							<span class="fa fa-skull-crossbones"></span>
 						</li>
-						<li <?php if( $_SESSION[ 'step' ] == 5 ) { ?>class="active"<?php } ?> id="icon5">
+						<li <?php if( $_SESSION[ 'step' ] >= 5 ) { ?>class="active"<?php } ?> id="icon5">
 							<span class="fa fa-coins"></span>
+						</li>
+						<li <?php if( $_SESSION[ 'step' ] >= 6 ) { ?>class="active"<?php } ?> id="icon6">
+							<span class="fa fa-tshirt"></span>
 						</li>
 					</ul>
 				</div>

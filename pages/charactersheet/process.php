@@ -1,23 +1,39 @@
 <?php
 
+	$maxStep = 6;
+	
 	if( !isset( $_SESSION[ 'step' ] ) ) {
 		// Premiere page
 		$_SESSION[ 'step' ] = 1;
 
+		// Step 1
 		$_SESSION[ 'post' ][ 'dice_courage' ] = '';
 		$_SESSION[ 'post' ][ 'dice_intelligence' ] = '';
 		$_SESSION[ 'post' ][ 'dice_charisme' ]= '';
 		$_SESSION[ 'post' ][ 'dice_adresse' ]= '';
 		$_SESSION[ 'post' ][ 'dice_force' ] = '';
 
+		// Step 2
 		$_SESSION[ 'post' ][ 'origine' ] = -1;
 		$_SESSION[ 'post' ][ 'metier' ] = -1;
 
+		// Step 3
 		$_SESSION[ 'post' ][ 'competences' ] = '';
+
+		// Step 4
+		$_SESSION[ 'post' ][ 'dice_pdt' ] = '';
+
+		// Step 5
+		$_SESSION[ 'post' ][ 'dice_or' ] = '';
+		$_SESSION[ 'post' ][ 'dice_orBonus' ] = '';
+
+		// Step 6
+		
 	}	
 
 	// Post du formulaire
-	if( $_SERVER['REQUEST_METHOD'] == 'POST' ) {		
+	if( $_SERVER['REQUEST_METHOD'] == 'POST' ) {
+
 		foreach( $_POST AS $key => $value ) {
 			$_SESSION['post'][$key] = $value;
 		}

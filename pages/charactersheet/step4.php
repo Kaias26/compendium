@@ -1,7 +1,7 @@
 <form method="post" action="/charactersheet/charactersheet" id="charactersheet">
 	<fieldset id="form1">
 		<div class="sub__title__container ">
-			<p>Etape 4/5</p>
+			<p>Etape 4/<?php echo $maxStep ?></p>
 			<h2>Points de Destin</h2>
 			<p><b>Tirez 1D4-1</b><br>
 			Reportez cette valeur (entre 0 et 3) dans votre case de Points de Destin.</p>			

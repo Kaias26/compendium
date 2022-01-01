@@ -2,7 +2,7 @@
 	<input type="hidden" name="step" value="1">
 	<fieldset id="form1">
 		<div class="sub__title__container ">
-			<p>Etape 1/5</p>
+			<p>Etape 1/<?php echo $maxStep ?></p>
 			<h2>Commençons par tirer vos caractéristiques principales</h2>
 			<p>Tirez 5 fois <b>1D6+7</b><br>Vous obtenez normalement 5 nombres entre 8 et 13 inclus.</p>
 			<p><b>Allouez vos scores aux différentes caractéristiques de votre personnage.</b><br>

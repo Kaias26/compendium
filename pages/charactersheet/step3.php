@@ -1,7 +1,7 @@
 <form method="post" action="/charactersheet/charactersheet" id="charactersheet">
 	<fieldset id="form1">
 		<div class="sub__title__container ">
-			<p>Etape 3/5</p>
+			<p>Etape 3/<?php echo $maxStep ?></p>
 			<h2>Les compétences</h2>
 			<p>Maintenant que vous avez l'ossature de votre personnage, il vous faut noter ses compétences, qui sont ses points forts (ou ses points faibles).</p>
 

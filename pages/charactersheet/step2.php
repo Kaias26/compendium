@@ -1,7 +1,7 @@
 <form method="post" action="/charactersheet/charactersheet" id="charactersheet">
 	<fieldset id="form1">
 		<div class="sub__title__container ">
-			<p>Etape 2/5</p>
+			<p>Etape 2/<?php echo $maxStep ?></p>
 			<h2>L'origine et le métier du héros, </h2>
 			<p>Les caractéristiques du personnage (page précédente) déterminent son origine et son métier.</p>
 			<p>Vous devez en premier lieu définir  son Origine : c'est ainsi qu'il héritera de ses compétences, ses qualités et ses défauts.<br>
