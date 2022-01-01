@@ -27,11 +27,12 @@
 					<button id="dice_button" data-dicethrows="1" data-dicebonus="7" data-dicesides="6" type="button">Lancer 1D6+7</button>
 				</div>
 				<div class="col-md">
+					<br>
 					<div class="row">
 						<div id="help_courage" class="form-text">La bravoure du personnage face au danger et à la mort</div>
-						<div class="col-md-4">
+						<div class="col-md-6">
 							<div class="form-floating mb-3">
-								<input type="number" class="form-control col-md-4" name="dice_courage" id="dice_courage" 
+								<input type="number" class="form-control" name="dice_courage" id="dice_courage" 
 									aria-describedby="help_courage" placeholder="Courage"
 									value="<?php echo $_SESSION[ 'post' ][ 'dice_courage' ] ?>"
 									required min=8 max=13
@@ -42,7 +43,7 @@
 					</div>
 					<div class="row">
 						<div id="help_intelligence" class="form-text">La capacité à réfléchir et l'érudition</div>
-						<div class="col-md-4">
+						<div class="col-md-6">
 							<div class="form-floating mb-3">
 								<input type="number" class="form-control" name="dice_intelligence" id="dice_intelligence"
 									aria-describedby="help_intelligence" placeholder="Intelligence"
@@ -55,7 +56,7 @@
 					</div>
 					<div class="row">
 						<div id="help_charisme" class="form-text">La beauté physique et la capacité à convaincre les autres</div>
-						<div class="col-md-4">
+						<div class="col-md-6">
 							<div class="form-floating mb-3">
 								<input type="number" class="form-control" name="dice_charisme" id="dice_charisme"
 									aria-describedby="help_charisme" placeholder="Charisme"
@@ -68,7 +69,7 @@
 					</div>
 					<div class="row">
 						<div id="help_adresse" class="form-text">L'agilité, la souplesse et la précision</div>
-						<div class="col-md-4">
+						<div class="col-md-6">
 							<div class="form-floating mb-3">
 								<input type="number" class="form-control" name="dice_adresse" id="dice_adresse"
 									aria-describedby="help_adresse" placeholder="Adresse"
@@ -81,7 +82,7 @@
 					</div>
 					<div class="row">
 						<div id="help_force" class="form-text">La capacité musculaire du personnage, et sa résistance</div>
-						<div class="col-md-4">
+						<div class="col-md-6">
 							<div class="form-floating mb-3">
 								<input type="number" class="form-control" name="dice_force" id="dice_force"
 									aria-describedby="help_force" placeholder="Force"
