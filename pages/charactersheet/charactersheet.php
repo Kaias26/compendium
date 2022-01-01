@@ -35,6 +35,10 @@
 						<h3>Équipement et Matériel</h3>
 						<p>Votre richesse de départ</p>
 					</div>
+					<div class="title__name">
+						<h3>Résumé</h3>
+						<p>Validez votre personnage</p>
+					</div>
 				</div>
 				<div class="progress__bar__container">
 					<ul>
@@ -55,6 +59,9 @@
 						</li>
 						<li <?php if( $_SESSION[ 'step' ] >= 6 ) { ?>class="active"<?php } ?> id="icon6">
 							<span class="fa fa-tshirt"></span>
+						</li>
+						<li <?php if( $_SESSION[ 'step' ] >= 7 ) { ?>class="active"<?php } ?> id="icon7">
+							<span class="fa fa-book-reader"></span>
 						</li>
 					</ul>
 				</div>
