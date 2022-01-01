@@ -31,6 +31,7 @@
 								if( $result_origine->num_rows > 0 ) {
 									while( $row = $result_origine->fetch_assoc() ) {
 										echo '<li class="list-group-item" data-bs-toggle="tooltip" data-bs-placement="top" title="' . $row[ 'value' ] . '"> ' . $row[ 'name' ] . ' </li>';
+										echo '<input type="hidden" name="competences" value="' . $row[ 'id' ] . '">';
 									}
 								} else {
 									echo "Aucune";
@@ -50,6 +51,7 @@
 								if( $result_metier->num_rows > 0 ) {
 									while( $row = $result_metier->fetch_assoc() ) {
 										echo '<li class="list-group-item" data-bs-toggle="tooltip" data-bs-placement="top" title="' . $row[ 'value' ] . '"> ' . $row[ 'name' ] . ' </li>';
+										echo '<input type="hidden" name="competences" value="' . $row[ 'id' ] . '">';
 									}
 								} else {
 									echo "Aucune";

@@ -32,7 +32,7 @@
 		$origine_id_auChoix = $aOrigines[ $_SESSION['post']['origine'] ]->competencesAuChoix;
 
 		// Affichage des compétences de l'Origine 
-		$sql = "SELECT c.name, cf.value
+		$sql = "SELECT c.id, c.name, cf.value
 				FROM `compendium` as c
 				INNER JOIN `compendium_fields` as cf ON cf.idCompendium = c.id
 				WHERE c.id in ( $origine_id_naissance )
@@ -48,7 +48,7 @@
 		$metier_id_auChoix = $aJobs[ $_SESSION['post']['metier'] ]->competencesAuChoix;
 
 		// Affichage des compétences du Métier 
-		$sql = "SELECT c.name, cf.value
+		$sql = "SELECT c.id, c.name, cf.value
 				FROM `compendium` as c
 				INNER JOIN `compendium_fields` as cf ON cf.idCompendium = c.id
 				WHERE c.id in ( $metier_id_naissance )
