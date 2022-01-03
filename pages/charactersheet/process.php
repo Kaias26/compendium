@@ -18,7 +18,7 @@
 		$_SESSION[ 'post' ][ 'metier' ] = -1;
 
 		// Step 3
-		$_SESSION[ 'post' ][ 'competences' ] = '';
+		$_SESSION[ 'post' ][ 'competences' ] = [];
 
 		// Step 4
 		$_SESSION[ 'post' ][ 'dice_pdt' ] = '';
