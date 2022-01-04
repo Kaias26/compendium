@@ -10,7 +10,7 @@
 <script src="/js/datatables/datatables.min.js"></script>
 
 <?php if( $folder == 'charactersheet' ) {?>
-	<script src="/js/charactersheet.js"></script>
+	<script src="/js/charactersheet.js?20220104"></script>
 <?php }?>
 
 <script>

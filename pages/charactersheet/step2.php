@@ -22,54 +22,56 @@
 		<div class="input__container">
 			<br>
 			<div class="row text-center">
-				<div class="col">
-					<div class="card">
-						<div class="card-header">
-							Courage
+				<div class="row">
+					<div class="col-md-2 offset-md-1">
+						<div class="form-floating">
+							<input type="text" class="form-control" name="dice_courage" id="dice_courage" 
+								placeholder="Courage"
+								value="<?php echo $_SESSION[ 'post' ][ 'dice_courage' ] ?>"
+								required readonly						
+							>
+							<label for="dice_courage">Courage</label>
 						</div>
-						<ul class="list-group list-group-flush">
-							<li class="list-group-item"><?php echo $_SESSION[ 'post' ][ 'dice_courage' ]; ?></li>
-						</ul>
 					</div>
-				</div>
-				<div class="col">
-					<div class="card">
-						<div class="card-header">
-							Intelligence
+					<div class="col-md-2">
+						<div class="form-floating">
+							<input type="text" class="form-control" name="dice_intelligence" id="dice_intelligence" 
+								placeholder="Intelligence"
+								value="<?php echo $_SESSION[ 'post' ][ 'dice_intelligence' ] ?>"
+								required readonly				
+							>
+							<label for="dice_intelligence">Intelligence</label>
 						</div>
-						<ul class="list-group list-group-flush">
-							<li class="list-group-item"><?php echo $_SESSION[ 'post' ][ 'dice_intelligence' ]; ?></li>
-						</ul>
 					</div>
-				</div>
-				<div class="col">
-					<div class="card">
-						<div class="card-header">
-							Charisme
+					<div class="col-md-2">
+						<div class="form-floating">
+							<input type="text" class="form-control" name="dice_charisme" id="dice_charisme" 
+								placeholder="Charisme"
+								value="<?php echo $_SESSION[ 'post' ][ 'dice_charisme' ] ?>"
+								required readonly				
+							>
+							<label for="dice_charisme">Charisme</label>
 						</div>
-						<ul class="list-group list-group-flush">
-							<li class="list-group-item"><?php echo $_SESSION[ 'post' ][ 'dice_charisme' ]; ?></li>
-						</ul>
 					</div>
-				</div>
-				<div class="col">
-					<div class="card text-center">
-						<div class="card-header">
-							Adresse
+					<div class="col-md-2">
+						<div class="form-floating">
+							<input type="text" class="form-control" name="dice_adresse" id="dice_adresse" 
+								placeholder="Adresse"
+								value="<?php echo $_SESSION[ 'post' ][ 'dice_adresse' ] ?>"
+								required readonly				
+							>
+							<label for="dice_adresse">Adresse</label>
 						</div>
-						<ul class="list-group list-group-flush">
-							<li class="list-group-item"><?php echo $_SESSION[ 'post' ][ 'dice_adresse' ]; ?></li>
-						</ul>
 					</div>
-				</div>
-				<div class="col">
-					<div class="card text-center">
-						<div class="card-header">
-							Force
+					<div class="col-md-2">
+						<div class="form-floating">
+							<input type="text" class="form-control" name="dice_force" id="dice_force" 
+								placeholder="Force"
+								value="<?php echo $_SESSION[ 'post' ][ 'dice_force' ] ?>"
+								required readonly				
+							>
+							<label for="dice_force">Force</label>
 						</div>
-						<ul class="list-group list-group-flush">
-							<li class="list-group-item"><?php echo $_SESSION[ 'post' ][ 'dice_force' ]; ?></li>
-						</ul>
 					</div>
 				</div>
 			</div>

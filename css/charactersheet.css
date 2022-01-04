@@ -182,7 +182,7 @@
 	}
 
 	.left__container {
-		display: flex;
+		display: none;
 		flex-direction: column;
 		margin: 0;
 		padding: 0;
@@ -234,6 +234,9 @@
 	}
 	.progress__bar__container ul li::before {
 		transform: rotate(90deg)
+	}
+	.starter-template p.lead {
+		display: none;
 	}
 }
 #dice_placeholder {
