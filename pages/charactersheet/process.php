@@ -34,6 +34,12 @@
 	// Post du formulaire
 	if( $_SERVER['REQUEST_METHOD'] == 'POST' ) {
 
+		// Changement de classe et ou de métier
+		if( ( isset( $_POST['origine'] ) and $_SESSION['post']['origine'] != $_POST['origine'] )
+		 OR ( isset( $_POST['metier'] ) and $_SESSION['post']['metier'] != $_POST['metier'] ) ) {
+			$_SESSION[ 'post' ][ 'competences' ] = [];
+		}
+
 		foreach( $_POST AS $key => $value ) {
 			$_SESSION['post'][$key] = $value;
 		}
