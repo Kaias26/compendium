@@ -56,7 +56,7 @@ $humain->ea = [0,null];
 $humain->at = [8,null];
 $humain->prd = [10,null];
 $humain->competencesNaissance = "0";
-$humain->competencesAuChoix = "1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,45,46,47,48,49";
+$humain->competencesAuChoix = "1,2,3,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49";
 $humain->poids = [0];
 
 $barbare = new Origine();
@@ -608,7 +608,7 @@ $bourreau->ev = [2,null];
 $bourreau->ea = [0,null];
 $bourreau->at = [10,"Fixe"];
 $bourreau->prd = [8,"Fixe"];
-$bourreau->competencesNaissance = "7,5,25,30,32,33"; // TODO : 50,51,52
+$bourreau->competencesNaissance = "7,5,25,30,32,33,2088,2089,2090";
 $bourreau->competencesAuChoix = "21,11,24,47,35,23,15,14,39,49";
 
 $sbire = new Metier();
@@ -623,7 +623,7 @@ $sbire->ev = [0,null];
 $sbire->ea = [0,null];
 $sbire->at = [9,"Fixe"];
 $sbire->prd = [9,"Fixe"];
-$sbire->competencesNaissance = "3,25,32,26,33,34,42,27"; // TODO : 53,54,55
+$sbire->competencesNaissance = "3,25,32,26,33,34,42,27,2091,2092,2093";
 $sbire->competencesAuChoix = "1,2,3,5,6,7,8,9,10,11,12,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,34,35,36,37,38,39,40,41,42,43,45,46,47,48,49"; // TODO ,50,51,52,53,54,55,56,57,58,59,60,61
 
 $nainDeLaMafia = new Metier();
@@ -638,7 +638,7 @@ $nainDeLaMafia->ev = [38,"Fixe", "", ""];
 $nainDeLaMafia->ea = [0,null];
 $nainDeLaMafia->at = [10,"Fixe"];
 $nainDeLaMafia->prd = [9,"Fixe"];
-$nainDeLaMafia->competencesNaissance = "5,29,40,1,10,16,42"; // TODO : 56,57
+$nainDeLaMafia->competencesNaissance = "5,29,40,1,10,16,42,2094,2095";
 $nainDeLaMafia->competencesAuChoix = "45,3,38,21,8,11,26,33,47,20";
 
 $amazoneSylderienne = new Metier();
@@ -653,7 +653,7 @@ $amazoneSylderienne->ev = [38,"Fixe", "", ""];
 $amazoneSylderienne->ea = [0,null];
 $amazoneSylderienne->at = [10,"Fixe"];
 $amazoneSylderienne->prd = [8,"Fixe"];
-$amazoneSylderienne->competencesNaissance = "9,14,10,15,46,49"; // TODO : ,58,59,60,61
+$amazoneSylderienne->competencesNaissance = "9,14,10,15,46,49,2096,2097,2098,2099";
 $amazoneSylderienne->competencesAuChoix = "23,30,35,38,47,28";
 
 $chaman = new Metier();
@@ -668,8 +668,8 @@ $chaman->ev = [34,"Fixe", "", ""];
 $chaman->ea = [0,null];
 $chaman->at = [10,"Fixe"];
 $chaman->prd = [9,"Fixe"];
-$chaman->competencesNaissance = "0";
-$chaman->competencesAuChoix = "0";
+$chaman->competencesNaissance = "2,10,19,23,35,38,39,47,28,2100,2101";
+$chaman->competencesAuChoix = "7,3,14,15,17,18,21,30";
 
 $jobless = new Metier();
 $jobless->id = 23;
