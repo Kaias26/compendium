@@ -47,6 +47,12 @@
 							<li><a class="dropdown-item <?php if( $group == "consommables" ) {?>active<?php }?>" href="/objets/consommables">Consommables</a></li>
 						</ul>
 					</li>
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle <?php if( $folder == "charactersheet" ) {?>active<?php }?>" id="dropdown05" data-bs-toggle="dropdown" aria-expanded="false" href="#"><i class="fas fa-tools"></i> Outils</a>
+						<ul class="dropdown-menu" aria-labelledby="dropdown05">
+							<li><a class="dropdown-item <?php if( $group == "charactersheet" ) {?>active<?php }?>" href="/charactersheet/charactersheet">Générateur de fiche personnage</a></li>
+						</ul>
+					</li>
 				</ul>
 			</div>
 		</div>

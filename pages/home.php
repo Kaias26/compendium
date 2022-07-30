@@ -64,4 +64,17 @@
 			</div>
 		</div>
 	</div><!-- /.row -->
+	<div class="row">
+		<div class="col-lg-3">
+			<div class="card">
+				<div class="card-body">
+					<h5 class="card-title"><i class="fas fa-tools"></i> Outils</h5>
+					<p class="card-text">Aide de jeu pou MJ et ou Joueurs</p>
+				</div>
+				<ul class="list-group list-group-flush">
+					<li class="list-group-item"><a href="/charactersheet/charactersheet" class="card-link">Générateur de fiche personnage</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
 </div>
