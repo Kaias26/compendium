@@ -59,7 +59,7 @@
 					<li class="list-group-item"><a href="/objets/protections" class="card-link">Protections</a></li>
 					<li class="list-group-item"><a href="/objets/accessoires" class="card-link">Accessoires</a></li>
 					<li class="list-group-item"><a href="/objets/materiel" class="card-link">Matériel</a></li>
-					<li class="list-group-item"><a href="/objets/ingredients" class="card-link">Ingrédients</a></li>
+					<li class="list-group-item"><a href="/objets/consommables" class="card-link">Consommables</a></li>
 				</ul>
 			</div>
 		</div>

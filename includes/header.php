@@ -44,7 +44,7 @@
 							<li><a class="dropdown-item <?php if( $group == "protections" ) {?>active<?php }?>" href="/objets/protections">Protections</a></li>
 							<li><a class="dropdown-item <?php if( $group == "accessoires" ) {?>active<?php }?>" href="/objets/accessoires">Accessoires</a></li>
 							<li><a class="dropdown-item <?php if( $group == "materiel" ) {?>active<?php }?>" href="/objets/materiel">Matériel</a></li>
-							<li><a class="dropdown-item <?php if( $group == "ingredients" ) {?>active<?php }?>" href="/objets/ingredients">Ingrédients</a></li>
+							<li><a class="dropdown-item <?php if( $group == "consommables" ) {?>active<?php }?>" href="/objets/consommables">Consommables</a></li>
 						</ul>
 					</li>
 				</ul>
