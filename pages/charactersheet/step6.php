@@ -22,7 +22,12 @@
 				</div>
 			</div>
 		</div>
-		<div class="input__container">			
+		<div class="input__container">	
+			<div class="row">
+				<div class="col-md text-center">
+					Work in progress...
+				</div>
+			</div>		
 		</div>
 	</fieldset>
 </form>
