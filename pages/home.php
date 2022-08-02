@@ -55,7 +55,7 @@
 					<p class="card-text">Pour s'équiper avant de partir à l'aventure</p>
 				</div>
 				<ul class="list-group list-group-flush">
-					<li class="list-group-item"><a href="/objets/traitsspeciaux" class="card-link">Armement</a></li>
+					<li class="list-group-item"><a href="/objets/armement" class="card-link">Armement</a></li>
 					<li class="list-group-item"><a href="/objets/protections" class="card-link">Protections</a></li>
 					<li class="list-group-item"><a href="/objets/accessoires" class="card-link">Accessoires</a></li>
 					<li class="list-group-item"><a href="/objets/materiel" class="card-link">Matériel</a></li>
