@@ -38,7 +38,7 @@
 				<div class="col-md">
 					<br>
 					<div class="row">
-						<div id="help_or" class="form-text">Roturier, paysan ou fils de noble ?</div>
+						<div id="help_or" class="form-text">Roturier, paysan ou fils de noble ?<br>(N'oubliez pas de multiplier le résultat par 10)</div>
 						<div class="col-md-8">
 							<div class="form-floating mb-3">
 								<input type="number" class="form-control col-md-4" name="dice_or" id="dice_or" 
@@ -48,7 +48,7 @@
 								>
 								<label for="dice_or">Or</label>
 							</div>
-						</div>
+						</div>						
 					</div>
 					<?php if( $aJobs[ $_SESSION['post']['metier'] ]->id == 11 ) { ?>
 					<br>
