@@ -16,6 +16,10 @@
 	<link href="/css/charactersheet.css" rel="stylesheet" >
 <?php }?>
 
+<?php if( $folder == 'generateurButin' ) {?>
+	<link href="/css/generateurButin.css" rel="stylesheet" >
+<?php }?>
+
 <script type="text/javascript">
 	var dataTables_options = {};
 </script>

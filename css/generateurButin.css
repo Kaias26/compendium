@@ -1,0 +1,7 @@
+ul.list-group-flush {
+	list-style-type: none;
+}
+ul.list-group-flush {
+	height: 30px;
+	overflow: hidden;
+}

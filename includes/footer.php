@@ -13,6 +13,10 @@
 	<script src="/js/charactersheet.js?20220104"></script>
 <?php }?>
 
+<?php if( $folder == 'generateurButin' ) {?>
+	<script src="/js/generateurButin.js?20220104"></script>
+<?php }?>
+
 <script>
 	$(document).ready( function () {
 		var dataTable_defaults = {
