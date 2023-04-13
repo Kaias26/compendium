@@ -200,7 +200,6 @@ function remember_me(int $user_id, int $day = 30)
     if (insert_user_token($user_id, $selector, $hash_validator, $expiry)) {
         setcookie('remember_me', $token, $expired_seconds);
     }
-    exit();
 }
 
 function generate_tokens(): array
