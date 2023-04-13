@@ -48,22 +48,33 @@
 			<?php
 			foreach ($aRows as $row ) {
 
-				$macro = '{"repeating_bagues_rowID_bague_nom":"' . $row['name'] . '","repeating_bagues_rowID_bague_count":"' . $row['charges'] . '","repeating_bagues_rowID_bague_bonus":"' . $row['effet'] . '"}';	
+				if( isset( $row['slot']) ) {
+					if( $row['slot'] == "materiels" ) {
+						$macro = '{"repeating_materiels_rowID_materiel_nom":"' . $row['name'] . '"}';
+					} else if( $row['slot'] == "bouffes" ) {
+						$macro = '{"repeating_bouffes_rowID_bouffe_nom":"' . $row['name'] . '"}';				
+					} else if( $row['slot'] == "sacs" ) {
+						$macro = '{"repeating_sacs_rowID_sac_nom":"' . $row['name'] . '","repeating_sacs_rowID_sac_charge_max":"' . $row['charge_max'] . '"}';
+					} else if( $row['slot'] == "bourses" ) {
+						$macro = '{"repeating_bourses_rowID_bourse_nom":"' . $row['name'] . '","repeating_bourses_rowID_bourse_charge_max":"' . $row['charge_max'] . '"}';				
+					} else if( $row['slot'] == "livres" ) {
+						$macro = '{"repeating_livres_rowID_livre_nom":"' . $row['name'] . '"}';				
+					}
+					
 
-				echo "<tr>";
-					echo "<td>" . $row['type'] . "</td>";
-					echo "<td class='cell-min-width'><div class='d-none'>" . $row['type'] . "</div>" . $row['name'] . "</td>";
-					echo "<td class='cell-min-width text-center'>" . $row['prix'] . "</td>";					
-					echo "<td class='cell-min-width text-center'>" . $row['niveau'] . "</td>";					
-					echo "<td class='cell-min-width text-center'>" . $row['charges'] . "</td>";					
-					echo "<td>" . $row['effet'] . "</td>";					
-					echo "<td class='cell-min-width'>";
-						echo "<input type='text' id='text_" . $row['id'] . "' class='form-control' value='" . $macro . "' />";
-					echo "</td>";
-					echo "<td class='cell-min-width'>";
-						echo "<button type='button' class='btn btn-default' data-id='" . $row['id'] . "' title='Copier'><i class='fa fa-copy'></i></button>";
-					echo "</td>";
-				echo "</tr>";
+					echo "<tr>";
+						echo "<td>" . $row['type'] . "</td>";
+						echo "<td class='cell-min-width'><div class='d-none'>" . $row['type'] . "</div>" . $row['name'] . "</td>";
+						echo "<td class='cell-min-width text-center'>" . $row['prix'] . "</td>";					
+						echo "<td>" . $row['notes'] . "</td>";					
+						echo "<td class='cell-min-width'>";
+							echo "<input type='text' id='text_" . $row['id'] . "' class='form-control' value='" . $macro . "' />";
+						echo "</td>";
+						echo "<td class='cell-min-width'>";
+							echo "<button type='button' class='btn btn-default' data-id='" . $row['id'] . "' title='Copier'><i class='fa fa-copy'></i></button>";
+						echo "</td>";
+					echo "</tr>";
+				}
 			}
 			?>
 		</tbody>
