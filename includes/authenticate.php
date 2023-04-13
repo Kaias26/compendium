@@ -20,9 +20,63 @@ if( isset( $_POST['login'] ) ) {
 }
 
 
+// Au submit du formulaire Register, vérifie l'authentification
+if( isset( $_POST["register"] ) ) {
+    // récupérer le post et supprimer les antislashes ajoutés par le formulaire
+    $username = stripslashes( $_POST['username'] );
+    $username = mysqli_real_escape_string( $conn, $username );
+    $password = stripslashes( $_POST['password'] );
+    $password = mysqli_real_escape_string( $conn, $password );
+    $confirmPassword = stripslashes( $_POST['confirmPassword'] );
+    $confirmPassword = mysqli_real_escape_string( $conn, $confirmPassword );
+    $email = stripslashes( $_POST['email'] );
+    $email = mysqli_real_escape_string( $conn, $email );
+
+    if( empty( $username ) ) $erreur="L'identifiant est obligatoire";
+    elseif( empty( $password ) ) $erreur="Le mot de passe est oblibatoire";
+    elseif( $password != $confirmPassword ) $erreur="Les mots des passes ne sont pas identiques";
+    elseif( empty( $email ) ) $erreur="L'email est oblibatoire";
+    elseif( !filter_var( $email, FILTER_VALIDATE_EMAIL) ) $erreur="L'email n'est pas valide";
+    else{
+        
+        $user = find_user_by_username( $username );
+        
+        if( $user ) {
+            $erreur = "Cet identifiant existe déjà.";
+        } else {
+            $user = find_user_by_email( $email );
+            
+            if( $user ) {
+                $erreur = "Cette adresse email existe déjà.";
+            } else {
+                if( register( $username, $password, $email ) ) {
+                    $success = true;
+                } else {
+                    $erreur = "Une erreur s'est produite, impossible de créer le compte.";
+                }
+            }
+        }
+    }
+}
+
 if( $group == 'logout' )
 {
     logout();
+}
+
+/****************/
+/*** REGISTER ***/
+/****************/
+function register( string $username, string $password, string $email ): bool
+{
+	global $conn;
+    $sql = 'INSERT INTO users(username, email, password)
+            VALUES(?, ?, ?)';
+
+    $statement = $conn->prepare($sql);
+    $statement->bind_param( 'sss', $username, $email, password_hash($password, PASSWORD_DEFAULT) );
+
+    return $statement->execute();
 }
 
 /************/
