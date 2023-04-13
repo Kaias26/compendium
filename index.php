@@ -7,6 +7,7 @@
 
 	require_once("includes/config.php");	
 	require_once("includes/framework.php");	
+	require_once("includes/authenticate.php");
 ?>
 <!doctype html>
 <html lang="en">
