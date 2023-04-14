@@ -52,7 +52,7 @@ if( is_user_logged_in() ) {
 
 					<div class="col">
 						<!-- Simple link -->
-						<a href="#!">Mot de passe oublié ?</a>
+						<a class="openModal" href="/vault/pwdReset">Mot de passe oublié ?</a>
 					</div>
 				</div>
 
