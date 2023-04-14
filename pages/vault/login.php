@@ -24,7 +24,7 @@ if( is_user_logged_in() ) {
 			<form action="" method="post" class=" needs-validation" novalidate>
 				<!-- Identifiant -->
 				<div class="form-outline form-floating mb-4"> 
-					<input type="text" id="username" name="username" class="form-control" placeholder="Identifiant" />
+					<input type="text" id="username" name="username" class="form-control" placeholder="Identifiant" required />
 					<label class="form-label" for="username">Identifiant</label>
 					<div class="invalid-feedback">
 						L'identifiant est obligatoire.
@@ -33,7 +33,7 @@ if( is_user_logged_in() ) {
 
 				<!-- Password -->
 				<div class="form-outline form-floating mb-4">
-					<input type="password" id="password" name="password" class="form-control" placeholder="Mot de passe" />
+					<input type="password" id="password" name="password" class="form-control" placeholder="Mot de passe" required />
 					<label class="form-label" for="password">Mot de passe</label>
 					<div class="invalid-feedback">
 						Le mot de passe est oblibatoire.
