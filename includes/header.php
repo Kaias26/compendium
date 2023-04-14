@@ -56,6 +56,23 @@
 					</li>
 				</ul>
 			</div>
+			<div class="d-flex align-items-center">
+				<ul class="navbar-nav me-auto mb-2 mb-md-0">
+					<?php if( !is_user_logged_in() ) {?>
+						<li class="nav-item">						
+							<a class="nav-link <?php if( $folder == "vault" ) {?>active<?php }?>" href="/vault/login"><i class="fas fa-solid fa-door-open"></i> Connexion</a>
+						</li>
+						<?php } else { ?>	
+						<li class="nav-item">						
+							<a class="nav-link <?php if( $folder == "vault" ) {?>active<?php }?>" href="/vault/home"><i class="fas fa-regular fa-toolbox"></i> Vault</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="/vault/logout"><i class="fas fa-solid fa-door-closed"></i> Déconnexion</a>
+						</li>
+						<?php }?>
+					</li>
+				</ul>
+			</div>
 		</div>
 	</nav>
 </header>
