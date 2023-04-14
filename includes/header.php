@@ -1,5 +1,5 @@
 <header>
-	<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
 		<div class="container-fluid">
 			<a class="navbar-brand" href="/"><img src="/img/naheulbeuk.png" alt="Naheulbeuk - Compendium" title="Naheulbeuk - Compendium" width="40" height="40"> Naheulbeuk - Compendium</a>
 			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
@@ -54,24 +54,24 @@
 							<li><a class="dropdown-item <?php if( $group == "bijoux" ) {?>active<?php }?>" href="/generateurButin/bijoux">Générateur de Butin : Bijoux</a></li>
 						</ul>
 					</li>
-				</ul>
-			</div>
-			<div class="d-flex align-items-center">
-				<ul class="navbar-nav me-auto mb-2 mb-md-0">
-					<?php if( !is_user_logged_in() ) {?>
-						<li class="nav-item">						
-							<a class="nav-link <?php if( $folder == "vault" ) {?>active<?php }?>" href="/vault/login"><i class="fas fa-solid fa-door-open"></i> Connexion</a>
+				</ul>				
+				<div class="d-flex align-items-center">
+					<ul class="navbar-nav me-auto mb-2 mb-md-0">
+						<?php if( !is_user_logged_in() ) {?>
+							<li class="nav-item">						
+								<a class="nav-link <?php if( $folder == "vault" ) {?>active<?php }?>" href="/vault/login"><i class="fas fa-solid fa-door-open"></i> Connexion</a>
+							</li>
+							<?php } else { ?>	
+							<li class="nav-item">						
+								<a class="nav-link <?php if( $folder == "vault" ) {?>active<?php }?>" href="/vault/home"><i class="fas fa-regular fa-toolbox"></i> Vault</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="/vault/logout"><i class="fas fa-solid fa-door-closed"></i> Déconnexion</a>
+							</li>
+							<?php }?>
 						</li>
-						<?php } else { ?>	
-						<li class="nav-item">						
-							<a class="nav-link <?php if( $folder == "vault" ) {?>active<?php }?>" href="/vault/home"><i class="fas fa-regular fa-toolbox"></i> Vault</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="/vault/logout"><i class="fas fa-solid fa-door-closed"></i> Déconnexion</a>
-						</li>
-						<?php }?>
-					</li>
-				</ul>
+					</ul>
+				</div>
 			</div>
 		</div>
 	</nav>
