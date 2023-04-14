@@ -87,7 +87,7 @@ function login( string $username, string $password, bool $remember = false ): bo
 	$user = find_user_by_username( $username );
 
 	if( $user && password_verify( $password, $user['password'] ) ) {
-		//log_user_in( $user );
+		log_user_in( $user );
 
 		if( $remember ) {
 			remember_me( $user['id'] );
@@ -172,7 +172,6 @@ function is_user_logged_in(): bool
     if ($token && token_is_valid($token)) {
 
         $user = find_user_by_token($token);
-
         if ($user) {
             return log_user_in($user);
         }
