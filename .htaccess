@@ -4,4 +4,4 @@ RewriteEngine On
 RewriteRule ^faq$ /index.php?folder=faq [L]
 RewriteRule ^vault/pwdReset$ /pages/vault/pwdReset.php [L,QSA]
 RewriteRule ^([a-zA-Z]*)\/([0-9]*)$ /modals/$1.php?id=$2 [L,QSA]
-RewriteRule ^([a-zA-Z]*)\/([a-zA-Z]*)\/?([a-zA-Z]*)$ /index.php?folder=$1&group=$2&subgroup=$3 [L]
+RewriteRule ^([a-zA-Z]*)\/([a-zA-Z]*)\/?([a-zA-Z]*)$ /index.php?folder=$1&group=$2&subgroup=$3 [L,QSA]
