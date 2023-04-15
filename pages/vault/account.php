@@ -37,7 +37,7 @@ $user = find_user_by_id( $_SESSION['user_id'] );
 			<form action="" method="post" class=" needs-validation" novalidate>
 				<!-- Identifiant -->
 				<div class="form-outline form-floating mb-4"> 
-					<input type="text" id="username" name="username" class="form-control" placeholder="Identifiant" required value="<?php echo $user[ 'username' ];?>" />
+					<input type="text" id="username" name="username" class="form-control" placeholder="Identifiant" required value="<?php echo  htmlspecialchars( $user[ 'username' ] );?>" />
 					<label class="form-label" for="username">Identifiant</label>
 					<div class="invalid-feedback">
 						L'identifiant est obligatoire.
@@ -46,7 +46,7 @@ $user = find_user_by_id( $_SESSION['user_id'] );
 
 				<!-- Email -->
 				<div class="form-outline form-floating mb-4"> 
-					<input type="email" id="email" name="email" class="form-control" placeholder="Email" required required value="<?php echo $user[ 'email' ];?>" />
+					<input type="email" id="email" name="email" class="form-control" placeholder="Email" required required value="<?php echo  htmlspecialchars( $user[ 'email' ] );?>" />
 					<label class="form-label" for="email">Email</label>
 					<div class="invalid-feedback">
 						L'adresse email est obligatoire et doit etre valide.

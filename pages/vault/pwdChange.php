@@ -26,10 +26,10 @@
 				</div>
 			<?php } ?>
 			<?php if( isset( $user ) ) { ?>
-				<form action="/vault/pwdChange?key=<?php echo $_GET['key'];?>&reset=<?php echo $_GET['reset'];?>" method="post" class=" needs-validation" novalidate>
+				<form action="/vault/pwdChange?key=<?php echo htmlspecialchars( $_GET['key'] );?>&reset=<?php echo  htmlspecialchars( $_GET['reset'] );?>" method="post" class=" needs-validation" novalidate>
 					<!-- Email -->
 					<div class="form-outline form-floating mb-4"> 
-						<input type="email" id="email" name="email" class="form-control disabled" placeholder="Email" required value="<?php echo $user[ 'email' ];?>" readonly />
+						<input type="email" id="email" name="email" class="form-control disabled" placeholder="Email" required value="<?php echo htmlspecialchars( $user[ 'email' ] );?>" readonly />
 						<label class="form-label" for="email">Email</label>
 						<div class="invalid-feedback">
 							L'adresse email est obligatoire et doit etre valide.
