@@ -189,8 +189,9 @@ function register( string $username, string $password, string $email ): bool
 	$sql = 'INSERT INTO users(username, email, password)
 			VALUES(?, ?, ?)';
 
+	$password_hash = password_hash( $password, PASSWORD_DEFAULT );
 	$statement = $conn->prepare($sql);
-	$statement->bind_param( 'sss', $username, $email, password_hash($password, PASSWORD_DEFAULT) );
+	$statement->bind_param( 'sss', $username, $email, $password_hash );
 
 	return $statement->execute();
 }
@@ -204,8 +205,9 @@ function update( int $id, string $username, string $password, string $email ): b
 	$sql = 'UPDATE users set username = ?, email = ?, password = ?
 			WHERE id = ?';
 
+	$password_hash = password_hash( $password, PASSWORD_DEFAULT );
 	$statement = $conn->prepare($sql);
-	$statement->bind_param( 'sssi', $username, $email, password_hash( $password, PASSWORD_DEFAULT ), $id );
+	$statement->bind_param( 'sssi', $username, $email, $password_hash, $id );
 
 	return $statement->execute();
 }
