@@ -124,9 +124,7 @@ if( isset( $_POST["pwdChange"] ) ) {
 	
 	if( empty( $password ) ) $erreur="Le mot de passe est oblibatoire";
 	elseif( $password != $confirmPassword ) $erreur="Les mots des passes ne sont pas identiques";    
-	else{
-		$user = find_user_by_email( $email );
-		
+	else{		
 		if( update( $user[ 'id' ], $user[ 'username' ], $password, $user[ 'email' ] ) ) {
 			$success = true;
 		} else {
