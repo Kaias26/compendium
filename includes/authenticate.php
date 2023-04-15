@@ -81,8 +81,8 @@ if( isset( $_POST["pwdReset"] ) ) {
 				'naheulbeukdb@gmail.com',
 				'Naheulbeuk DB',
 				'Reinitialiser votre mot de passe',
-				'Bonjour ' . $user[ 'username' ] . ' ,<br><br>Une demande de changement de mot de passe a été faites sur le site Naheulbeuk-db.<br>Si vous souhaitez changer votre mot de passe, 
-				<a href="' . $link . '">Cliquez ici</a><br><br>Ou copiez/collez cette URL dans votre navigateur : <br>' . $link . '<br><br>Naheulbeuk-DB'
+				'Bonjour ' . $user[ 'username' ] . ' ,<br><br>Une demande de changement de mot de passe a &eacute;t&eacute; faites sur le site Naheulbeuk-db.<br>Si vous souhaitez changer votre mot de passe, 
+				<a href="' . $link . '">cliquez ici</a><br><br>Ou copiez/collez cette URL dans votre navigateur : <br>' . $link . '<br><br>Naheulbeuk-DB'
 			);
 
 			if( $sendMail )
