@@ -59,11 +59,14 @@
 					<ul class="navbar-nav me-auto mb-2 mb-md-0">
 						<?php if( !is_user_logged_in() ) {?>
 							<li class="nav-item">						
-								<a class="nav-link <?php if( $folder == "vault" ) {?>active<?php }?>" href="/vault/login"><i class="fas fa-solid fa-door-open"></i> Connexion</a>
+								<a class="nav-link <?php if( $group == "login" ) {?>active<?php }?>" href="/vault/login"><i class="fas fa-solid fa-door-open"></i> Connexion</a>
 							</li>
 							<?php } else { ?>	
 							<li class="nav-item">						
-								<a class="nav-link <?php if( $folder == "vault" ) {?>active<?php }?>" href="/vault/home"><i class="fas fa-regular fa-toolbox"></i> Vault</a>
+								<a class="nav-link <?php if( $group == "home" ) {?>active<?php }?>" href="/vault/home"><i class="fas fa-regular fa-toolbox"></i> Vault</a>
+							</li>
+							<li class="nav-item">						
+								<a class="nav-link <?php if( $group == "account" ) {?>active<?php }?>" href="/vault/account"><i class="fas fa-regular fa-user"></i> Mon compte</a>
 							</li>
 							<li class="nav-item">
 								<a class="nav-link" href="/vault/logout"><i class="fas fa-solid fa-door-closed"></i> Déconnexion</a>
