@@ -19,7 +19,7 @@
 	$page_desc = "Compendium des differents tableaux du JDR papier Le donjon de naheulbeuk. Compatible avec les fiches de personnages de la table de jeu en ligne Roll20.";
 	$page_key = "Naheulbeuk,Compendium,roll20";
 
-	if( $group != "home" and $group!= "faq" and $group!= "charactersheet" ) {
+	if( $folder == "grimoires" || $folder == "pnj" || $folder == "pj" || $folder == "objets" ) {
 		$sql = "SELECT cg.title,cg.desc,cg.keywords, c.*, cf.key, cf.value
 				FROM `compendium_group` as cg
 				INNER JOIN `compendium` as c ON c.idGroup = cg.id
