@@ -19,15 +19,18 @@ $(document).ready( function () {
 		var $this = $( this );
 		var $text_id = $this.data( "id" );
 		var $input = $( "#text_" + $text_id );
+		var textToCopy = $input.val();
 
-		$input.select();
-		document.execCommand("copy");
-		$input.blur();
-
-		$this.html( '<i class="fa fa-check"></i>' ).removeClass( "btn-default" ).addClass( "btn-success" );
-		setTimeout( function() {
-			$this.removeClass( "btn-success" ).addClass( "btn-default" ).html( '<i class="fa fa-copy"></i>' );
-		}, 1000);
+		navigator.clipboard.writeText(textToCopy).then(function() {
+			/* success */
+			$this.html( '<i class="fa fa-check"></i>' ).removeClass( "btn-default" ).addClass( "btn-success" );
+			setTimeout( function() {
+				$this.removeClass( "btn-success" ).addClass( "btn-default" ).html( '<i class="fa fa-copy"></i>' );
+			}, 1000);
+		}, function(err) {
+			/* error */
+			console.error('Impossible de copier le texte: ', err);
+		});
 
 	});
 
