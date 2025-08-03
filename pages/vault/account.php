@@ -16,7 +16,7 @@ $user = find_user_by_id( $_SESSION['user_id'] );
 <div class="container">
 	<div class="row justify-content-center">
 		 <div class="col-xl-5 col-md-8 rounded-5 shadow-5-strong p-5">
-			<?php echo display_flash_messages(); clear_flash_messages(); ?>
+		 	<?php echo $flashMessenger->display_flash_messages(); $flashMessenger->clear_flash_messages(); ?>
 			<form action="" method="post" class=" needs-validation" novalidate>
 				<!-- Identifiant -->
 				<div class="form-outline form-floating mb-4"> 

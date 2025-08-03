@@ -15,7 +15,7 @@
 		<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 	</div>
 	<div class="modal-body">
-		<?php echo display_flash_messages(); clear_flash_messages(); ?>
+		<?php echo $flashMessenger->display_flash_messages(); $flashMessenger->clear_flash_messages(); ?>
 		<input type="hidden" name="pwdReset" value="1">
 		<!-- Email -->
 		<div class="form-outline form-floating mb-4"> 

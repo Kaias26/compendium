@@ -6,7 +6,7 @@
 <div class="container">
 	<div class="row justify-content-center">
 		<div class="col-xl-5 col-md-8 rounded-5 shadow-5-strong p-5">
-			<?php echo display_flash_messages(); clear_flash_messages(); ?>
+			<?php echo $flashMessenger->display_flash_messages(); $flashMessenger->clear_flash_messages(); ?>
 			<?php if( isset( $user ) ) { ?>
 				<form action="/vault/pwdChange?selector=<?php echo htmlspecialchars( $_GET['selector'] );?>&validator=<?php echo  htmlspecialchars( $_GET['validator'] );?>" method="post" class=" needs-validation" novalidate>
 					<input type="hidden" name="selector" value="<?php echo htmlspecialchars( $_GET['selector'] ); ?>">
