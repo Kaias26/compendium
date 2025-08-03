@@ -15,6 +15,41 @@
 		$page .= "/" . $group;
 	}
 
+	$allowed_pages = [
+		'pages/home', 
+		'pages/faq', 
+		'pages/grimoires/mage', 
+		'pages/grimoires/paladin', 
+		'pages/grimoires/pretre', 
+		'pages/pnj/invocations', 
+		'pages/pnj/bestiaire', 
+		'pages/pnj/pretires', 
+		'pages/pnj/traitsspeciaux', 
+		'pages/pj/competences', 
+		'pages/pj/coupsspeciaux', 
+		'pages/pj/traitsparticuliers', 
+		'pages/pj/ape', 
+		'pages/objets/armement', 
+		'pages/objets/protections', 
+		'pages/objets/accessoires', 
+		'pages/objets/materiel', 
+		'pages/objets/consommables', 
+		'pages/charactersheet/charactersheet', 
+		'pages/generateurButin/bijoux',
+		'pages/vault/login',
+		'pages/vault/home',
+		'pages/vault/account',
+		'pages/vault/logout',
+		'pages/vault/pwdChange',
+		'pages/vault/pwdReset',
+		'pages/vault/register'
+	];
+
+	if (!in_array($page, $allowed_pages)) {
+		header('Location: /home');
+		exit;
+	}
+
 	$page_title = "Naheulbeuk Online - Compendium";
 	$page_desc = "Compendium des differents tableaux du JDR papier Le donjon de naheulbeuk. Compatible avec les fiches de personnages de la table de jeu en ligne Roll20.";
 	$page_key = "Naheulbeuk,Compendium,roll20";
