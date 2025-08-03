@@ -41,7 +41,7 @@ if( !is_user_logged_in() ) {
 		</thead>
 		<tbody>
 			<?php
-			while( $row = $result->fetch_assoc() ) {
+			while( $row = $statement->fetch() ) {
 				echo "<tr>";
 					echo "<td>" . $row['nom'] . "</td>";
 					echo "<td>" . $row['origine'] . "</td>";

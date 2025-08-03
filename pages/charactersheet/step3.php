@@ -29,7 +29,7 @@
 						<ul class="list-group list-group-flush">
 							<?php
 								if( $result_origine->num_rows > 0 ) {
-									while( $row = $result_origine->fetch_assoc() ) {
+									while( $row = $result_origine->fetch() ) {
 										echo '<li class="list-group-item" data-bs-toggle="tooltip" data-bs-placement="top" title="' . $row[ 'value' ] . '"> ' . $row[ 'name' ] . ' </li>';
 										echo '<input type="hidden" name="competences[]" value="' . $row[ 'id' ] . '">';
 									}
@@ -49,7 +49,7 @@
 						<ul class="list-group list-group-flush">
 							<?php
 								if( $result_metier->num_rows > 0 ) {
-									while( $row = $result_metier->fetch_assoc() ) {
+									while( $row = $result_metier->fetch() ) {
 										echo '<li class="list-group-item" data-bs-toggle="tooltip" data-bs-placement="top" title="' . $row[ 'value' ] . '"> ' . $row[ 'name' ] . ' </li>';
 										echo '<input type="hidden" name="competences[]" value="' . $row[ 'id' ] . '">';
 									}
@@ -67,7 +67,7 @@
 				</div>
 			</div>
 			<?php
-				while( $row = $result_auChoix->fetch_assoc() ) {
+				while( $row = $result_auChoix->fetch() ) {
 					$checked = "";
 					if( in_array( $row[ 'id' ], $_SESSION[ 'post' ][ 'competences' ] ) ) {
 						$checked = "checked";
