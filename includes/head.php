@@ -7,9 +7,9 @@
 <meta name="keywords" content="<?php echo $page_key;?>" />
 
 <!-- Bootstrap core CSS -->
-<link href="/css/bootstrap/bootstrap.min.css" rel="stylesheet">
-<link href="/css/datatables/datatables.min.css" rel="stylesheet">
-<link href="/css/fa/css/all.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+<link href="https://cdn.datatables.net/v/bs5/dt-2.0.8/r-3.0.2/rg-1.5.0/datatables.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <link href="/css/styles.css" rel="stylesheet" >
 
 <?php if( $folder == 'charactersheet' ) {?>
