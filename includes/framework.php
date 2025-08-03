@@ -54,6 +54,9 @@
 	$page_desc = "Compendium des differents tableaux du JDR papier Le donjon de naheulbeuk. Compatible avec les fiches de personnages de la table de jeu en ligne Roll20.";
 	$page_key = "Naheulbeuk,Compendium,roll20";
 
+	/**************/
+	/* Compendium */
+	/**************/
 	if( $folder == "grimoires" || $folder == "pnj" || $folder == "pj" || $folder == "objets" ) {
 		$sql = "SELECT cg.title,cg.desc,cg.keywords, c.*, cf.key, cf.value
 				FROM `compendium_group` as cg
@@ -94,6 +97,28 @@
 			$page_title = $row[ 'title' ];
 			$page_desc = $row[ 'desc' ];
 			$page_key = $row[ 'keywords' ];
+		}
+	}
+
+	/***************/
+	/*    Vault    */
+	/***************/
+	if( $folder == "vault" and $group == "home" ) {
+		$user_id = $_SESSION[ 'user_id' ];
+
+		$sql = "SELECT us.*
+				FROM `user_sheets` as us
+				WHERE `user_id` = ?
+				AND `subgroup` = ?
+				ORDER BY updated ASC";
+		if ($statement = $conn->prepare($sql)) {
+			$statement->bind_param('is', $user_id, $subgroup);
+			$statement->execute();
+			$result = $statement->get_result();
+		} else {
+			echo "Désolé, le site web subit des problèmes.";
+			echo "Error: " . $conn->error  . "\n";
+			exit;
 		}
 	}
 ?>
