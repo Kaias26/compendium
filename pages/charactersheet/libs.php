@@ -24,21 +24,30 @@ class Origine
 	public function isAvailable() {
 		$availaible = 0;
 		global $aStats;
+		$missingStats = [];
 
 		foreach( $aStats as $stat ) {
 			// Vérifie  les stats min
 			if( $this->$stat[0] == "Non" ) { $availaible++; }
 			elseif( $_SESSION[ 'post' ][ 'dice_' . $stat ] >= $this->$stat[0]  ) { $availaible++; }
-			else { return false; }
+			else { 
+				$missingStats[] = ucfirst($stat) . " (min " . $this->$stat[0] . ")";
+			}
 
 			// Vérifie  les stats max
 			if( $this->$stat[1] == "Non" ) { $availaible++; }
 			elseif( $_SESSION[ 'post' ][ 'dice_' . $stat ] <= $this->$stat[1] ) { $availaible++; }
-			else { return false; }
+			else { 
+				$missingStats[] = ucfirst($stat) . " (max " . $this->$stat[1] . ")";
+			}
 		}
 		
-		if( $availaible === 10 ) { return true; }
-		else { return false; }
+		if( count($missingStats) > 0 ) {
+			$this->tooltip = implode("<br>", $missingStats);
+			return false;
+		} else {
+			return true;
+		}
 	}
 }
 
@@ -283,25 +292,34 @@ class Metier
 	public $competencesNaissance;
 	public $competencesAuChoix;
 	public $poids;
-	
+
 	public function isAvailable() {
 		$availaible = 0;
 		global $aStats;
-		
+		$missingStats = [];
+
 		foreach( $aStats as $stat ) {
 			// Vérifie  les stats min
 			if( $this->$stat[0] == "Non" ) { $availaible++; }
 			elseif( $_SESSION[ 'post' ][ 'dice_' . $stat ] >= $this->$stat[0]  ) { $availaible++; }
-			else { return false; }
+			else { 
+				$missingStats[] = ucfirst($stat) . " (min " . $this->$stat[0] . ")";
+			}
 
 			// Vérifie  les stats max
 			if( $this->$stat[1] == "Non" ) { $availaible++; }
 			elseif( $_SESSION[ 'post' ][ 'dice_' . $stat ] <= $this->$stat[1] ) { $availaible++; }
-			else { return false; }
+			else { 
+				$missingStats[] = ucfirst($stat) . " (max " . $this->$stat[1] . ")";
+			}
 		}
 		
-		if( $availaible === 10 ) { return true; }
-		else { return false; }
+		if( count($missingStats) > 0 ) {
+			$this->tooltip = implode("<br>", $missingStats);
+			return false;
+		} else {
+			return true;
+		}
 	}
 }
 

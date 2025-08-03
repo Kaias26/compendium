@@ -80,6 +80,7 @@
 					<br><p>Vos statistiques permettent de choisir parmis les Origines suivantes :</p>
 				</div>
 			</div>
+			<div class="d-flex flex-wrap gap-1">
 			<?php 			
 			foreach( $aOrigines as $oOrigine ) {
 				$disabled = "";
@@ -94,14 +95,18 @@
 					$checked = "";
 					$class = "btn-outline-danger";
 				}
+				echo '<div data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true" title="' . $oOrigine->tooltip. '">';
 				echo '<input type="radio" required class="btn-check" name="origine" id="origine-' . $oOrigine->id . '" autocomplete="off" value="' . $oOrigine->id . '"' . $disabled .' ' . $checked .'>';
-				echo '<label class="btn '. $class . '" for="origine-' . $oOrigine->id . '" data-bs-toggle="tooltip" data-bs-placement="top" title="' . $oOrigine->tooltip. '">' . $oOrigine->label . '</label>';
+				echo '<label class="btn '. $class . '" for="origine-' . $oOrigine->id . '">' . $oOrigine->label . '</label>';
+				echo '</div>';
 				echo ' ';
 			}
 			?>
+			</div>
 
 			<p>Et les métiers suivant :</p>	
 
+			<div class="d-flex flex-wrap gap-1">
 			<?php 			
 			foreach( $aMetiers as $oMetier ) {
 				$disabled = "";
@@ -116,14 +121,18 @@
 					$checked = "";
 					$class = "btn-outline-danger";
 				}				
+				echo '<div data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true" title="' . $oMetier->tooltip. '">';
 				echo '<input type="radio" required class="btn-check" name="metier" id="metier-' . $oMetier->id . '" autocomplete="off" value="' . $oMetier->id . '"' . $disabled .' ' . $checked .'>';
-				echo '<label class="btn '. $class . '" for="metier-' . $oMetier->id . '" data-bs-toggle="tooltip" data-bs-placement="top" title="' . $oMetier->tooltip. '">' . $oMetier->label . '</label>';
+				echo '<label class="btn '. $class . '" for="metier-' . $oMetier->id . '">' . $oMetier->label . '</label>';
+				echo '</div>';
 				echo ' ';
 			}
 			?>
+			</div>
 
 			<p>Vous pouvez également devenir Soldat pour participer aux campagnes spéciales :</p>	
 
+			<div class="d-flex flex-wrap gap-1">
 			<?php 			
 			foreach( $aSoldats as $oMetier ) {
 				$disabled = "";
@@ -138,14 +147,18 @@
 					$checked = "";
 					$class = "btn-outline-danger";
 				}				
+				echo '<div data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true" title="' . $oMetier->tooltip. '">';
 				echo '<input type="radio" required class="btn-check" name="metier" id="metier-' . $oMetier->id . '" autocomplete="off" value="' . $oMetier->id . '"' . $disabled .' ' . $checked .'>';
-				echo '<label class="btn '. $class . '" for="metier-' . $oMetier->id . '" data-bs-toggle="tooltip" data-bs-placement="top" title="' . $oMetier->tooltip. '">' . $oMetier->label . '</label>';
+				echo '<label class="btn '. $class . '" for="metier-' . $oMetier->id . '">' . $oMetier->label . '</label>';
+				echo '</div>';
 				echo ' ';
 			}
 			?>
+			</div>
 
 			<p>Ou choisir un métier "avancé" (avec l'accord du MJ) :</p>	
 
+			<div class="d-flex flex-wrap gap-1">
 			<?php 			
 			foreach( $aSupplements as $oMetier ) {
 				$disabled = "";
@@ -160,11 +173,14 @@
 					$checked = "";
 					$class = "btn-outline-danger";
 				}				
+				echo '<div data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true" title="' . $oMetier->tooltip. '">';
 				echo '<input type="radio" required class="btn-check" name="metier" id="metier-' . $oMetier->id . '" autocomplete="off" value="' . $oMetier->id . '"' . $disabled .' ' . $checked .'>';
-				echo '<label class="btn '. $class . '" for="metier-' . $oMetier->id . '" data-bs-toggle="tooltip" data-bs-placement="top" title="' . $oMetier->tooltip. '">' . $oMetier->label . '</label>';
+				echo '<label class="btn '. $class . '" for="metier-' . $oMetier->id . '">' . $oMetier->label . '</label>';
+				echo '</div>';
 				echo ' ';
 			}
 			?>
+			</div>
 
 			<p>Ou encore ne pas choisir de métier et attendre qu'une occasion se présente (avec l'accord du MJ) :</p>			
 			<input type="radio" required class="btn-check" name="metier" id="metier-23" autocomplete="off" value="23" <?php if( $_SESSION[ 'post' ][ 'metier' ] == 23 or $_SESSION[ 'post' ][ 'metier' ] == -1 ) { echo 'checked'; } ?>>
