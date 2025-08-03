@@ -1,5 +1,5 @@
 <?php
-	include("_query.php");
+	include(__DIR__ . "/_query.php");
 ?>
 
 <div class="modal-header">
