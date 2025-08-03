@@ -234,6 +234,7 @@ function login( string $username, string $password, bool $remember = false ): bo
 
 function log_user_in(array $user): bool
 {
+	session_regenerate_id(true);
 	// set username & id in the session
 	$_SESSION['username'] = $user['username'];
 	$_SESSION['user_id'] = $user['id'];
