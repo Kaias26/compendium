@@ -67,8 +67,8 @@
                 and cf.key = 'effet'
 				ORDER BY name ASC";
 		if (!$result_origine = $conn->query($sql)) {
-			echo "Désolé, le site web subit des problèmes.";
-			echo "Error: " . $conn->error  . "\n";
+			set_flash_message('danger', 'Un problème est survenu lors de l\'accès aux données. Veuillez réessayer plus tard.');
+			header('Location: /home');
 			exit;
 		}
 
@@ -84,8 +84,8 @@
                 and cf.key = 'effet'
 				ORDER BY name ASC";
 		if (!$result_metier = $conn->query($sql)) {
-			echo "Désolé, le site web subit des problèmes.";
-			echo "Error: " . $conn->error  . "\n";
+			set_flash_message('danger', 'Un problème est survenu lors de l\'accès aux données. Veuillez réessayer plus tard.');
+			header('Location: /home');
 			exit;
 		}
 		
@@ -102,8 +102,8 @@
                 and cf.key = 'effet'
 				ORDER BY name ASC";				
 		if (!$result_auChoix = $conn->query($sql)) {
-			echo "Désolé, le site web subit des problèmes.";
-			echo "Error: " . $conn->error  . "\n";
+			set_flash_message('danger', 'Un problème est survenu lors de l\'accès aux données. Veuillez réessayer plus tard.');
+			header('Location: /home');
 			exit;
 		}
 	}

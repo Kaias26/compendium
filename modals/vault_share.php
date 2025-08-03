@@ -6,8 +6,8 @@
 			FROM `user_sheets` as us
 			WHERE `id` = '$id'";
 	if (!$result = $conn->query($sql)) {
-		echo "Désolé, le site web subit des problèmes.";
-		echo "Error: " . $conn->error  . "\n";
+		set_flash_message('danger', 'Un problème est survenu lors de l\'accès aux données. Veuillez réessayer plus tard.');
+		header('Location: /home');
 		exit;
 	}
 ?>
