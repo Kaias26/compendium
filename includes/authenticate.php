@@ -136,7 +136,9 @@ if (isset($_POST["pwdChange"])) {
             $user = $authService->find_user_by_id($token['user_id']);
             if ($authService->update($user['id'], $user['username'], $password, $user['email'])) {
                 $authService->delete_user_token($user['id']);
-                $flashMessenger->set_flash_message('success', "Votre mot de passe a été changé avec succès.");
+                $flashMessenger->set_flash_message('success', "Votre mot de passe a été changé avec succès.<br />Vous pouvez maintenant vous connecter.");
+                header('Location: /vault/login');
+                exit();
             } else {
                 $flashMessenger->set_flash_message('danger', "Une erreur s'est produite, impossible de changer le mot de passe.");
             }
