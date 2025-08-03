@@ -24,10 +24,14 @@
 				FROM `compendium_group` as cg
 				INNER JOIN `compendium` as c ON c.idGroup = cg.id
 				INNER JOIN `compendium_fields` as cf ON cf.idCompendium = c.id
-				WHERE `group` = '$group'
-				AND `subgroup` = '$subgroup'
+				WHERE `group` = ?
+				AND `subgroup` = ?
 				ORDER BY name ASC";
-		if (!$result = $conn->query($sql)) {
+		if ($statement = $conn->prepare($sql)) {
+			$statement->bind_param('ss', $group, $subgroup);
+			$statement->execute();
+			$result = $statement->get_result();
+		} else {
 			echo "Désolé, le site web subit des problèmes.";
 			echo "Error: " . $conn->error  . "\n";
 			exit;

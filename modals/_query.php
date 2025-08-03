@@ -7,13 +7,18 @@
 	$sql = "SELECT c.*, cf.key, cf.value
 			FROM `compendium` as c
 			INNER JOIN `compendium_fields` as cf ON cf.idCompendium = c.id
-			WHERE c.id = '$id'
+			WHERE c.id = ?
 			ORDER BY name ASC";
-	if (!$result = $conn->query($sql)) {
+	
+	if ($statement = $conn->prepare($sql)) {
+		$statement->bind_param('i', $id);
+		$statement->execute();
+		$result = $statement->get_result();
+	} else {
 		echo "Désolé, le site web subit des problèmes.";
 		echo "Error: " . $conn->error  . "\n";
 		exit;
-	};
+	}
 
 	$aRows = [];
 
