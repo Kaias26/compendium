@@ -46,25 +46,25 @@
 	}
 
 	$allowed_pages = [
-		'pages/home', 
-		'pages/faq', 
-		'pages/grimoires/mage', 
-		'pages/grimoires/paladin', 
-		'pages/grimoires/pretre', 
-		'pages/pnj/invocations', 
-		'pages/pnj/bestiaire', 
-		'pages/pnj/pretires', 
-		'pages/pnj/traitsspeciaux', 
-		'pages/pj/competences', 
-		'pages/pj/coupsspeciaux', 
-		'pages/pj/traitsparticuliers', 
-		'pages/pj/ape', 
-		'pages/objets/armement', 
-		'pages/objets/protections', 
-		'pages/objets/accessoires', 
-		'pages/objets/materiel', 
-		'pages/objets/consommables', 
-		'pages/charactersheet/charactersheet', 
+		'pages/home',
+		'pages/faq',
+		'pages/grimoires/mage',
+		'pages/grimoires/paladin',
+		'pages/grimoires/pretre',
+		'pages/pnj/invocations',
+		'pages/pnj/bestiaire',
+		'pages/pnj/pretires',
+		'pages/pnj/traitsspeciaux',
+		'pages/pj/competences',
+		'pages/pj/coupsspeciaux',
+		'pages/pj/traitsparticuliers',
+		'pages/pj/ape',
+		'pages/objets/armement',
+		'pages/objets/protections',
+		'pages/objets/accessoires',
+		'pages/objets/materiel',
+		'pages/objets/consommables',
+		'pages/charactersheet/charactersheet',
 		'pages/generateurButin/bijoux',
 		'pages/vault/login',
 		'pages/vault/home',
@@ -95,15 +95,7 @@
 				WHERE `group` = ?
 				AND `subgroup` = ?
 				ORDER BY name ASC";
-		if ($statement = $conn->prepare($sql)) {
-			$statement->bind_param('ss', $group, $subgroup);
-			$statement->execute();
-			$result = $statement->get_result();
-		} else {
-			set_flash_message('danger', 'Un problème est survenu lors de l\'accès aux données. Veuillez réessayer plus tard.');
-			header('Location: /home');
-			exit;
-		}
+		$result = $database->execute_query($sql, 'ss', $group, $subgroup);
 
 		$aRows = [];
 		$aRow = [];
@@ -141,14 +133,6 @@
 				WHERE `user_id` = ?
 				AND `subgroup` = ?
 				ORDER BY updated ASC";
-		if ($statement = $conn->prepare($sql)) {
-			$statement->bind_param('is', $user_id, $subgroup);
-			$statement->execute();
-			$result = $statement->get_result();
-		} else {
-			set_flash_message('danger', 'Un problème est survenu lors de l\'accès aux données. Veuillez réessayer plus tard.');
-			header('Location: /home');
-			exit;
-		}
+		$result = $database->execute_query($sql, 'is', $user_id, $subgroup);
 	}
 ?>

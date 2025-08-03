@@ -1,12 +1,14 @@
 <?php
 
+require_once("Database.php");
+
 class AuthService
 {
     private $conn;
 
-    public function __construct(mysqli $conn)
+    public function __construct(Database $db)
     {
-        $this->conn = $conn;
+        $this->conn = $db->getConnection();
     }
 
     /****************/
@@ -81,7 +83,7 @@ class AuthService
             $result = $statement->get_result();
             return $result->fetch_assoc();
         }
-        exit;
+        return null; // Return null on error instead of exit
     }
 
     public function find_user_by_email(string $email)
@@ -97,7 +99,7 @@ class AuthService
             $result = $statement->get_result();
             return $result->fetch_assoc();
         }
-        exit;
+        return null; // Return null on error instead of exit
     }
 
     public function find_user_by_id(int $id)
@@ -113,7 +115,7 @@ class AuthService
             $result = $statement->get_result();
             return $result->fetch_assoc();
         }
-        exit;
+        return null; // Return null on error instead of exit
     }
 
     public function logout(): void
@@ -222,7 +224,7 @@ class AuthService
             $result = $statement->get_result();
             return $result->fetch_assoc();
         }
-        exit;
+        return null; // Return null on error instead of exit
     }
 
     public function delete_user_token(int $user_id): bool
@@ -249,12 +251,13 @@ class AuthService
                 expiry > now()
                 LIMIT 1';
 
-        $statement = $this->conn->prepare($sql);
-        $statement->bind_param('s', $tokens[0]);
-        $statement->execute();
-        $result = $statement->get_result();
-
-        return $result->fetch_assoc();
+        if ($statement = $this->conn->prepare($sql)) {
+            $statement->bind_param('s', $tokens[0]);
+            $statement->execute();
+            $result = $statement->get_result();
+            return $result->fetch_assoc();
+        }
+        return null; // Return null on error instead of exit
     }
 
     public function token_is_valid(string $token): bool

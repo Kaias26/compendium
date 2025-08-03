@@ -3,7 +3,8 @@
 require_once("includes/AuthService.php");
 
 // Instantiate the AuthService
-$authService = new AuthService($conn);
+$database = Database::getInstance();
+$authService = new AuthService($database);
 
 // Au submit du formulaire Login, vérifie l'authentification
 if (isset($_POST['login'])) {

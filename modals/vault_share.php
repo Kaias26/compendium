@@ -1,15 +1,12 @@
 <?php
 	include("../includes/config.php");
 
-	$id = openssl_decrypt( $_GET['id'], $cipher, $key, 0, $iv, $tag )
+	$id = openssl_decrypt( $_GET['id'], $cipher, $key, 0, $iv, $tag );
 	$sql = "SELECT us.*
 			FROM `user_sheets` as us
-			WHERE `id` = '$id'";
-	if (!$result = $conn->query($sql)) {
-		set_flash_message('danger', 'Un problème est survenu lors de l\'accès aux données. Veuillez réessayer plus tard.');
-		header('Location: /home');
-		exit;
-	}
+			WHERE `id` = ?";
+			
+	$result = $database->execute_query($sql, 'i', $id);
 ?>
 <div class="modal-header">
 	<h5 class="modal-title" id="modal-title"><?php echo $aRows[ 0 ]['name'] ?></h5>

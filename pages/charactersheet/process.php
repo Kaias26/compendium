@@ -63,14 +63,10 @@
 		$sql = "SELECT c.id, c.name, cf.value
 				FROM `compendium` as c
 				INNER JOIN `compendium_fields` as cf ON cf.idCompendium = c.id
-				WHERE c.id in ( $origine_id_naissance )
+				WHERE c.id in ( ? )
                 and cf.key = 'effet'
 				ORDER BY name ASC";
-		if (!$result_origine = $conn->query($sql)) {
-			set_flash_message('danger', 'Un problème est survenu lors de l\'accès aux données. Veuillez réessayer plus tard.');
-			header('Location: /home');
-			exit;
-		}
+		$result_origine = $database->execute_query($sql, 's', $origine_id_naissance);
 
 		$metier_id_naissance = $aJobs[ $_SESSION['post']['metier'] ]->competencesNaissance;
 		$metier_id_auChoix = $aJobs[ $_SESSION['post']['metier'] ]->competencesAuChoix;
@@ -79,15 +75,11 @@
 		$sql = "SELECT c.id, c.name, cf.value
 				FROM `compendium` as c
 				INNER JOIN `compendium_fields` as cf ON cf.idCompendium = c.id
-				WHERE c.id in ( $metier_id_naissance )
-				and c.id not in ( $origine_id_naissance )
+				WHERE c.id in ( ? )
+				and c.id not in ( ? )
                 and cf.key = 'effet'
 				ORDER BY name ASC";
-		if (!$result_metier = $conn->query($sql)) {
-			set_flash_message('danger', 'Un problème est survenu lors de l\'accès aux données. Veuillez réessayer plus tard.');
-			header('Location: /home');
-			exit;
-		}
+				$result_metier = $database->execute_query($sql, 'ss', $metier_id_naissance, $origine_id_naissance);
 		
 		// Affichage des compétences Au choix
 		if( $aOrigines[ $_SESSION['post']['origine'] ]->id == 0 and $aJobs[ $_SESSION['post']['metier'] ]->id != 23 ) {			
@@ -97,15 +89,11 @@
 		$sql = "SELECT c.id, c.name, cf.value
 				FROM `compendium` as c
 				INNER JOIN `compendium_fields` as cf ON cf.idCompendium = c.id
-				WHERE c.id in ( $origine_id_auChoix, $metier_id_auChoix )
-				and c.id not in ( $metier_id_naissance,$origine_id_naissance )
+				WHERE c.id in ( ?, ? )
+				and c.id not in ( ?, ? )
                 and cf.key = 'effet'
 				ORDER BY name ASC";				
-		if (!$result_auChoix = $conn->query($sql)) {
-			set_flash_message('danger', 'Un problème est survenu lors de l\'accès aux données. Veuillez réessayer plus tard.');
-			header('Location: /home');
-			exit;
-		}
+		$result_auChoix = $database->execute_query($sql, 'iiii', $origine_id_auChoix, $metier_id_auChoix, $metier_id_naissance, $origine_id_naissance);
 	}
 
 	if( $_SESSION[ 'step' ] == 7 )

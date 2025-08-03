@@ -10,15 +10,7 @@
 			WHERE c.id = ?
 			ORDER BY name ASC";
 	
-	if ($statement = $conn->prepare($sql)) {
-		$statement->bind_param('i', $id);
-		$statement->execute();
-		$result = $statement->get_result();
-	} else {
-		set_flash_message('danger', 'Un problème est survenu lors de l\'accès aux données. Veuillez réessayer plus tard.');
-		header('Location: /home');
-		exit;
-	}
+		$result = $database->execute_query($sql, 'i', $id);
 
 	$aRows = [];
 
