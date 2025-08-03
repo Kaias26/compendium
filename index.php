@@ -20,8 +20,8 @@
 		<?php include "$page.php";?>
 		<?php 
 			// Fallback for flash messages if not displayed in the included page
-			echo display_flash_messages();
-			clear_flash_messages();
+			echo $flashMessenger->display_flash_messages();
+			$flashMessenger->clear_flash_messages();
 		?>
 	</main>
 

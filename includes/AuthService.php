@@ -1,16 +1,19 @@
 <?php
 
 require_once("Database.php");
+require_once("FlashMessenger.php");
 
 class AuthService
 {
     private $conn;
     private $db;
+    private $flashMessenger;
 
-    public function __construct(Database $db)
+    public function __construct(Database $db, FlashMessenger $flashMessenger)
     {
         $this->db = $db;
         $this->conn = $db->getConnection();
+        $this->flashMessenger = $flashMessenger;
     }
 
     /****************/
@@ -28,8 +31,14 @@ class AuthService
             ':password' => $password_hash
         ];
 
-        $statement = $this->db->execute_query($sql, $params);
-        return $statement->rowCount() > 0;
+        try {
+            $statement = $this->db->execute_query($sql, $params);
+            return $statement->rowCount() > 0;
+        } catch (PDOException $e) {
+            error_log("AuthService register error: " . $e->getMessage());
+            $this->flashMessenger->set_flash_message('danger', 'Une erreur est survenue lors de l\'enregistrement. Veuillez réessayer plus tard.');
+            return false;
+        }
     }
 
     /**************/
@@ -48,16 +57,28 @@ class AuthService
             ':id' => $id
         ];
 
-        $statement = $this->db->execute_query($sql, $params);
-        return $statement->rowCount() > 0;
+        try {
+            $statement = $this->db->execute_query($sql, $params);
+            return $statement->rowCount() > 0;
+        } catch (PDOException $e) {
+            error_log("AuthService update error: " . $e->getMessage());
+            $this->flashMessenger->set_flash_message('danger', 'Une erreur est survenue lors de la mise à jour. Veuillez réessayer plus tard.');
+            return false;
+        }
     }
 
-    /************/
+    /************/ 
     /*** AUTH ***/
-    /************/
+    /************/ 
     public function login(string $username, string $password, bool $remember = false): bool
     {
-        $user = $this->find_user_by_username($username);
+        try {
+            $user = $this->find_user_by_username($username);
+        } catch (PDOException $e) {
+            error_log("AuthService login error (find_user_by_username): " . $e->getMessage());
+            $this->flashMessenger->set_flash_message('danger', 'Une erreur est survenue lors de la connexion. Veuillez réessayer plus tard.');
+            return false;
+        }
 
         if ($user && password_verify($password, $user['password'])) {
             $this->log_user_in($user);
@@ -207,8 +228,14 @@ class AuthService
             ':expiry' => $expiry
         ];
 
-        $statement = $this->db->execute_query($sql, $params);
-        return $statement->rowCount() > 0;
+        try {
+            $statement = $this->db->execute_query($sql, $params);
+            return $statement->rowCount() > 0;
+        } catch (PDOException $e) {
+            error_log("AuthService insert_user_token error: " . $e->getMessage());
+            $this->flashMessenger->set_flash_message('danger', 'Une erreur est survenue lors de la génération du token. Veuillez réessayer plus tard.');
+            return false;
+        }
     }
 
     public function find_user_token_by_selector(string $selector)
@@ -219,15 +246,27 @@ class AuthService
                 expiry >= NOW()
                 LIMIT 1';
 
-        $statement = $this->db->execute_query($sql, [':selector' => $selector]);
-        return $statement->fetch();
+        try {
+            $statement = $this->db->execute_query($sql, [':selector' => $selector]);
+            return $statement->fetch();
+        } catch (PDOException $e) {
+            error_log("AuthService find_user_token_by_selector error: " . $e->getMessage());
+            $this->flashMessenger->set_flash_message('danger', 'Une erreur est survenue lors de la recherche du token. Veuillez réessayer plus tard.');
+            return null;
+        }
     }
 
     public function delete_user_token(int $user_id): bool
     {
         $sql = 'DELETE FROM user_tokens WHERE user_id = :user_id';
-        $statement = $this->db->execute_query($sql, [':user_id' => $user_id]);
-        return $statement->rowCount() > 0;
+        try {
+            $statement = $this->db->execute_query($sql, [':user_id' => $user_id]);
+            return $statement->rowCount() > 0;
+        } catch (PDOException $e) {
+            error_log("AuthService delete_user_token error: " . $e->getMessage());
+            $this->flashMessenger->set_flash_message('danger', 'Une erreur est survenue lors de la suppression du token. Veuillez réessayer plus tard.');
+            return false;
+        }
     }
 
     public function find_user_by_token(string $token)
@@ -245,8 +284,14 @@ class AuthService
                 expiry > NOW()
                 LIMIT 1';
 
-        $statement = $this->db->execute_query($sql, [':selector' => $tokens[0]]);
-        return $statement->fetch();
+        try {
+            $statement = $this->db->execute_query($sql, [':selector' => $tokens[0]]);
+            return $statement->fetch();
+        } catch (PDOException $e) {
+            error_log("AuthService find_user_by_token error: " . $e->getMessage());
+            $this->flashMessenger->set_flash_message('danger', 'Une erreur est survenue lors de la recherche de l\'utilisateur par token. Veuillez réessayer plus tard.');
+            return null;
+        }
     }
 
     public function token_is_valid(string $token): bool

@@ -19,10 +19,8 @@ class Database
         } catch (PDOException $e) {
             // Log the error for debugging purposes
             error_log("Database connection error: " . $e->getMessage());
-            // Redirect to home with a flash message
-            set_flash_message('danger', 'Impossible de se connecter à la base de données. Veuillez réessayer plus tard.');
-            header('Location: /home');
-            exit;
+            // Re-throw the exception or handle it more gracefully if needed at a higher level
+            throw new Exception('Impossible de se connecter à la base de données.', 0, $e);
         }
     }
 
@@ -48,10 +46,8 @@ class Database
         } catch (PDOException $e) {
             // Log the error for debugging purposes
             error_log("Database query error: " . $e->getMessage());
-            // Redirect to home with a flash message
-            set_flash_message('danger', 'Un problème est survenu lors de l\'accès aux données. Veuillez réessayer plus tard.');
-            header('Location: /home');
-            exit;
+            // Re-throw the exception to be caught by the calling code
+            throw $e;
         }
     }
 

@@ -4,21 +4,22 @@ require_once("includes/AuthService.php");
 
 // Instantiate the AuthService
 $database = Database::getInstance();
-$authService = new AuthService($database);
+$flashMessenger = new FlashMessenger();
+$authService = new AuthService($database, $flashMessenger);
 
 // Au submit du formulaire Login, vérifie l'authentification
 if (isset($_POST['login'])) {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    if (empty($username)) set_flash_message('danger', "L'identifiant est obligatoire");
-    elseif (empty($password)) set_flash_message('danger', "Le mot de passe est oblibatoire");
+    if (empty($username)) $flashMessenger->set_flash_message('danger', "L'identifiant est obligatoire");
+    elseif (empty($password)) $flashMessenger->set_flash_message('danger', "Le mot de passe est oblibatoire");
     else {
         if ($authService->login($username, $password, isset($_POST['remember_me']))) {
             echo '<meta http-equiv="refresh" content="0; URL=/vault/home">';
             die();
         } else {
-            set_flash_message('danger', "L'identifiant ou le mot de passe est incorrect.");
+            $flashMessenger->set_flash_message('danger', "L'identifiant ou le mot de passe est incorrect.");
         }
     }
 }
@@ -26,31 +27,31 @@ if (isset($_POST['login'])) {
 // Au submit du formulaire Register, vérifie l'authentification
 if (isset($_POST["register"])) {
     // récupérer le post et supprimer les antislashes ajoutés par le formulaire
-
-    if (empty($username)) set_flash_message('danger', "L'identifiant est obligatoire");
-    elseif (empty($password)) set_flash_message('danger', "Le mot de passe est oblibatoire");
-    elseif ($password != $confirmPassword) set_flash_message('danger', "Les mots des passes ne sont pas identiques");
-    elseif (empty($email)) set_flash_message('danger', "L'email est oblibatoire");
-    elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) set_flash_message('danger', "L'email n'est pas valide");
     $username = $_POST['username'];
     $password = $_POST['password'];
     $confirmPassword = $_POST['confirmPassword'];
     $email = $_POST['email'];
+
+    if (empty($username)) $flashMessenger->set_flash_message('danger', "L'identifiant est obligatoire");
+    elseif (empty($password)) $flashMessenger->set_flash_message('danger', "Le mot de passe est oblibatoire");
+    elseif ($password != $confirmPassword) $flashMessenger->set_flash_message('danger', "Les mots des passes ne sont pas identiques");
+    elseif (empty($email)) $flashMessenger->set_flash_message('danger', "L'email est oblibatoire");
+    elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) $flashMessenger->set_flash_message('danger', "L'email n'est pas valide");
     else {
         $user = $authService->find_user_by_username($username);
 
         if ($user) {
-            set_flash_message('danger', "Cet identifiant existe déjà.");
+            $flashMessenger->set_flash_message('danger', "Cet identifiant existe déjà.");
         } else {
             $user = $authService->find_user_by_email($email);
 
             if ($user) {
-                set_flash_message('danger', "Cette adresse email existe déjà.");
+                $flashMessenger->set_flash_message('danger', "Cette adresse email existe déjà.");
             } else {
                 if ($authService->register($username, $password, $email)) {
-                    set_flash_message('success', "Votre compte a été créé avec succès.");
+                    $flashMessenger->set_flash_message('success', "Votre compte a été créé avec succès.");
                 } else {
-                    set_flash_message('danger', "Une erreur s'est produite, impossible de créer le compte.");
+                    $flashMessenger->set_flash_message('danger', "Une erreur s'est produite, impossible de créer le compte.");
                 }
             }
         }
@@ -62,8 +63,8 @@ if (isset($_POST["pwdReset"])) {
     // récupérer le post et supprimer les antislashes ajoutés par le formulaire
     $email = $_POST['email'];
 
-    if (empty($email)) set_flash_message('danger', "L'email est oblibatoire");
-    elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) set_flash_message('danger', "L'email n'est pas valide");
+    if (empty($email)) $flashMessenger->set_flash_message('danger', "L'email est oblibatoire");
+    elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) $flashMessenger->set_flash_message('danger', "L'email n'est pas valide");
     else {
         $user = $authService->find_user_by_email($email);
 
@@ -94,15 +95,15 @@ if (isset($_POST["pwdReset"])) {
                 );
 
                 if ($sendMail) {
-                    set_flash_message('success', "Un email vous a été envoyé pour réinitialiser votre mot de passe.");
+                    $flashMessenger->set_flash_message('success', "Un email vous a été envoyé pour réinitialiser votre mot de passe.");
                 } else {
-                    set_flash_message('danger', $sendMail);
+                    $flashMessenger->set_flash_message('danger', $sendMail);
                 }
             } else {
-                set_flash_message('danger', "Une erreur s'est produite, impossible de générer le lien de réinitialisation.");
+                $flashMessenger->set_flash_message('danger', "Une erreur s'est produite, impossible de générer le lien de réinitialisation.");
             }
         } else {
-            set_flash_message('danger', "Cet identifiant n'existe pas.");
+            $flashMessenger->set_flash_message('danger', "Cet identifiant n'existe pas.");
         }
     }
 }
@@ -117,7 +118,7 @@ if (isset($_GET['selector']) && isset($_GET['validator'])) {
     if ($token && password_verify($validator, $token['hashed_validator'])) {
         $user = $authService->find_user_by_id($token['user_id']);
     } else {
-        set_flash_message('danger', "Le lien de changement de mot de passe n'est pas valide ou a expiré.");
+        $flashMessenger->set_flash_message('danger', "Le lien de changement de mot de passe n'est pas valide ou a expiré.");
     }
 }
 
@@ -127,20 +128,20 @@ if (isset($_POST["pwdChange"])) {
     $password = $_POST['password'];
     $confirmPassword = $_POST['confirmPassword'];
 
-    if (empty($password)) set_flash_message('danger', "Le mot de passe est oblibatoire");
-    elseif ($password != $confirmPassword) set_flash_message('danger', "Les mots des passes ne sont pas identiques");
+    if (empty($password)) $flashMessenger->set_flash_message('danger', "Le mot de passe est oblibatoire");
+    elseif ($password != $confirmPassword) $flashMessenger->set_flash_message('danger', "Les mots des passes ne sont pas identiques");
     else {
         $token = $authService->find_user_token_by_selector($selector);
         if ($token) {
             $user = $authService->find_user_by_id($token['user_id']);
             if ($authService->update($user['id'], $user['username'], $password, $user['email'])) {
                 $authService->delete_user_token($user['id']);
-                set_flash_message('success', "Votre mot de passe a été changé avec succès.");
+                $flashMessenger->set_flash_message('success', "Votre mot de passe a été changé avec succès.");
             } else {
-                set_flash_message('danger', "Une erreur s'est produite, impossible de changer le mot de passe.");
+                $flashMessenger->set_flash_message('danger', "Une erreur s'est produite, impossible de changer le mot de passe.");
             }
         } else {
-            set_flash_message('danger', "Le lien de changement de mot de passe n'est pas valide ou a expiré.");
+            $flashMessenger->set_flash_message('danger', "Le lien de changement de mot de passe n'est pas valide ou a expiré.");
         }
     }
 }
@@ -152,21 +153,21 @@ if (isset($_POST["update"])) {
     $confirmPassword = $_POST['confirmPassword'];
     $email = $_POST['email'];
 
-    if (empty($username)) set_flash_message('danger', "L'identifiant est obligatoire");
-    elseif ($password != $confirmPassword) set_flash_message('danger', "Les mots des passes ne sont pas identiques");
-    elseif (empty($email)) set_flash_message('danger', "L'email est oblibatoire");
-    elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) set_flash_message('danger', "L'email n'est pas valide");
+    if (empty($username)) $flashMessenger->set_flash_message('danger', "L'identifiant est obligatoire");
+    elseif ($password != $confirmPassword) $flashMessenger->set_flash_message('danger', "Les mots des passes ne sont pas identiques");
+    elseif (empty($email)) $flashMessenger->set_flash_message('danger', "L'email est oblibatoire");
+    elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) $flashMessenger->set_flash_message('danger', "L'email n'est pas valide");
     else {
         $user = $authService->find_user_by_username($username);
 
         if ($user && $user['id'] !== $_SESSION['user_id']) {
-            set_flash_message('danger', "Cet identifiant existe déjà.");
+            $flashMessenger->set_flash_message('danger', "Cet identifiant existe déjà.");
         }
         else {
             $user = $authService->find_user_by_email($email);
 
             if ($user && $user['id'] !== $_SESSION['user_id']) {
-                set_flash_message('danger', "Cette adresse email existe déjà.");
+                $flashMessenger->set_flash_message('danger', "Cette adresse email existe déjà.");
             } else {
                 if ($password == "") {
                     $user = $authService->find_user_by_id($_SESSION['user_id']);
@@ -174,10 +175,10 @@ if (isset($_POST["update"])) {
                 }
 
                 if ($authService->update($_SESSION['user_id'], $username, $password, $email)) {
-                    set_flash_message('success', "Votre compte a été mis à jour avec succès.");
+                    $flashMessenger->set_flash_message('success', "Votre compte a été mis à jour avec succès.");
                     $authService->log_user_in($user);
                 } else {
-                    set_flash_message('danger', "Une erreur s'est produite, impossible de mettre à jour le compte.");
+                    $flashMessenger->set_flash_message('danger', "Une erreur s'est produite, impossible de mettre à jour le compte.");
                 }
             }
         }

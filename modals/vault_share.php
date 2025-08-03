@@ -1,31 +1,39 @@
 <?php
 	include("../includes/config.php");
 
-	$id = openssl_decrypt( $_GET['id'], $cipher, $key, 0, $iv, $tag );
-	$sql = "SELECT us.*
-			FROM `user_sheets` as us
-			WHERE `id` = :id";
-	
-	$statement = $database->execute_query($sql, [':id' => $id]);
-	$aRows = [];
+try {
+		$id = openssl_decrypt( $_GET['id'], $cipher, $key, 0, $iv, $tag );
+		$sql = "SELECT us.*
+				FROM `user_sheets` as us
+				WHERE `id` = :id";
+				
+		$statement = $database->execute_query($sql, [':id' => $id]);
+		$aRows = [];
 
-	while( $row = $statement->fetch() ) {
-		$aRow = "";
+		while( $row = $statement->fetch() ) {
+			$aRow = "";
 
-		$rowValue = str_replace( "\n", "<br>", $row[ 'value' ] );
+			$rowValue = str_replace( "\n", "<br>", $row[ 'value' ] );
 
-		if( isset( $aRows[ 0 ] ) ) {
-			$aRows[ 0 ] = array_merge( $aRows[ 0 ], array( $row[ 'key' ]  => $rowValue ) );
-		} else {
-			// no data found, empty array
-			$aRow = array(
-				"id" => $row[ 'id' ],
-				"name" => $row[ 'name' ],
-				$row[ 'key' ] => $rowValue
-			);
+			if( isset( $aRows[ 0 ] ) ) {
+				$aRows[ 0 ] = array_merge( $aRows[ 0 ], array( $row[ 'key' ]  => $rowValue ) );
+			} else {
+				// no data found, empty array
+				$aRow = array(
+					"id" => $row[ 'id' ],
+					"name" => $row[ 'name' ],
+					$row[ 'key' ] => $rowValue
+				);
 
-			$aRows[ 0 ] = $aRow;
+				$aRows[ 0 ] = $aRow;
+			}
 		}
+	} catch (PDOException $e) {
+		$flashMessenger->set_flash_message('danger', 'Un problème est survenu lors de l'accès aux données. Veuillez réessayer plus tard.');
+		// For AJAX requests, you might want to return a JSON error instead of redirecting
+		// For now, we'll just output a simple error message
+		echo "<p>Erreur: " . htmlspecialchars($e->getMessage()) . "</p>";
+		exit;
 	}
 ?>
 <div class="modal-header">

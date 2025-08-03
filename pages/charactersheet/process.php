@@ -59,46 +59,53 @@
 		$origine_id_naissance = $aOrigines[ $_SESSION['post']['origine'] ]->competencesNaissance;
 		$origine_id_auChoix = $aOrigines[ $_SESSION['post']['origine'] ]->competencesAuChoix;
 
-		// Affichage des compétences de l'Origine 
-		$sql = "SELECT c.id, c.name, cf.value
-				FROM `compendium` as c
-				INNER JOIN `compendium_fields` as cf ON cf.idCompendium = c.id
-				WHERE c.id = :origine_id_naissance
-                and cf.key = 'effet'
-				ORDER BY name ASC";
-		$statement_origine = $database->execute_query($sql, [':origine_id_naissance' => $origine_id_naissance]);
-
-		$metier_id_naissance = $aJobs[ $_SESSION['post']['metier'] ]->competencesNaissance;
-		$metier_id_auChoix = $aJobs[ $_SESSION['post']['metier'] ]->competencesAuChoix;
-
-		// Affichage des compétences du Métier 
-		$sql = "SELECT c.id, c.name, cf.value
-				FROM `compendium` as c
-				INNER JOIN `compendium_fields` as cf ON cf.idCompendium = c.id
-				WHERE c.id = :metier_id_naissance
-				and c.id != :origine_id_naissance
-                and cf.key = 'effet'
-				ORDER BY name ASC";
-		$statement_metier = $database->execute_query($sql, [':metier_id_naissance' => $metier_id_naissance, ':origine_id_naissance' => $origine_id_naissance]);
 		
-		// Affichage des compétences Au choix
-		if( $aOrigines[ $_SESSION['post']['origine'] ]->id == 0 and $aJobs[ $_SESSION['post']['metier'] ]->id != 23 ) {			
-			$origine_id_auChoix = 0;
-		}
+		try {
+			// Affichage des compétences de l'Origine 
+			$sql = "SELECT c.id, c.name, cf.value
+					FROM `compendium` as c
+					INNER JOIN `compendium_fields` as cf ON cf.idCompendium = c.id
+					WHERE c.id = :origine_id_naissance
+	                and cf.key = 'effet'
+					ORDER BY name ASC";
+			$statement_origine = $database->execute_query($sql, [':origine_id_naissance' => $origine_id_naissance]);
 
-		$sql = "SELECT c.id, c.name, cf.value
-				FROM `compendium` as c
-				INNER JOIN `compendium_fields` as cf ON cf.idCompendium = c.id
-				WHERE c.id IN ( :origine_id_auChoix, :metier_id_auChoix )
-				AND c.id NOT IN ( :metier_id_naissance, :origine_id_naissance )
-                and cf.key = 'effet'
-				ORDER BY name ASC";				
-		$statement_auChoix = $database->execute_query($sql, [
-			':origine_id_auChoix' => $origine_id_auChoix,
-			':metier_id_auChoix' => $metier_id_auChoix,
-			':metier_id_naissance' => $metier_id_naissance,
-			':origine_id_naissance' => $origine_id_naissance
-		]);
+			$metier_id_naissance = $aJobs[ $_SESSION['post']['metier'] ]->competencesNaissance;
+			$metier_id_auChoix = $aJobs[ $_SESSION['post']['metier'] ]->competencesAuChoix;
+
+			// Affichage des compétences du Métier 
+			$sql = "SELECT c.id, c.name, cf.value
+					FROM `compendium` as c
+					INNER JOIN `compendium_fields` as cf ON cf.idCompendium = c.id
+					WHERE c.id = :metier_id_naissance
+					and c.id != :origine_id_naissance
+	                and cf.key = 'effet'
+					ORDER BY name ASC";
+			$statement_metier = $database->execute_query($sql, [':metier_id_naissance' => $metier_id_naissance, ':origine_id_naissance' => $origine_id_naissance]);
+			
+			// Affichage des compétences Au choix
+			if( $aOrigines[ $_SESSION['post']['origine'] ]->id == 0 and $aJobs[ $_SESSION['post']['metier'] ]->id != 23 ) {			
+				$origine_id_auChoix = 0;
+			}
+
+			$sql = "SELECT c.id, c.name, cf.value
+					FROM `compendium` as c
+					INNER JOIN `compendium_fields` as cf ON cf.idCompendium = c.id
+					WHERE c.id IN ( :origine_id_auChoix, :metier_id_auChoix )
+					AND c.id NOT IN ( :metier_id_naissance, :origine_id_naissance )
+	                and cf.key = 'effet'
+					ORDER BY name ASC";				
+			$statement_auChoix = $database->execute_query($sql, [
+				':origine_id_auChoix' => $origine_id_auChoix,
+				':metier_id_auChoix' => $metier_id_auChoix,
+				':metier_id_naissance' => $metier_id_naissance,
+				':origine_id_naissance' => $origine_id_naissance
+			]);
+		} catch (PDOException $e) {
+			$flashMessenger->set_flash_message('danger', 'Un problème est survenu lors de l\'accès aux données. Veuillez réessayer plus tard.');
+			header('Location: /home');
+			exit;
+		}
 	}
 
 	if( $_SESSION[ 'step' ] == 7 )
