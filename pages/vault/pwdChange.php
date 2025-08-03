@@ -26,7 +26,8 @@
 				</div>
 			<?php } ?>
 			<?php if( isset( $user ) ) { ?>
-				<form action="/vault/pwdChange?key=<?php echo htmlspecialchars( $_GET['key'] );?>&reset=<?php echo  htmlspecialchars( $_GET['reset'] );?>" method="post" class=" needs-validation" novalidate>
+				<form action="/vault/pwdChange?selector=<?php echo htmlspecialchars( $_GET['selector'] );?>&validator=<?php echo  htmlspecialchars( $_GET['validator'] );?>" method="post" class=" needs-validation" novalidate>
+					<input type="hidden" name="selector" value="<?php echo htmlspecialchars( $_GET['selector'] ); ?>">
 					<!-- Email -->
 					<div class="form-outline form-floating mb-4"> 
 						<input type="email" id="email" name="email" class="form-control disabled" placeholder="Email" required value="<?php echo htmlspecialchars( $user[ 'email' ] );?>" readonly />

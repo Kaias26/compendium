@@ -72,26 +72,41 @@ if( isset( $_POST["pwdReset"] ) ) {
 		$user = find_user_by_email( $email );
 		
 		if( $user ) {
-			$cryptedMail = md5( $user[ 'email' ] );
-			$cryptedPwd = md5( $user[ 'password' ] );
-			$link="http://naheulbeuk-db.byethost9.com/vault/pwdChange?key=".$cryptedMail."&reset=".$cryptedPwd;
+			//Supprimer les anciens tokens
+			delete_user_token($user['id']);
 
-			$sendMail = smtpmailer(
-				$email,
-				'naheulbeukdb@gmail.com',
-				'Naheulbeuk DB',
-				'Reinitialiser votre mot de passe',
-				'Bonjour ' . $user[ 'username' ] . ' ,<br><br>Une demande de changement de mot de passe a &eacute;t&eacute; faites sur le site Naheulbeuk-db.<br>Si vous souhaitez changer votre mot de passe, 
-				<a href="' . $link . '">cliquez ici</a><br><br>Ou copiez/collez cette URL dans votre navigateur : <br>' . $link . '<br><br>Naheulbeuk-DB'
-			);
+			//Générer un nouveau token
+			[$selector, $validator, $token] = generate_tokens();
 
-			if( $sendMail )
-			{
-				$success = true;
-			}
-			else
-			{
-			   $erreur = $sendMail;     
+			// 1 heure d'expiration
+			$expired_seconds = time() + 3600;
+
+			// insérer le token dans la DB
+			$hash_validator = password_hash($validator, PASSWORD_DEFAULT);
+			$expiry = date('Y-m-d H:i:s', $expired_seconds);
+
+			if (insert_user_token($user['id'], $selector, $hash_validator, $expiry)) {
+				$link="http://naheulbeuk-db.byethost9.com/vault/pwdChange?selector=".$selector."&validator=".$validator;
+
+				$sendMail = smtpmailer(
+					$email,
+					'naheulbeukdb@gmail.com',
+					'Naheulbeuk DB',
+					'Reinitialiser votre mot de passe',
+					'Bonjour ' . $user[ 'username' ] . ' ,<br><br>Une demande de changement de mot de passe a &eacute;t&eacute; faites sur le site Naheulbeuk-db.<br>Si vous souhaitez changer votre mot de passe, 
+					<a href="' . $link . '">cliquez ici</a><br><br>Ou copiez/collez cette URL dans votre navigateur : <br>' . $link . '<br><br>Ce lien expirera dans 1 heure.<br><br>Naheulbeuk-DB'
+				);
+
+				if( $sendMail )
+				{
+					$success = true;
+				}
+				else
+				{
+				   $erreur = $sendMail;     
+				}
+			} else {
+				$erreur = "Une erreur s'est produite, impossible de générer le lien de réinitialisation.";
 			}
 	
 		} else {
@@ -101,14 +116,16 @@ if( isset( $_POST["pwdReset"] ) ) {
 }
 
 // Au chargement de la page changement de mot de passe (via email)
-if( isset( $_GET['key'] ) && isset( $_GET['reset'] ) ) {
-	$email = $_GET['key'];
-	$reset = $_GET['reset'];
+if( isset( $_GET['selector'] ) && isset( $_GET['validator'] ) ) {
+	$selector = $_GET['selector'];
+	$validator = $_GET['validator'];
 
-	$user = find_user_by_reset( $email, $reset );
-	if( !isSet( $user ) )
-	{
-	   $erreur = "Le lien de changement de mot de passe n'est pas valide.";    
+	$token = find_user_token_by_selector($selector);
+
+	if ($token && password_verify($validator, $token['hashed_validator'])) {
+		$user = find_user_by_id($token['user_id']);
+	} else {
+		$erreur = "Le lien de changement de mot de passe n'est pas valide ou a expiré.";
 	}
 }
 
@@ -258,22 +275,7 @@ function find_user_by_username( string $username )
 	exit;
 }
 
-function find_user_by_reset( string $email, string $reset  )
-{
-	global $conn;
-	$sql = 'SELECT id, username, password, email
-				FROM users
-				WHERE md5( email ) = ? AND md5( password ) = ?
-				LIMIT 1';
 
-	if( $statement = $conn->prepare($sql) ) {
-		$statement->bind_param('ss', $email, $reset );
-		$statement->execute();
-		$result = $statement->get_result();
-		return $result->fetch_assoc();
-	}
-	exit;
-}
 
 function find_user_by_email( string $email )
 {
