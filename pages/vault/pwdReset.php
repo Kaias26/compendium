@@ -1,12 +1,8 @@
 <?php
-	ini_set('display_errors', 1);
-	ini_set('display_startup_errors', 1);
-	error_reporting(E_ALL);
-
-	require_once("../../includes/config.php");	
-	require_once("../../includes/mailer.php");	
-	require_once("../../includes/framework.php");	
-	require_once("../../includes/authenticate.php");
+	require_once(__DIR__ . "/../../includes/config.php");	
+	require_once(__DIR__ . "/../../includes/mailer.php");	
+	require_once(__DIR__ . "/../../includes/framework.php");	
+	require_once(__DIR__ . "/../../includes/authenticate.php");
 ?>
 
 <form action="/vault/pwdReset" method="post" class="ajaxForm">

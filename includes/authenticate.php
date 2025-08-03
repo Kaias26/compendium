@@ -1,6 +1,6 @@
 <?php
 
-require_once("includes/AuthService.php");
+require_once(__DIR__ . "/AuthService.php");
 
 // Instantiate the AuthService
 $database = Database::getInstance();

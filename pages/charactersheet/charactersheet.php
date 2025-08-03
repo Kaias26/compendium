@@ -1,5 +1,5 @@
-<?php include("pages/charactersheet/libs.php");?>
-<?php include("pages/charactersheet/process.php");?>
+<?php include(__DIR__ . "/pages/charactersheet/libs.php");?>
+<?php include(__DIR__ . "/pages/charactersheet/process.php");?>
 
 <div class="starter-template">
 	<h1 class="mt-5">Créer votre personnage</h1>
@@ -67,7 +67,7 @@
 				</div>
 			</div>			
 			<div class="col-lg-8 right__container">
-				<?php include( "pages/charactersheet/step" . $_SESSION[ 'step' ] . ".php");?>
+				<?php include( __DIR__ . "/pages/charactersheet/step" . $_SESSION[ 'step' ] . ".php");?>
 			</div>
 		</div><!-- /.row -->
 	</div>

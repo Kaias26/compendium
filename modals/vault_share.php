@@ -1,5 +1,5 @@
 <?php
-	include("../includes/config.php");
+	include(__DIR__ . "/../includes/config.php");
 
 try {
 		$id = openssl_decrypt( $_GET['id'], $cipher, $key, 0, $iv, $tag );

@@ -1,15 +1,15 @@
 ﻿<?php 
 	session_start(); 
 
-	require_once("includes/config.php");	
-	require_once("includes/mailer.php");	
-	require_once("includes/framework.php");	
-	require_once("includes/authenticate.php");
+	require_once(__DIR__ . "/includes/config.php");	
+	require_once(__DIR__ . "/includes/mailer.php");	
+	require_once(__DIR__ . "/includes/framework.php");	
+	require_once(__DIR__ . "/includes/authenticate.php");
 ?>
 <!doctype html>
 <html lang="fr">
 <head>
-	<?php include_once("includes/head.php");?>
+	<?php include_once(__DIR__ . "/includes/head.php");?>
 </head>
 
 <body>
@@ -33,6 +33,6 @@
 		</div>
 	</div>
 
-	<?php include_once("includes/footer.php");?>
+	<?php include_once(__DIR__ . "/includes/footer.php");?>
 </body>
 </html>

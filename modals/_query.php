@@ -1,5 +1,5 @@
 <?php
-	include("../includes/config.php");
+	include(__DIR__ . "/../includes/config.php");
 
 	$id = isset($_GET['id'])?$_GET['id']:0;
 
