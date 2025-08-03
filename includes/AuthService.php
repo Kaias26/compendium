@@ -5,9 +5,11 @@ require_once("Database.php");
 class AuthService
 {
     private $conn;
+    private $db;
 
     public function __construct(Database $db)
     {
+        $this->db = $db;
         $this->conn = $db->getConnection();
     }
 
@@ -17,13 +19,17 @@ class AuthService
     public function register(string $username, string $password, string $email): bool
     {
         $sql = 'INSERT INTO users(username, email, password)
-                VALUES(?, ?, ?)';
+                VALUES(:username, :email, :password)';
 
         $password_hash = password_hash($password, PASSWORD_DEFAULT);
-        $statement = $this->conn->prepare($sql);
-        $statement->bind_param('sss', $username, $email, $password_hash);
+        $params = [
+            ':username' => $username,
+            ':email' => $email,
+            ':password' => $password_hash
+        ];
 
-        return $statement->execute();
+        $statement = $this->db->execute_query($sql, $params);
+        return $statement->rowCount() > 0;
     }
 
     /**************/
@@ -31,14 +37,19 @@ class AuthService
     /**************/
     public function update(int $id, string $username, string $password, string $email): bool
     {
-        $sql = 'UPDATE users set username = ?, email = ?, password = ?
-                WHERE id = ?';
+        $sql = 'UPDATE users set username = :username, email = :email, password = :password
+                WHERE id = :id';
 
         $password_hash = password_hash($password, PASSWORD_DEFAULT);
-        $statement = $this->conn->prepare($sql);
-        $statement->bind_param('sssi', $username, $email, $password_hash, $id);
+        $params = [
+            ':username' => $username,
+            ':email' => $email,
+            ':password' => $password_hash,
+            ':id' => $id
+        ];
 
-        return $statement->execute();
+        $statement = $this->db->execute_query($sql, $params);
+        return $statement->rowCount() > 0;
     }
 
     /************/
@@ -74,48 +85,33 @@ class AuthService
     {
         $sql = 'SELECT id, username, password, email
                 FROM users
-                WHERE username = ?
+                WHERE username = :username
                 LIMIT 1';
 
-        if ($statement = $this->conn->prepare($sql)) {
-            $statement->bind_param('s', $username);
-            $statement->execute();
-            $result = $statement->get_result();
-            return $result->fetch_assoc();
-        }
-        return null; // Return null on error instead of exit
+        $statement = $this->db->execute_query($sql, [':username' => $username]);
+        return $statement->fetch();
     }
 
     public function find_user_by_email(string $email)
     {
         $sql = 'SELECT id, username, password, email
                 FROM users
-                WHERE email = ?
+                WHERE email = :email
                 LIMIT 1';
 
-        if ($statement = $this->conn->prepare($sql)) {
-            $statement->bind_param('s', $email);
-            $statement->execute();
-            $result = $statement->get_result();
-            return $result->fetch_assoc();
-        }
-        return null; // Return null on error instead of exit
+        $statement = $this->db->execute_query($sql, [':email' => $email]);
+        return $statement->fetch();
     }
 
     public function find_user_by_id(int $id)
     {
         $sql = 'SELECT id, username, password, email
                 FROM users
-                WHERE id = ?
+                WHERE id = :id
                 LIMIT 1';
 
-        if ($statement = $this->conn->prepare($sql)) {
-            $statement->bind_param('i', $id);
-            $statement->execute();
-            $result = $statement->get_result();
-            return $result->fetch_assoc();
-        }
-        return null; // Return null on error instead of exit
+        $statement = $this->db->execute_query($sql, [':id' => $id]);
+        return $statement->fetch();
     }
 
     public function logout(): void
@@ -202,38 +198,36 @@ class AuthService
     public function insert_user_token(int $user_id, string $selector, string $hashed_validator, string $expiry): bool
     {
         $sql = 'INSERT INTO user_tokens(user_id, selector, hashed_validator, expiry)
-                VALUES(?, ?, ?, ?)';
+                VALUES(:user_id, :selector, :hashed_validator, :expiry)';
 
-        $statement = $this->conn->prepare($sql);
-        $statement->bind_param('isss', $user_id, $selector, $hashed_validator, $expiry);
+        $params = [
+            ':user_id' => $user_id,
+            ':selector' => $selector,
+            ':hashed_validator' => $hashed_validator,
+            ':expiry' => $expiry
+        ];
 
-        return $statement->execute();
+        $statement = $this->db->execute_query($sql, $params);
+        return $statement->rowCount() > 0;
     }
 
     public function find_user_token_by_selector(string $selector)
     {
         $sql = 'SELECT id, selector, hashed_validator, user_id, expiry
                 FROM user_tokens
-                WHERE selector = ? AND
-                expiry >= now()
+                WHERE selector = :selector AND
+                expiry >= NOW()
                 LIMIT 1';
 
-        if ($statement = $this->conn->prepare($sql)) {
-            $statement->bind_param('s', $selector);
-            $statement->execute();
-            $result = $statement->get_result();
-            return $result->fetch_assoc();
-        }
-        return null; // Return null on error instead of exit
+        $statement = $this->db->execute_query($sql, [':selector' => $selector]);
+        return $statement->fetch();
     }
 
     public function delete_user_token(int $user_id): bool
     {
-        $sql = 'DELETE FROM user_tokens WHERE user_id = ?';
-        $statement = $this->conn->prepare($sql);
-        $statement->bind_param('i', $user_id);
-
-        return $statement->execute();
+        $sql = 'DELETE FROM user_tokens WHERE user_id = :user_id';
+        $statement = $this->db->execute_query($sql, [':user_id' => $user_id]);
+        return $statement->rowCount() > 0;
     }
 
     public function find_user_by_token(string $token)
@@ -247,17 +241,12 @@ class AuthService
         $sql = 'SELECT users.id, username
                 FROM users
                 INNER JOIN user_tokens ON user_id = users.id
-                WHERE selector = ? AND
-                expiry > now()
+                WHERE selector = :selector AND
+                expiry > NOW()
                 LIMIT 1';
 
-        if ($statement = $this->conn->prepare($sql)) {
-            $statement->bind_param('s', $tokens[0]);
-            $statement->execute();
-            $result = $statement->get_result();
-            return $result->fetch_assoc();
-        }
-        return null; // Return null on error instead of exit
+        $statement = $this->db->execute_query($sql, [':selector' => $tokens[0]]);
+        return $statement->fetch();
     }
 
     public function token_is_valid(string $token): bool

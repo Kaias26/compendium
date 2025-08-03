@@ -3,18 +3,17 @@
 
 	$id = isset($_GET['id'])?$_GET['id']:0;
 
-	mysqli_set_charset( $conn,'utf8' );
 	$sql = "SELECT c.*, cf.key, cf.value
 			FROM `compendium` as c
 			INNER JOIN `compendium_fields` as cf ON cf.idCompendium = c.id
-			WHERE c.id = ?
+			WHERE c.id = :id
 			ORDER BY name ASC";
 	
-		$result = $database->execute_query($sql, 'i', $id);
+	$statement = $database->execute_query($sql, [':id' => $id]);
 
 	$aRows = [];
 
-	while( $row = $result->fetch_assoc() ) {
+	while( $row = $statement->fetch() ) {
 		$aRow = "";
 
 		$rowValue = str_replace( "\n", "<br>", $row[ 'value' ] );

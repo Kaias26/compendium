@@ -92,15 +92,16 @@
 				FROM `compendium_group` as cg
 				INNER JOIN `compendium` as c ON c.idGroup = cg.id
 				INNER JOIN `compendium_fields` as cf ON cf.idCompendium = c.id
-				WHERE `group` = ?
-				AND `subgroup` = ?
+				WHERE `group` = :group
+				AND `subgroup` = :subgroup
 				ORDER BY name ASC";
-		$result = $database->execute_query($sql, 'ss', $group, $subgroup);
+		$params = [':group' => $group, ':subgroup' => $subgroup];
+		$statement = $database->execute_query($sql, $params);
 
 		$aRows = [];
 		$aRow = [];
 
-		while( $row = $result->fetch_assoc() ) {
+		while( $row = $statement->fetch() ) {
 			$aRow = "";
 
 			if( isset( $aRows[ $row[ 'id' ] ] ) ) {
@@ -130,9 +131,10 @@
 
 		$sql = "SELECT us.*
 				FROM `user_sheets` as us
-				WHERE `user_id` = ?
-				AND `subgroup` = ?
+				WHERE `user_id` = :user_id
+				AND `subgroup` = :subgroup
 				ORDER BY updated ASC";
-		$result = $database->execute_query($sql, 'is', $user_id, $subgroup);
+		$params = [':user_id' => $user_id, ':subgroup' => $subgroup];
+		$statement = $database->execute_query($sql, $params);
 	}
 ?>

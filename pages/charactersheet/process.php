@@ -63,10 +63,10 @@
 		$sql = "SELECT c.id, c.name, cf.value
 				FROM `compendium` as c
 				INNER JOIN `compendium_fields` as cf ON cf.idCompendium = c.id
-				WHERE c.id in ( ? )
+				WHERE c.id = :origine_id_naissance
                 and cf.key = 'effet'
 				ORDER BY name ASC";
-		$result_origine = $database->execute_query($sql, 's', $origine_id_naissance);
+		$statement_origine = $database->execute_query($sql, [':origine_id_naissance' => $origine_id_naissance]);
 
 		$metier_id_naissance = $aJobs[ $_SESSION['post']['metier'] ]->competencesNaissance;
 		$metier_id_auChoix = $aJobs[ $_SESSION['post']['metier'] ]->competencesAuChoix;
@@ -75,11 +75,11 @@
 		$sql = "SELECT c.id, c.name, cf.value
 				FROM `compendium` as c
 				INNER JOIN `compendium_fields` as cf ON cf.idCompendium = c.id
-				WHERE c.id in ( ? )
-				and c.id not in ( ? )
+				WHERE c.id = :metier_id_naissance
+				and c.id != :origine_id_naissance
                 and cf.key = 'effet'
 				ORDER BY name ASC";
-				$result_metier = $database->execute_query($sql, 'ss', $metier_id_naissance, $origine_id_naissance);
+		$statement_metier = $database->execute_query($sql, [':metier_id_naissance' => $metier_id_naissance, ':origine_id_naissance' => $origine_id_naissance]);
 		
 		// Affichage des compétences Au choix
 		if( $aOrigines[ $_SESSION['post']['origine'] ]->id == 0 and $aJobs[ $_SESSION['post']['metier'] ]->id != 23 ) {			
@@ -89,11 +89,16 @@
 		$sql = "SELECT c.id, c.name, cf.value
 				FROM `compendium` as c
 				INNER JOIN `compendium_fields` as cf ON cf.idCompendium = c.id
-				WHERE c.id in ( ?, ? )
-				and c.id not in ( ?, ? )
+				WHERE c.id IN ( :origine_id_auChoix, :metier_id_auChoix )
+				AND c.id NOT IN ( :metier_id_naissance, :origine_id_naissance )
                 and cf.key = 'effet'
 				ORDER BY name ASC";				
-		$result_auChoix = $database->execute_query($sql, 'iiii', $origine_id_auChoix, $metier_id_auChoix, $metier_id_naissance, $origine_id_naissance);
+		$statement_auChoix = $database->execute_query($sql, [
+			':origine_id_auChoix' => $origine_id_auChoix,
+			':metier_id_auChoix' => $metier_id_auChoix,
+			':metier_id_naissance' => $metier_id_naissance,
+			':origine_id_naissance' => $origine_id_naissance
+		]);
 	}
 
 	if( $_SESSION[ 'step' ] == 7 )

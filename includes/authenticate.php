@@ -8,10 +8,8 @@ $authService = new AuthService($database);
 
 // Au submit du formulaire Login, vérifie l'authentification
 if (isset($_POST['login'])) {
-    $username = stripslashes($_POST['username']);
-    $username = mysqli_real_escape_string($conn, $username);
-    $password = stripslashes($_POST['password']);
-    $password = mysqli_real_escape_string($conn, $password);
+    $username = $_POST['username'];
+    $password = $_POST['password'];
 
     if (empty($username)) set_flash_message('danger', "L'identifiant est obligatoire");
     elseif (empty($password)) set_flash_message('danger', "Le mot de passe est oblibatoire");
@@ -28,20 +26,16 @@ if (isset($_POST['login'])) {
 // Au submit du formulaire Register, vérifie l'authentification
 if (isset($_POST["register"])) {
     // récupérer le post et supprimer les antislashes ajoutés par le formulaire
-    $username = stripslashes($_POST['username']);
-    $username = mysqli_real_escape_string($conn, $username);
-    $password = stripslashes($_POST['password']);
-    $password = mysqli_real_escape_string($conn, $password);
-    $confirmPassword = stripslashes($_POST['confirmPassword']);
-    $confirmPassword = mysqli_real_escape_string($conn, $confirmPassword);
-    $email = stripslashes($_POST['email']);
-    $email = mysqli_real_escape_string($conn, $email);
 
     if (empty($username)) set_flash_message('danger', "L'identifiant est obligatoire");
     elseif (empty($password)) set_flash_message('danger', "Le mot de passe est oblibatoire");
     elseif ($password != $confirmPassword) set_flash_message('danger', "Les mots des passes ne sont pas identiques");
     elseif (empty($email)) set_flash_message('danger', "L'email est oblibatoire");
     elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) set_flash_message('danger', "L'email n'est pas valide");
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+    $confirmPassword = $_POST['confirmPassword'];
+    $email = $_POST['email'];
     else {
         $user = $authService->find_user_by_username($username);
 
@@ -66,8 +60,7 @@ if (isset($_POST["register"])) {
 // Au submit du formulaire Reset pwd, envoit un mail de reset
 if (isset($_POST["pwdReset"])) {
     // récupérer le post et supprimer les antislashes ajoutés par le formulaire
-    $email = stripslashes($_POST['email']);
-    $email = mysqli_real_escape_string($conn, $email);
+    $email = $_POST['email'];
 
     if (empty($email)) set_flash_message('danger', "L'email est oblibatoire");
     elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) set_flash_message('danger', "L'email n'est pas valide");
@@ -130,12 +123,9 @@ if (isset($_GET['selector']) && isset($_GET['validator'])) {
 
 // Au submit du formulaire change pwd
 if (isset($_POST["pwdChange"])) {
-    $email = stripslashes($_POST['email']);
-    $email = mysqli_real_escape_string($conn, $email);
-    $password = stripslashes($_POST['password']);
-    $password = mysqli_real_escape_string($conn, $password);
-    $confirmPassword = stripslashes($_POST['confirmPassword']);
-    $confirmPassword = mysqli_real_escape_string($conn, $confirmPassword);
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+    $confirmPassword = $_POST['confirmPassword'];
 
     if (empty($password)) set_flash_message('danger', "Le mot de passe est oblibatoire");
     elseif ($password != $confirmPassword) set_flash_message('danger', "Les mots des passes ne sont pas identiques");
@@ -157,14 +147,10 @@ if (isset($_POST["pwdChange"])) {
 
 // Au submit du formulaire d'update de compte
 if (isset($_POST["update"])) {
-    $username = stripslashes($_POST['username']);
-    $username = mysqli_real_escape_string($conn, $username);
-    $password = stripslashes($_POST['password']);
-    $password = mysqli_real_escape_string($conn, $password);
-    $confirmPassword = stripslashes($_POST['confirmPassword']);
-    $confirmPassword = mysqli_real_escape_string($conn, $confirmPassword);
-    $email = stripslashes($_POST['email']);
-    $email = mysqli_real_escape_string($conn, $email);
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+    $confirmPassword = $_POST['confirmPassword'];
+    $email = $_POST['email'];
 
     if (empty($username)) set_flash_message('danger', "L'identifiant est obligatoire");
     elseif ($password != $confirmPassword) set_flash_message('danger', "Les mots des passes ne sont pas identiques");

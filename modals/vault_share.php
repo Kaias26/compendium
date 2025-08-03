@@ -4,9 +4,29 @@
 	$id = openssl_decrypt( $_GET['id'], $cipher, $key, 0, $iv, $tag );
 	$sql = "SELECT us.*
 			FROM `user_sheets` as us
-			WHERE `id` = ?";
-			
-	$result = $database->execute_query($sql, 'i', $id);
+			WHERE `id` = :id";
+	
+	$statement = $database->execute_query($sql, [':id' => $id]);
+	$aRows = [];
+
+	while( $row = $statement->fetch() ) {
+		$aRow = "";
+
+		$rowValue = str_replace( "\n", "<br>", $row[ 'value' ] );
+
+		if( isset( $aRows[ 0 ] ) ) {
+			$aRows[ 0 ] = array_merge( $aRows[ 0 ], array( $row[ 'key' ]  => $rowValue ) );
+		} else {
+			// no data found, empty array
+			$aRow = array(
+				"id" => $row[ 'id' ],
+				"name" => $row[ 'name' ],
+				$row[ 'key' ] => $rowValue
+			);
+
+			$aRows[ 0 ] = $aRow;
+		}
+	}
 ?>
 <div class="modal-header">
 	<h5 class="modal-title" id="modal-title"><?php echo $aRows[ 0 ]['name'] ?></h5>

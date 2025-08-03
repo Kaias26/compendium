@@ -7,20 +7,23 @@ class Database
 
     private function __construct()
     {
-        // Use constants defined in config_local.php
-        $servername = DB_SERVERNAME;
-        $username = DB_USERNAME;
-        $password = DB_PASSWORD;
-        $dbname = DB_NAME;
+        $dsn = 'mysql:host=' . DB_SERVERNAME . ';dbname=' . DB_NAME . ';charset=utf8mb4';
+        $options = [
+            PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
+            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+            PDO::ATTR_EMULATE_PREPARES   => false,
+        ];
 
-        // Create connection
-        $this->connection = new mysqli($servername, $username, $password, $dbname);
-
-        // Check connection
-        if ($this->connection->connect_error) {
-            die("Connection failed: " . $this->connection->connect_error);
+        try {
+            $this->connection = new PDO($dsn, DB_USERNAME, DB_PASSWORD, $options);
+        } catch (PDOException $e) {
+            // Log the error for debugging purposes
+            error_log("Database connection error: " . $e->getMessage());
+            // Redirect to home with a flash message
+            set_flash_message('danger', 'Impossible de se connecter à la base de données. Veuillez réessayer plus tard.');
+            header('Location: /home');
+            exit;
         }
-        $this->connection->set_charset('utf8');
     }
 
     public static function getInstance(): Database
@@ -31,22 +34,20 @@ class Database
         return self::$instance;
     }
 
-    public function getConnection(): mysqli
+    public function getConnection(): PDO
     {
         return $this->connection;
     }
 
-    public function execute_query(string $sql, string $param_types = '', ...$params) {
-        if ($statement = $this->connection->prepare($sql)) {
-            if (!empty($param_types)) {
-                $statement->bind_param($param_types, ...$params);
-            }
-            $statement->execute();
-            $result = $statement->get_result();
-            return $result;
-        } else {
+    public function execute_query(string $sql, array $params = []): PDOStatement
+    {
+        try {
+            $statement = $this->connection->prepare($sql);
+            $statement->execute($params);
+            return $statement;
+        } catch (PDOException $e) {
             // Log the error for debugging purposes
-            error_log("Database query error: " . $this->connection->error);
+            error_log("Database query error: " . $e->getMessage());
             // Redirect to home with a flash message
             set_flash_message('danger', 'Un problème est survenu lors de l\'accès aux données. Veuillez réessayer plus tard.');
             header('Location: /home');
