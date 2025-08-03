@@ -6,15 +6,15 @@ if( isset( $_POST['login'] ) ) {
 	$password = stripslashes( $_POST['password'] );
 	$password = mysqli_real_escape_string( $conn, $password );  
 
-	if( empty( $username ) ) $erreur="L'identifiant est obligatoire";
-	elseif( empty( $password ) ) $erreur="Le mot de passe est oblibatoire";
+	if( empty( $username ) ) set_flash_message('danger', "L'identifiant est obligatoire");
+	elseif( empty( $password ) ) set_flash_message('danger', "Le mot de passe est oblibatoire");
 	else {
 	
 		if( login( $username, $password, isset( $_POST['remember_me'] ) ) ) {
 			echo '<meta http-equiv="refresh" content="0; URL=/vault/home">';
 			die();
 		} else  {
-			$message = "L'identifiant ou le mot de passe est incorrect.";
+			set_flash_message('danger', "L'identifiant ou le mot de passe est incorrect.");
 		}
 	}
 }
@@ -32,27 +32,27 @@ if( isset( $_POST["register"] ) ) {
 	$email = stripslashes( $_POST['email'] );
 	$email = mysqli_real_escape_string( $conn, $email );
 
-	if( empty( $username ) ) $erreur="L'identifiant est obligatoire";
-	elseif( empty( $password ) ) $erreur="Le mot de passe est oblibatoire";
-	elseif( $password != $confirmPassword ) $erreur="Les mots des passes ne sont pas identiques";
-	elseif( empty( $email ) ) $erreur="L'email est oblibatoire";
-	elseif( !filter_var( $email, FILTER_VALIDATE_EMAIL) ) $erreur="L'email n'est pas valide";
+	if( empty( $username ) ) set_flash_message('danger', "L'identifiant est obligatoire");
+	elseif( empty( $password ) ) set_flash_message('danger', "Le mot de passe est oblibatoire");
+	elseif( $password != $confirmPassword ) set_flash_message('danger', "Les mots des passes ne sont pas identiques");
+	elseif( empty( $email ) ) set_flash_message('danger', "L'email est oblibatoire");
+	elseif( !filter_var( $email, FILTER_VALIDATE_EMAIL) ) set_flash_message('danger', "L'email n'est pas valide");
 	else{
 		
 		$user = find_user_by_username( $username );
 		
 		if( $user ) {
-			$erreur = "Cet identifiant existe déjà.";
+			set_flash_message('danger', "Cet identifiant existe déjà.");
 		} else {
 			$user = find_user_by_email( $email );
 			
 			if( $user ) {
-				$erreur = "Cette adresse email existe déjà.";
+				set_flash_message('danger', "Cette adresse email existe déjà.");
 			} else {
 				if( register( $username, $password, $email ) ) {
-					$success = true;
+					set_flash_message('success', "Votre compte a été créé avec succès.");
 				} else {
-					$erreur = "Une erreur s'est produite, impossible de créer le compte.";
+					set_flash_message('danger', "Une erreur s'est produite, impossible de créer le compte.");
 				}
 			}
 		}
@@ -65,8 +65,8 @@ if( isset( $_POST["pwdReset"] ) ) {
 	$email = stripslashes( $_POST['email'] );
 	$email = mysqli_real_escape_string( $conn, $email );
 
-	if( empty( $email ) ) $erreur="L'email est oblibatoire";
-	elseif( !filter_var( $email, FILTER_VALIDATE_EMAIL) ) $erreur="L'email n'est pas valide";
+	if( empty( $email ) ) set_flash_message('danger', "L'email est oblibatoire");
+	elseif( !filter_var( $email, FILTER_VALIDATE_EMAIL) ) set_flash_message('danger', "L'email n'est pas valide");
 	else{
 		
 		$user = find_user_by_email( $email );
@@ -99,18 +99,18 @@ if( isset( $_POST["pwdReset"] ) ) {
 
 				if( $sendMail )
 				{
-					$success = true;
+					set_flash_message('success', "Un email vous a été envoyé pour réinitialiser votre mot de passe.");
 				}
 				else
 				{
-				   $erreur = $sendMail;     
+				   set_flash_message('danger', $sendMail);     
 				}
 			} else {
-				$erreur = "Une erreur s'est produite, impossible de générer le lien de réinitialisation.";
+				set_flash_message('danger', "Une erreur s'est produite, impossible de générer le lien de réinitialisation.");
 			}
 	
 		} else {
-			$erreur = "Cet identifiant n'existe pas.";            
+			set_flash_message('danger', "Cet identifiant n'existe pas.");
 		}
 	}
 }
@@ -125,7 +125,7 @@ if( isset( $_GET['selector'] ) && isset( $_GET['validator'] ) ) {
 	if ($token && password_verify($validator, $token['hashed_validator'])) {
 		$user = find_user_by_id($token['user_id']);
 	} else {
-		$erreur = "Le lien de changement de mot de passe n'est pas valide ou a expiré.";
+		set_flash_message('danger', "Le lien de changement de mot de passe n'est pas valide ou a expiré.");
 	}
 }
 
@@ -139,13 +139,13 @@ if( isset( $_POST["pwdChange"] ) ) {
 	$confirmPassword = mysqli_real_escape_string( $conn, $confirmPassword );
 
 	
-	if( empty( $password ) ) $erreur="Le mot de passe est oblibatoire";
-	elseif( $password != $confirmPassword ) $erreur="Les mots des passes ne sont pas identiques";    
+	if( empty( $password ) ) set_flash_message('danger', "Le mot de passe est oblibatoire");
+	elseif( $password != $confirmPassword ) set_flash_message('danger', "Les mots des passes ne sont pas identiques");
 	else{		
 		if( update( $user[ 'id' ], $user[ 'username' ], $password, $user[ 'email' ] ) ) {
-			$success = true;
+			set_flash_message('success', "Votre mot de passe a été changé avec succès.");
 		} else {
-			$erreur = "Une erreur s'est produite, impossible de changer le mot de passe.";
+			set_flash_message('danger', "Une erreur s'est produite, impossible de changer le mot de passe.");
 		}
 	}
 }
@@ -161,20 +161,20 @@ if( isset( $_POST["update"] ) ) {
 	$email = stripslashes( $_POST['email'] );
 	$email = mysqli_real_escape_string( $conn, $email );
 	
-	if( empty( $username ) ) $erreur="L'identifiant est obligatoire";	
-	elseif( $password != $confirmPassword ) $erreur="Les mots des passes ne sont pas identiques";
-	elseif( empty( $email ) ) $erreur="L'email est oblibatoire";
-	elseif( !filter_var( $email, FILTER_VALIDATE_EMAIL) ) $erreur="L'email n'est pas valide";
+	if( empty( $username ) ) set_flash_message('danger', "L'identifiant est obligatoire");	
+	elseif( $password != $confirmPassword ) set_flash_message('danger', "Les mots des passes ne sont pas identiques");
+	elseif( empty( $email ) ) set_flash_message('danger', "L'email est oblibatoire");
+	elseif( !filter_var( $email, FILTER_VALIDATE_EMAIL) ) set_flash_message('danger', "L'email n'est pas valide");
 	else{
 		$user = find_user_by_username( $username );
 		
 		if( $user && $user[ 'id' ] !== $_SESSION['user_id'] ) {
-			$erreur = "Cet identifiant existe déjà.";
+			set_flash_message('danger', "Cet identifiant existe déjà.");
 		} else {
 			$user = find_user_by_email( $email );
 			
 			if( $user && $user[ 'id' ] !== $_SESSION['user_id'] ) {
-				$erreur = "Cette adresse email existe déjà.";
+				set_flash_message('danger', "Cette adresse email existe déjà.");
 			} else {
 				if( $password == "" ) {
 					$user = find_user_by_id( $_SESSION['user_id'] );
@@ -182,10 +182,10 @@ if( isset( $_POST["update"] ) ) {
 				}
 
 				if( update( $_SESSION['user_id'], $username, $password, $email ) ) {
-					$success = true;
+					set_flash_message('success', "Votre compte a été mis à jour avec succès.");
 					log_user_in( $user );
 				} else {
-					$erreur = "Une erreur s'est produite, impossible de mettre à jour le compte.";
+					set_flash_message('danger', "Une erreur s'est produite, impossible de mettre à jour le compte.");
 				}
 			}
 		}
