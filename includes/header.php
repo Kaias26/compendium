@@ -50,8 +50,9 @@
 					<li class="nav-item dropdown">
 						<a class="nav-link dropdown-toggle <?php if( $folder == "charactersheet" || $folder == "tools" ) {?>active<?php }?>" id="dropdown05" data-bs-toggle="dropdown" aria-expanded="false" href="#"><i class="fas fa-tools"></i> Outils</a>
 						<ul class="dropdown-menu" aria-labelledby="dropdown05">
-							<li><a class="dropdown-item <?php if( $group == "charactersheet" ) {?>active<?php }?>" href="/charactersheet/charactersheet">Générateur de fiche personnage</a></li>
+							<li><a class="dropdown-item <?php if( $group == "charactersheet" ) {?>active<?php }?>" href="/charactersheet/charactersheet">Générateur de Fiche personnage</a></li>
 							<li><a class="dropdown-item <?php if( $group == "generateur_bijoux" ) {?>active<?php }?>" href="/tools/generateur_bijoux">Générateur de Butin : Bijoux</a></li>
+							<li><a class="dropdown-item <?php if( $group == "generateurNoms" ) {?>active<?php }?>" href="/tools/generateurNoms">Générateur de Noms</a></li>
 						</ul>
 					</li>
 				</ul>				

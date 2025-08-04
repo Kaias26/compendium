@@ -37,6 +37,7 @@
 		'pages/objets/consommables',
 		'pages/charactersheet/charactersheet',
 		'pages/tools/generateur_bijoux',
+		'pages/tools/generateurNoms',
 		'pages/vault/login',
 		'pages/vault/home',
 		'pages/vault/account',
