@@ -73,7 +73,7 @@
 				</div>
 				<ul class="list-group list-group-flush">
 					<li class="list-group-item"><a href="/charactersheet/charactersheet" class="card-link">Générateur de fiche personnage</a></li>
-					<li class="list-group-item"><a href="/generateurButin/bijoux" class="card-link">Générateur de Butin : Bijoux</a></li>
+					<li class="list-group-item"><a href="/tools/generateur_bijoux" class="card-link">Générateur de Butin : Bijoux</a></li>
 				</ul>
 			</div>
 		</div>

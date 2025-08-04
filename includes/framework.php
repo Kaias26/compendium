@@ -36,7 +36,7 @@
 		'pages/objets/materiel',
 		'pages/objets/consommables',
 		'pages/charactersheet/charactersheet',
-		'pages/generateurButin/bijoux',
+		'pages/tools/generateur_bijoux',
 		'pages/vault/login',
 		'pages/vault/home',
 		'pages/vault/account',

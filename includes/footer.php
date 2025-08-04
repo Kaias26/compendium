@@ -13,8 +13,8 @@
 	<script src="/js/charactersheet.js?20220104"></script>
 <?php }?>
 
-<?php if( $folder == 'generateurButin' ) {?>
-	<script src="/js/generateurButin.js?20220104"></script>
+<?php if( $folder == 'tools' ) {?>
+	<script src="/js/generateurs.js?20220104"></script>
 <?php }?>
 
 <script src="/js/functions.js?20220104"></script>

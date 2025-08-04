@@ -16,8 +16,8 @@
 	<link href="/css/charactersheet.css" rel="stylesheet" >
 <?php }?>
 
-<?php if( $folder == 'generateurButin' ) {?>
-	<link href="/css/generateurButin.css" rel="stylesheet" >
+<?php if( $folder == 'tools' ) {?>
+	<link href="/css/generateurs.css" rel="stylesheet" >
 <?php }?>
 
 <script type="text/javascript">
