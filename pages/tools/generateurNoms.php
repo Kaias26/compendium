@@ -161,7 +161,7 @@ $aNoms[] = new Nom(
 if( !isset( $_SESSION[ 'post' ][ 'sex' ] ) ) {
 	// Premiere connexion
 	$_SESSION[ 'post' ][ 'sex' ] = "femme";
-	$_SESSION[ 'post' ][ 'origine' ] = "barbares";
+	$_SESSION[ 'post' ][ 'origine' ] = "Barbares";
 }
 
 if( $_SERVER['REQUEST_METHOD'] == 'POST' ) 
