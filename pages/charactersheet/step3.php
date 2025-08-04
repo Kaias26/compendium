@@ -28,8 +28,8 @@
 						</div>
 						<ul class="list-group list-group-flush">
 							<?php
-								if( $result_origine->num_rows > 0 ) {
-									while( $row = $result_origine->fetch() ) {
+								if( $statement_origine->rowCount() > 0 ) {
+									while( $row = $statement_origine->fetch() ) {
 										echo '<li class="list-group-item" data-bs-toggle="tooltip" data-bs-placement="top" title="' . $row[ 'value' ] . '"> ' . $row[ 'name' ] . ' </li>';
 										echo '<input type="hidden" name="competences[]" value="' . $row[ 'id' ] . '">';
 									}
@@ -48,8 +48,8 @@
 						</div>
 						<ul class="list-group list-group-flush">
 							<?php
-								if( $result_metier->num_rows > 0 ) {
-									while( $row = $result_metier->fetch() ) {
+								if( $statement_metier->rowCount() > 0 ) {
+									while( $row = $statement_metier->fetch() ) {
 										echo '<li class="list-group-item" data-bs-toggle="tooltip" data-bs-placement="top" title="' . $row[ 'value' ] . '"> ' . $row[ 'name' ] . ' </li>';
 										echo '<input type="hidden" name="competences[]" value="' . $row[ 'id' ] . '">';
 									}
@@ -67,7 +67,7 @@
 				</div>
 			</div>
 			<?php
-				while( $row = $result_auChoix->fetch() ) {
+				while( $row = $statement_auChoix->fetch() ) {
 					$checked = "";
 					if( in_array( $row[ 'id' ], $_SESSION[ 'post' ][ 'competences' ] ) ) {
 						$checked = "checked";

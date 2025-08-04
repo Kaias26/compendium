@@ -56,51 +56,57 @@
 	}
 
 	if( $_SESSION[ 'step' ] == 3 ) {
-		$origine_id_naissance = $aOrigines[ $_SESSION['post']['origine'] ]->competencesNaissance;
-		$origine_id_auChoix = $aOrigines[ $_SESSION['post']['origine'] ]->competencesAuChoix;
-
-		
 		try {
 			// Affichage des compétences de l'Origine 
-			$sql = "SELECT c.id, c.name, cf.value
+			$origine_naissance_data = Database::createInClauseParams($aOrigines[$_SESSION['post']['origine']]->competencesNaissance, 'ori_naiss');
+			$sql_origine = "SELECT c.id, c.name, cf.value
 					FROM `compendium` as c
 					INNER JOIN `compendium_fields` as cf ON cf.idCompendium = c.id
-					WHERE c.id = :origine_id_naissance
-	                and cf.key = 'effet'
+					WHERE c.id IN (" . $origine_naissance_data['placeholders'] . ")
+					AND cf.key = 'effet'
 					ORDER BY name ASC";
-			$statement_origine = $database->execute_query($sql, [':origine_id_naissance' => $origine_id_naissance]);
-
-			$metier_id_naissance = $aJobs[ $_SESSION['post']['metier'] ]->competencesNaissance;
-			$metier_id_auChoix = $aJobs[ $_SESSION['post']['metier'] ]->competencesAuChoix;
-
-			// Affichage des compétences du Métier 
-			$sql = "SELECT c.id, c.name, cf.value
-					FROM `compendium` as c
-					INNER JOIN `compendium_fields` as cf ON cf.idCompendium = c.id
-					WHERE c.id = :metier_id_naissance
-					and c.id != :origine_id_naissance
-	                and cf.key = 'effet'
-					ORDER BY name ASC";
-			$statement_metier = $database->execute_query($sql, [':metier_id_naissance' => $metier_id_naissance, ':origine_id_naissance' => $origine_id_naissance]);
+			$statement_origine = $database->execute_query($sql_origine, $origine_naissance_data['params']);
 			
-			// Affichage des compétences Au choix
-			if( $aOrigines[ $_SESSION['post']['origine'] ]->id == 0 and $aJobs[ $_SESSION['post']['metier'] ]->id != 23 ) {			
-				$origine_id_auChoix = 0;
-			}
+			// Affichage des compétences du Métier 
+			$metier_naissance_data = Database::createInClauseParams($aJobs[$_SESSION['post']['metier']]->competencesNaissance, 'met_naiss');
+			$params_metier = array_merge($metier_naissance_data['params'], $origine_naissance_data['params']);
 
-			$sql = "SELECT c.id, c.name, cf.value
+			$sql_metier = "SELECT c.id, c.name, cf.value
 					FROM `compendium` as c
 					INNER JOIN `compendium_fields` as cf ON cf.idCompendium = c.id
-					WHERE c.id IN ( :origine_id_auChoix, :metier_id_auChoix )
-					AND c.id NOT IN ( :metier_id_naissance, :origine_id_naissance )
-	                and cf.key = 'effet'
-					ORDER BY name ASC";				
-			$statement_auChoix = $database->execute_query($sql, [
-				':origine_id_auChoix' => $origine_id_auChoix,
-				':metier_id_auChoix' => $metier_id_auChoix,
-				':metier_id_naissance' => $metier_id_naissance,
-				':origine_id_naissance' => $origine_id_naissance
-			]);
+					WHERE c.id IN (" . $metier_naissance_data['placeholders'] . ")
+					AND c.id NOT IN (" . $origine_naissance_data['placeholders'] . ")
+					AND cf.key = 'effet'
+					ORDER BY name ASC";
+			$statement_metier = $database->execute_query($sql_metier, $params_metier);
+
+			// Affichage des compétences Au choix
+			if ($aOrigines[$_SESSION['post']['origine']]->id == 0 && $aJobs[$_SESSION['post']['metier']]->id != 23) { // Humain
+				$origine_auchoix_data = Database::createInClauseParams([0], 'ori_choix');
+			} 
+			else
+			{
+				$origine_auchoix_data = Database::createInClauseParams($aOrigines[$_SESSION['post']['origine']]->competencesAuChoix, 'ori_choix');
+			}
+			$metier_auchoix_data = Database::createInClauseParams($aJobs[$_SESSION['post']['metier']]->competencesAuChoix, 'met_choix');
+
+			$not_in_combined_ids = array_merge($metier_naissance_data['ids'], $origine_naissance_data['ids']);
+			$not_in_combined_ids = array_unique($not_in_combined_ids);
+			$not_in_data = Database::createInClauseParams($not_in_combined_ids, 'not_in');			
+
+			$combined_auchoix_ids = array_merge($origine_auchoix_data['ids'], $metier_auchoix_data['ids']);
+			$combined_auchoix_ids = array_unique($combined_auchoix_ids);
+			$auchoix_data = Database::createInClauseParams($combined_auchoix_ids, 'au_choix');
+
+			$sql_auChoix = "SELECT c.id, c.name, cf.value
+						FROM `compendium` as c
+						INNER JOIN `compendium_fields` as cf ON cf.idCompendium = c.id
+						WHERE c.id IN (" . $auchoix_data['placeholders'] . ")
+						AND c.id NOT IN (" . $not_in_data['placeholders'] . ")
+						AND cf.key = 'effet'
+						ORDER BY name ASC";
+			$params_auChoix = array_merge($auchoix_data['params'], $not_in_data['params']);
+			$statement_auChoix = $database->execute_query($sql_auChoix, $params_auChoix);		
 		} catch (PDOException $e) {
 			$flashMessenger->set_flash_message('danger', 'Un problème est survenu lors de l\'accès aux données. Veuillez réessayer plus tard.');
 			header('Location: /home');

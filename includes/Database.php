@@ -56,4 +56,20 @@ class Database
 
     // Prevent unserializing the instance
     public function __wakeup() {}
+
+    public static function createInClauseParams(array $idArray, string $paramPrefix): array
+    {
+        $ids = array_filter(array_map('intval', $idArray), fn($value) => is_numeric($value));
+        $placeholders = [];
+        $params = [];
+        if (empty($ids)) {
+            return ['placeholders' => 'NULL', 'params' => [], 'ids' => []];
+        }
+        foreach ($ids as $index => $id) {
+            $placeholder = $paramPrefix . '_' . $index;
+            $placeholders[] = ':' . $placeholder;
+            $params[$placeholder] = $id;
+        }
+        return ['placeholders' => implode(', ', $placeholders), 'params' => $params, 'ids' => $ids];
+    }
 }
