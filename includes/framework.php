@@ -38,6 +38,7 @@
 		'pages/charactersheet/charactersheet',
 		'pages/tools/generateurBijoux',
 		'pages/tools/generateurNoms',
+		'pages/tools/combatRapide',
 		'pages/vault/login',
 		'pages/vault/home',
 		'pages/vault/account',

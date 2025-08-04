@@ -13,8 +13,12 @@
 	<script src="/js/charactersheet.js?20220104"></script>
 <?php }?>
 
-<?php if( $folder == 'tools' ) {?>
+<?php if( $folder == 'tools' && ( $group == "generateurBijoux" || $group == "generateurNoms" ) ) {?>
 	<script src="/js/generateurs.js?20220104"></script>
+<?php }?>
+
+<?php if( $folder == 'tools' && ( $group == "combatRapide" ) ) {?>
+	<script src="/js/combatRapide.js?20250805"></script>
 <?php }?>
 
 <script src="/js/functions.js?20220104"></script>

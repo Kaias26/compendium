@@ -16,8 +16,12 @@
 	<link href="/css/charactersheet.css" rel="stylesheet" >
 <?php }?>
 
-<?php if( $folder == 'tools' ) {?>
+<?php if( $folder == 'tools' && ( $group == "generateurBijoux" || $group == "generateurNoms" ) ) {?>
 	<link href="/css/generateurs.css" rel="stylesheet" >
+<?php }?>
+
+<?php if( $folder == 'tools' && ( $group == "combatRapide" ) ) {?>
+	<link href="/css/combatRapide.css" rel="stylesheet" >
 <?php }?>
 
 <script type="text/javascript">
