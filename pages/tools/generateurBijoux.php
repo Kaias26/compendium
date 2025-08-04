@@ -1,7 +1,5 @@
 <?php 
 
-$aStats = [ "courage", "intelligence", "charisme", "adresse", "force" ];
-
 //=== Pierres et Gemmes
 class Pierre
 {
@@ -189,7 +187,7 @@ $aBijouxMatiere = [ "en os", "en cuir", "en bois", "en cuivre", "en bronze", "en
 	<p class="lead">Bijoux, Gemmes et Pierres précieuses</p>
 </div>
 <div class="container">
-	<form method="post" action="/tools/generateur_bijoux" id="bijoux">
+	<form method="post" action="/tools/generateurBijoux" id="bijoux">
 		<div class="row justify-content-md-center">
 			<div class="col-lg-3">
 				<div class="card">
