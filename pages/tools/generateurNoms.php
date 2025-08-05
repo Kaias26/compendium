@@ -59,7 +59,7 @@ $aNoms[] = new Nom(
     ["Ralagonbe", "Bravache", "Sauvagine", "Dusangbleu", "Argenteux", "Dubrillant", "Dispendiard", "Fasteriche", "Fortunard", "Nantide", "Ploutorustre", "Onéristule", "Survénal", "Moulthune", "Dupecule-Joli", "Viroflouze-Chéro", "Bourbistrouille", "Pécunière", "Fricanbar"],
     ["De Poutrefier", "De Sangverse", "Des Hôbereaux", "Du Haut-Lieu", "De Grantour", "Deuxième du nom", "Troisième du nom", "De Grandecité", "Dugratin", "Haltefort", "De Vadecôffiot", "De Raboulepèze", "Des Picaillons", "De Fierlingot", "Boursicot-Dublé", "De Môriaquie", "De l'Ancienne Vontorz", "De Rogebourson", "De Brassefroid", "De Chaudebière"],
     "",
-    [] // No 4th UL in this file
+    [""] // No 4th UL in this file
 );
 
 // nobles-femme.html
@@ -71,7 +71,7 @@ $aNoms[] = new Nom(
     ["Ralagonbe", "Bravache", "Sauvagine", "Dusangbleu", "Argenteux", "Dubrillant", "Dispendiard", "Fasteriche", "Nantide", "Ploutorustre", "Onéristule", "Survénal", "Moulthune", "Dupecule-Joli", "Viroflouze-Chéro", "Bourbistrouille", "Pécunière", "Fricanbar"],
     ["De Poutrefier", "De Sangverse", "Des Hôbereaux", "Du Haut-Lieu", "De Grantour", "Deuxième du nom", "Troisième du nom", "De Grandecité", "Dugratin", "Haltefort", "De Vadecôffiot", "De Raboulepèze", "Des Picaillons", "De Fierlingot", "Boursicot-Dublé", "De Môriaquie", "De l'Ancienne Vontorz", "De Rogebourson", "De Brassefroid", "De Chaudebière"],
     "",
-    [] // No 4th UL in this file
+    [""] // No 4th UL in this file
 );
 
 // nains-homme.html
@@ -242,7 +242,13 @@ foreach ($aNoms as $nomItem) {
 							$checked = "checked";
 						}
 					?>
-					<input type="radio" required="" class="btn-check" name="sex" id="sex-femme" autocomplete="off" value="femme" <?php echo( $checked )?>>
+					<?php
+						$disabled = "";
+						if( $_SESSION[ 'post' ][ 'origine' ] == "Nains" ) {
+							$disabled = "disabled";
+						}
+					?>
+					<input type="radio" required="" class="btn-check" name="sex" id="sex-femme" autocomplete="off" value="femme" <?php echo( $checked )?> <?php echo( $disabled )?>>
 					<label class="btn btn-outline-primary" for="sex-femme">Féminin</label>
 
 					<?php
@@ -329,6 +335,7 @@ foreach ($aNoms as $nomItem) {
 </div>
 
 <script>
+
 function display_results() {
 	var _aResults = $("ul.list-group-flush");
 	var _nom = $( _aResults[0] ).children(":first").html();
@@ -339,4 +346,25 @@ function display_results() {
 
 	$( "#results" ).html( "Je suis " + _nom + " " + _prenom + " " + _titre + " " + _phrase + " " + _provenance  );
 }
+
+$(document).ready(function() {
+    $('input[name="origine"]').change(function() {
+        if ($(this).val() === "Nains") {
+            $('#sex-femme').prop('disabled', true);
+            if ($('#sex-femme').is(':checked')) {
+                $('#sex-homme').prop('checked', true);
+            }
+        } else {
+            $('#sex-femme').prop('disabled', false);
+        }
+    });
+
+    // Initial check on page load
+    if ($('input[name="origine"]:checked').val() === "Nains") {
+        $('#sex-femme').prop('disabled', true);
+        if ($('#sex-femme').is(':checked')) {
+            $('#sex-homme').prop('checked', true);
+        }
+    }
+});
 </script>
