@@ -7,6 +7,7 @@ class Pierre
 	public $label;
 	public $tooltip;
 	public $ug;
+	public $gold;
 }
 
 $barbonate = new Pierre();
