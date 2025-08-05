@@ -34,7 +34,19 @@
 		$_SESSION[ 'post' ][ 'attr_Personnage_Sex' ] = '';
 		$_SESSION[ 'post' ][ 'attr_Personnage_Age' ] = '';
 		$_SESSION[ 'post' ][ 'attr_Personnage_Taille' ] = '';
+		$_SESSION[ 'post' ][ 'attr_Personnage_Poids' ] = '';
+		$_SESSION[ 'post' ][ 'bonus_adresse' ] = "";
+		$_SESSION[ 'post' ][ 'malus_adress' ] = "";
 		$_SESSION[ 'post' ][ 'grimoire_mage' ] = '';
+		$_SESSION[ 'post' ][ 'grimoire_pretre' ] = "";
+		$_SESSION[ 'post' ][ 'malus_ogre_at' ] = "";
+		$_SESSION[ 'post' ][ 'malus_ogre_prd' ] = "";
+		$_SESSION[ 'post' ][ 'malus_ranger' ] = "";
+		$_SESSION[ 'post' ][ 'bonus_ranger' ] = "";
+		$_SESSION[ 'post' ][ 'malus_marchand' ] = "";
+		$_SESSION[ 'post' ][ 'bonus_marchand' ] = "";
+		$_SESSION[ 'post' ][ 'malus_ingenieur' ] = "";
+		$_SESSION[ 'post' ][ 'bonus_ingenieur' ] = "";
 	}
 
 	// Post du formulaire
@@ -173,16 +185,89 @@
 			$_SESSION[ 'post' ][ 'attr_Stats_Parade' ] = $prd_metier;
 		} else {
 			$_SESSION[ 'post' ][ 'attr_Stats_Parade' ] = $prd_origine;
-		}
-		
-		$_SESSION[ 'post' ][ 'attr_Stats_ResiMagie' ] = ceil( ( $_SESSION[ 'post' ][ 'dice_courage' ] + $_SESSION[ 'post' ][ 'dice_intelligence' ] + $_SESSION[ 'post' ][ 'dice_force' ] ) / 3 );
-		$_SESSION[ 'post' ][ 'attr_Stats_MagiePhy' ] = ceil( ( $_SESSION[ 'post' ][ 'dice_intelligence' ] + $_SESSION[ 'post' ][ 'dice_adresse' ] ) / 2 );
-		$_SESSION[ 'post' ][ 'attr_Stats_MagiePsy' ] = ceil( ( $_SESSION[ 'post' ][ 'dice_intelligence' ] + $_SESSION[ 'post' ][ 'dice_charisme' ] ) / 2 );
+		}		
 
 		$_SESSION[ 'post' ][ 'attr_Stats_Courage' ] = $_SESSION[ 'post' ][ 'dice_courage' ];
 		$_SESSION[ 'post' ][ 'attr_Stats_Intelligence' ] = $_SESSION[ 'post' ][ 'dice_intelligence' ];
 		$_SESSION[ 'post' ][ 'attr_Stats_Charisme' ] = $_SESSION[ 'post' ][ 'dice_charisme' ];
 		$_SESSION[ 'post' ][ 'attr_Stats_Adresse' ] = $_SESSION[ 'post' ][ 'dice_adresse' ];
 		$_SESSION[ 'post' ][ 'attr_Stats_Force' ] = $_SESSION[ 'post' ][ 'dice_force' ];
+
+		// Apply malus/bonus from adresse
+		if (isset($_SESSION['post']['malus_adress'])) {
+			$targetStat = $_SESSION['post']['malus_adress'];
+			if (isset($_SESSION['post'][$targetStat])) {
+				$_SESSION['post'][$targetStat] -= 1;
+			}
+		}
+
+		if (isset($_SESSION['post']['bonus_adress'])) {
+			$targetStat = $_SESSION['post']['bonus_adress'];
+			if (isset($_SESSION['post'][$targetStat])) {
+				$_SESSION['post'][$targetStat] += 1;
+			}
+		}
+
+		// Apply Ingénieur malus/bonus
+		if (isset($aJobs[$_SESSION['post']['metier']]) && $aJobs[$_SESSION['post']['metier']]->id == 10) { // Ingénieur
+			$malus_ingenieur_stat = isset($_SESSION['post']['malus_ingenieur']) ? $_SESSION['post']['malus_ingenieur'] : '';
+			$bonus_ingenieur_stat = isset($_SESSION['post']['bonus_ingenieur']) ? $_SESSION['post']['bonus_ingenieur'] : '';
+
+			if (!empty($malus_ingenieur_stat)) {
+				$targetStat = $malus_ingenieur_stat;
+				if (isset($_SESSION['post'][$targetStat])) {
+					$_SESSION['post'][$targetStat] -= 1;
+				}
+			}
+
+			if (!empty($bonus_ingenieur_stat)) {
+				$_SESSION['post']['attr_Stats_' . ucfirst($bonus_ingenieur_stat)] += 1;
+			}
+		}
+
+		// Apply Ogre malus/bonus
+		if (isset($aOrigines[$_SESSION['post']['origine']]) && $aOrigines[$_SESSION['post']['origine']]->id == 10) { // Ogre
+			$malus_at = isset($_SESSION['post']['malus_ogre_at']) ? intval($_SESSION['post']['malus_ogre_at']) : 0;
+			$malus_prd = isset($_SESSION['post']['malus_ogre_prd']) ? intval($_SESSION['post']['malus_ogre_prd']) : 0;
+
+			$_SESSION['post']['attr_Stats_Attaque'] -= $malus_at;
+			$_SESSION['post']['attr_Stats_Parade'] -= $malus_prd;
+		}
+
+		// Apply Ranger malus/bonus
+		if (isset($aJobs[$_SESSION['post']['metier']]) && $aJobs[$_SESSION['post']['metier']]->id == 6) { // Ranger
+			$malus_ranger_stat = isset($_SESSION['post']['malus_ranger']) ? $_SESSION['post']['malus_ranger'] : '';
+			$bonus_ranger_stat = isset($_SESSION['post']['bonus_ranger']) ? $_SESSION['post']['bonus_ranger'] : '';
+
+			if (!empty($malus_ranger_stat)) {
+				$_SESSION['post']['attr_Stats_' . ucfirst($malus_ranger_stat)] -= 1;
+			}
+			if (!empty($bonus_ranger_stat)) {
+				$_SESSION['post']['attr_Stats_' . ucfirst($bonus_ranger_stat)] += 1;
+			}
+		}
+
+		// Competences
+		$playerCompetences = [];
+		if (!empty($_SESSION['post']['competences'])) {
+			try {
+				$competences_data = Database::createInClauseParams($_SESSION['post']['competences'], 'comp_ids');
+				$sql_competences = "SELECT c.id, c.name, cf.value
+					FROM `compendium` as c
+					INNER JOIN `compendium_fields` as cf ON cf.idCompendium = c.id
+					WHERE c.id IN (" . $competences_data['placeholders'] . ")
+					AND cf.key = 'effet'
+					ORDER BY name ASC";
+				$statement_competences = $database->execute_query($sql_competences, $competences_data['params']);
+				$playerCompetences = $statement_competences->fetchAll(PDO::FETCH_ASSOC);
+			} catch (PDOException $e) {
+				error_log("Error fetching player competences: " . $e->getMessage());
+				$flashMessenger->set_flash_message('danger', 'Un problème est survenu lors de la récupération des compétences. Veuillez réessayer plus tard.');
+			}
+		}
+
+		$_SESSION[ 'post' ][ 'attr_Stats_ResiMagie' ] = ceil( ( $_SESSION[ 'post' ][ 'attr_Stats_Courage' ] + $_SESSION[ 'post' ][ 'attr_Stats_Intelligence' ] + $_SESSION[ 'post' ][ 'attr_Stats_Force' ] ) / 3 );
+		$_SESSION[ 'post' ][ 'attr_Stats_MagiePhy' ] = ceil( ( $_SESSION[ 'post' ][ 'attr_Stats_Intelligence' ] + $_SESSION[ 'post' ][ 'attr_Stats_Adresse' ] ) / 2 );
+		$_SESSION[ 'post' ][ 'attr_Stats_MagiePsy' ] = ceil( ( $_SESSION[ 'post' ][ 'attr_Stats_Intelligence' ] + $_SESSION[ 'post' ][ 'attr_Stats_Charisme' ] ) / 2 );
 	}
 ?>

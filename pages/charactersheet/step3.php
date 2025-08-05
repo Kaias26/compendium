@@ -66,6 +66,7 @@
 					<br><p>Votre Origine et votre Métier permettent de choisir deux des compétences suivantes :</p>
 				</div>
 			</div>
+			<div class="d-flex flex-wrap gap-1">
 			<?php
 				while( $row = $statement_auChoix->fetch() ) {
 					$checked = "";
@@ -78,6 +79,7 @@
 					echo ' ';
 				}
 			?>
+			</div>
 		</div>
 	</fieldset>
 </form>
