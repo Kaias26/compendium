@@ -75,6 +75,7 @@
 					<li class="list-group-item"><a href="/charactersheet/charactersheet" class="card-link">Générateur de Fiche personnage</a></li>
 					<li class="list-group-item"><a href="/tools/generateurBijoux" class="card-link">Générateur de Butin : Bijoux</a></li>
 					<li class="list-group-item"><a href="/tools/generateurNoms" class="card-link">Générateur de Noms</a></li>
+					<li class="list-group-item"><a href="/tools/combatRapide" class="card-link">Aide au Combat Rapide</a></li>
 				</ul>
 			</div>
 		</div>

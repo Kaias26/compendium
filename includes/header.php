@@ -53,6 +53,7 @@
 							<li><a class="dropdown-item <?php if( $group == "charactersheet" ) {?>active<?php }?>" href="/charactersheet/charactersheet">Générateur de Fiche personnage</a></li>
 							<li><a class="dropdown-item <?php if( $group == "generateurBijoux" ) {?>active<?php }?>" href="/tools/generateurBijoux">Générateur de Butin : Bijoux</a></li>
 							<li><a class="dropdown-item <?php if( $group == "generateurNoms" ) {?>active<?php }?>" href="/tools/generateurNoms">Générateur de Noms</a></li>
+							<li><a class="dropdown-item <?php if( $group == "combatRapide" ) {?>active<?php }?>" href="/tools/combatRapide">Aide au Combat Rapide</a></li>
 						</ul>
 					</li>
 				</ul>				

@@ -1,7 +1,7 @@
 <div class="starter-template">
     <h1 class="mt-5">Aide au Combat Rapide</h1>
 </div>
-<div class="container">
+<div class="container-fluid">
     <div class="row justify-content-center">
         <!-- Colonne Joueurs -->
         <div class="col-md-4">
