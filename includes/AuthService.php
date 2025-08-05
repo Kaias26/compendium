@@ -161,7 +161,7 @@ class AuthService
         }
 
         // check the remember_me in cookie
-        $token = filter_input(INPUT_COOKIE, 'remember_me', FILTER_SANITIZE_STRING);
+        $token = filter_input(INPUT_COOKIE, 'remember_me', FILTER_UNSAFE_RAW);
 
         if ($token && $this->token_is_valid($token)) {
 
