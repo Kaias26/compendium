@@ -3,21 +3,22 @@
 	<p class="lead">Liste des maladies, poisons, folies, mutations...<br>Source : <a href="http://naheulbeuk.com/doc-equipement.htm" target="_blank">http://naheulbeuk.com/doc-equipement.htm</a></p>
 </div>
 
-<ul class="nav nav-tabs">
-	<li class="nav-item">
-		<a class="nav-link <?php if( $subgroup == "maladies" ) {?>active<?php }?>" href="/pj/traitsparticuliers/maladies">Maladies</a>
-	</li>
-	<li class="nav-item">
-		<a class="nav-link <?php if( $subgroup == "mutations" ) {?>active<?php }?>" href="/pj/traitsparticuliers/mutations">Mutations</a>
-	</li>
-	<li class="nav-item">
-		<a class="nav-link <?php if( $subgroup == "poisons" ) {?>active<?php }?>" href="/pj/traitsparticuliers/poisons">Poisons</a>
-	</li>
-	<li class="nav-item">
-		<a class="nav-link <?php if( $subgroup == "folies" ) {?>active<?php }?>" href="/pj/traitsparticuliers/folies">Folies</a>
-	</li>
-</ul>
-
+<div class="container">
+	<ul class="nav nav-tabs">
+		<li class="nav-item">
+			<a class="nav-link <?php if( $subgroup == "maladies" ) {?>active<?php }?>" href="/pj/traitsparticuliers/maladies">Maladies</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link <?php if( $subgroup == "mutations" ) {?>active<?php }?>" href="/pj/traitsparticuliers/mutations">Mutations</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link <?php if( $subgroup == "poisons" ) {?>active<?php }?>" href="/pj/traitsparticuliers/poisons">Poisons</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link <?php if( $subgroup == "folies" ) {?>active<?php }?>" href="/pj/traitsparticuliers/folies">Folies</a>
+		</li>
+	</ul>
+</div>
 <?php if( isset( $subgroup ) and $subgroup != "" ) {?>
 <br>
 <div class="container">

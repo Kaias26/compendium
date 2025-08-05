@@ -3,18 +3,19 @@
 	<p class="lead">Bagues, broches, médaillons...<br>Source : <a href="http://naheulbeuk.com/doc-equipement.htm" target="_blank">http://naheulbeuk.com/doc-equipement.htm</a></p>
 </div>
 
-<ul class="nav nav-tabs">	
-	<li class="nav-item">
-		<a class="nav-link <?php if( $subgroup == "accessoires" ) {?>active<?php }?>" href="/objets/accessoires/accessoires">Accessoires</a>
-	</li>
-	<li class="nav-item">
-		<a class="nav-link <?php if( $subgroup == "karma" ) {?>active<?php }?>" href="/objets/accessoires/karma">Prêtres et Paladins</a>
-	</li>
-	<li class="nav-item">
-		<a class="nav-link <?php if( $subgroup == "astral" ) {?>active<?php }?>" href="/objets/accessoires/astral">Mages et Sorciers</a>
-	</li>
-</ul>
-
+<div class="container">
+	<ul class="nav nav-tabs">	
+		<li class="nav-item">
+			<a class="nav-link <?php if( $subgroup == "accessoires" ) {?>active<?php }?>" href="/objets/accessoires/accessoires">Accessoires</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link <?php if( $subgroup == "karma" ) {?>active<?php }?>" href="/objets/accessoires/karma">Prêtres et Paladins</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link <?php if( $subgroup == "astral" ) {?>active<?php }?>" href="/objets/accessoires/astral">Mages et Sorciers</a>
+		</li>
+	</ul>
+</div>
 <?php if( isset( $subgroup ) and $subgroup != "" ) {?>
 <br>
 <div class="container">

@@ -3,18 +3,19 @@
 	<p class="lead">Potions, Poisons, Ingrédients...<br>Source : <a href="http://naheulbeuk.com/doc-equipement.htm" target="_blank">http://naheulbeuk.com/doc-equipement.htm</a></p>
 </div>
 
-<ul class="nav nav-tabs">	
-	<li class="nav-item">
-		<a class="nav-link <?php if( $subgroup == "ingredients" ) {?>active<?php }?>" href="/objets/consommables/ingredients">Ingrédients magiques</a>
-	</li>
-	<li class="nav-item">
-		<a class="nav-link <?php if( $subgroup == "potions" ) {?>active<?php }?>" href="/objets/consommables/potions">Poisons - Antidotes - Potions - Remedes</a>
-	</li>
-	<li class="nav-item">
-		<a class="nav-link <?php if( $subgroup == "nourriture" ) {?>active<?php }?>" href="/objets/consommables/nourriture">Nourriture et boisson</a>
-	</li>
-</ul>
-
+<div class="container">
+	<ul class="nav nav-tabs">	
+		<li class="nav-item">
+			<a class="nav-link <?php if( $subgroup == "ingredients" ) {?>active<?php }?>" href="/objets/consommables/ingredients">Ingrédients magiques</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link <?php if( $subgroup == "potions" ) {?>active<?php }?>" href="/objets/consommables/potions">Poisons - Antidotes - Potions - Remedes</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link <?php if( $subgroup == "nourriture" ) {?>active<?php }?>" href="/objets/consommables/nourriture">Nourriture et boisson</a>
+		</li>
+	</ul>
+</div>
 <?php if( isset( $subgroup ) and $subgroup != "" ) {?>
 <br>
 <div class="container">	

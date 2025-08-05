@@ -277,7 +277,7 @@ $aBijouxMatiere = [ "en os", "en cuir", "en bois", "en cuivre", "en bronze", "en
 				<button class="btn btn-success" type="submit">Relancer</button>
 			</div>
 		</div>
-	</div>
+	</form>
 	<br>
 	<div class="row text-center">
 		<div class="col">

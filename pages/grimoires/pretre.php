@@ -3,21 +3,22 @@
 	<p class="lead">Liste de sorts pour les prêtres.<br>Source : <a href="http://naheulbeuk.com/doc-magie.htm" target="_blank">http://naheulbeuk.com/doc-magie.htm</a></p>
 </div>
 
-<ul class="nav nav-tabs">
-	<li class="nav-item">
-		<a class="nav-link <?php if( $subgroup == "adathie" ) {?>active<?php }?>" href="/grimoires/pretre/adathie">Adathie</a>
-	</li>
-	<li class="nav-item">
-		<a class="nav-link <?php if( $subgroup == "dlul" ) {?>active<?php }?>" href="/grimoires/pretre/dlul">Dlul</a>
-	</li>
-	<li class="nav-item">
-		<a class="nav-link <?php if( $subgroup == "youclidh" ) {?>active<?php }?>" href="/grimoires/pretre/youclidh">Youclidh</a>
-	</li>
-	<li class="nav-item">
-		<a class="nav-link <?php if( $subgroup == "slanoush" ) {?>active<?php }?>" href="/grimoires/pretre/slanoush">Slanoush</a>
-	</li>
-</ul>
-
+<div class="container">
+	<ul class="nav nav-tabs">
+		<li class="nav-item">
+			<a class="nav-link <?php if( $subgroup == "adathie" ) {?>active<?php }?>" href="/grimoires/pretre/adathie">Adathie</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link <?php if( $subgroup == "dlul" ) {?>active<?php }?>" href="/grimoires/pretre/dlul">Dlul</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link <?php if( $subgroup == "youclidh" ) {?>active<?php }?>" href="/grimoires/pretre/youclidh">Youclidh</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link <?php if( $subgroup == "slanoush" ) {?>active<?php }?>" href="/grimoires/pretre/slanoush">Slanoush</a>
+		</li>
+	</ul>
+</div>
 <?php if( isset( $subgroup ) and $subgroup != "" ) {?>
 <br>
 <div class="container">

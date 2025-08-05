@@ -194,6 +194,7 @@ foreach ($aNoms as $nomItem) {
 <div class="starter-template">
 	<h1 class="mt-5">Générateur de Nom</h1>
 </div>
+
 <div class="container">
 	<form method="post" action="/tools/generateurNoms" id="noms">
 		<div class="row justify-content-md-center">
@@ -265,7 +266,7 @@ foreach ($aNoms as $nomItem) {
 				<button class="btn btn-success" type="submit">Relancer</button>
 			</div>
 		</div>
-	</div>
+	</form>
 	<br>
 	<div class="row text-center">
 		<div class="col">

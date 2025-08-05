@@ -3,18 +3,19 @@
 	<p class="lead">Liste créatures magiques à invoquer.<br>Source : <a href="http://naheulbeuk.com/doc-magie.htm" target="_bank">http://naheulbeuk.com/doc-magie.htm</a></p>
 </div>
 
-<ul class="nav nav-tabs">
-	<li class="nav-item">
-		<a class="nav-link <?php if( $subgroup == "communes" ) {?>active<?php }?>" href="/pnj/invocations/communes">Communes</a>
-	</li>
-	<li class="nav-item">
-		<a class="nav-link <?php if( $subgroup == "interdites" ) {?>active<?php }?>" href="/pnj/invocations/interdites">Interdites</a>
-	</li>
-	<li class="nav-item">
-		<a class="nav-link <?php if( $subgroup == "familiers" ) {?>active<?php }?>" href="/pnj/invocations/familiers">Familiers</a>
-	</li>
-</ul>
-
+<div class="container">
+	<ul class="nav nav-tabs">
+		<li class="nav-item">
+			<a class="nav-link <?php if( $subgroup == "communes" ) {?>active<?php }?>" href="/pnj/invocations/communes">Communes</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link <?php if( $subgroup == "interdites" ) {?>active<?php }?>" href="/pnj/invocations/interdites">Interdites</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link <?php if( $subgroup == "familiers" ) {?>active<?php }?>" href="/pnj/invocations/familiers">Familiers</a>
+		</li>
+	</ul>
+</div>
 <?php if( isset( $subgroup ) and $subgroup != "" ) {?>
 <br>
 <div class="container">

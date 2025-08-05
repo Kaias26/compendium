@@ -3,18 +3,19 @@
 	<p class="lead">Liste des coups spéciaux .<br>Source : <a href="http://naheulbeuk.com/doc-baston.htm" target="_blank">http://naheulbeuk.com/doc-baston.htm</a></p>
 </div>
 
-<ul class="nav nav-tabs">
-	<li class="nav-item">
-		<a class="nav-link <?php if( $subgroup == "universel" ) {?>active<?php }?>" href="/pj/coupsspeciaux/universel">Universels</a>
-	</li>
-	<li class="nav-item">
-		<a class="nav-link <?php if( $subgroup == "menestrel" ) {?>active<?php }?>" href="/pj/coupsspeciaux/menestrel">Ménestrel</a>
-	</li>
-	<li class="nav-item">
-		<a class="nav-link <?php if( $subgroup == "ninja" ) {?>active<?php }?>" href="/pj/coupsspeciaux/ninja">Ninja</a>
-	</li>
-</ul>
-
+<div class="container">
+	<ul class="nav nav-tabs">
+		<li class="nav-item">
+			<a class="nav-link <?php if( $subgroup == "universel" ) {?>active<?php }?>" href="/pj/coupsspeciaux/universel">Universels</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link <?php if( $subgroup == "menestrel" ) {?>active<?php }?>" href="/pj/coupsspeciaux/menestrel">Ménestrel</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link <?php if( $subgroup == "ninja" ) {?>active<?php }?>" href="/pj/coupsspeciaux/ninja">Ninja</a>
+		</li>
+	</ul>
+</div>
 <?php if( isset( $subgroup ) and $subgroup != "" ) {?>
 <br>
 <div class="container">

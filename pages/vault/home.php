@@ -11,18 +11,19 @@ if( !is_user_logged_in() ) {
 	<p class="lead">Stockez vos feuilles de personnages roll20 (PJ / PNJ / monstres...)</p>
 </div>
 
-<ul class="nav nav-tabs">
-	<li class="nav-item">
-		<a class="nav-link <?php if( $subgroup == "pj" ) {?>active<?php }?>" href="/vault/home/pj">Mes PJ</a>
-	</li>
-	<li class="nav-item">
-		<a class="nav-link <?php if( $subgroup == "pnj" ) {?>active<?php }?>" href="/vault/home/pnj">Mes PNJ</a>
-	</li>
-	<li class="nav-item">
-		<a class="nav-link <?php if( $subgroup == "bestiaire" ) {?>active<?php }?>" href="/vault/home/bestiaire">Mon bestiaire</a>
-	</li>
-</ul>
-
+<div class="container">
+	<ul class="nav nav-tabs">
+		<li class="nav-item">
+			<a class="nav-link <?php if( $subgroup == "pj" ) {?>active<?php }?>" href="/vault/home/pj">Mes PJ</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link <?php if( $subgroup == "pnj" ) {?>active<?php }?>" href="/vault/home/pnj">Mes PNJ</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link <?php if( $subgroup == "bestiaire" ) {?>active<?php }?>" href="/vault/home/bestiaire">Mon bestiaire</a>
+		</li>
+	</ul>
+</div>
 <?php if( isset( $subgroup ) and $subgroup != "" ) {?>
 <br>
 <div class="container">

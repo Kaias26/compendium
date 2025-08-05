@@ -3,41 +3,43 @@
 	<p class="lead">Liste de sorts pour les mages.<br>Source : <a href="http://naheulbeuk.com/doc-magie.htm" target="_blank">http://naheulbeuk.com/doc-magie.htm</a></p>
 </div>
 
-<ul class="nav nav-tabs">
-	<li class="nav-item">
-		<a class="nav-link <?php if( $subgroup == "air" ) {?>active<?php }?>" href="/grimoires/mage/air">Air</a>
-	</li>
-	<li class="nav-item">
-		<a class="nav-link <?php if( $subgroup == "combat" ) {?>active<?php }?>" href="/grimoires/mage/combat">Combat</a>
-	</li>
-	<li class="nav-item">
-		<a class="nav-link <?php if( $subgroup == "eau" ) {?>active<?php }?>" href="/grimoires/mage/eau">Eau / Glace</a>
-	</li>
-	<li class="nav-item">
-		<a class="nav-link <?php if( $subgroup == "feu" ) {?>active<?php }?>" href="/grimoires/mage/feu">Feu</a>
-	</li>
-	<li class="nav-item">
-		<a class="nav-link <?php if( $subgroup == "generaliste" ) {?>active<?php }?>" href="/grimoires/mage/generaliste">Généraliste</a>
-	</li>
-	<li class="nav-item">
-		<a class="nav-link <?php if( $subgroup == "invocateur" ) {?>active<?php }?>" href="/grimoires/mage/invocateur">Invocateur</a>
-	</li>
-	<li class="nav-item">
-		<a class="nav-link <?php if( $subgroup == "metamorphe" ) {?>active<?php }?>" href="/grimoires/mage/metamorphe">Métamorphe</a>
-	</li>
-	<li class="nav-item">
-		<a class="nav-link <?php if( $subgroup == "necromancien" ) {?>active<?php }?>" href="/grimoires/mage/necromancien">Nécromancien</a>
-	</li>
-	<li class="nav-item">
-		<a class="nav-link <?php if( $subgroup == "terre" ) {?>active<?php }?>" href="/grimoires/mage/terre">Terre</a>
-	</li>
-	<li class="nav-item">
-		<a class="nav-link <?php if( $subgroup == "thermo" ) {?>active<?php }?>" href="/grimoires/mage/thermo">Thermo</a>
-	</li>
-	<li class="nav-item">
-		<a class="nav-link <?php if( $subgroup == "tzinntch" ) {?>active<?php }?>" href="/grimoires/mage/tzinntch">Tzinntch</a>
-	</li>
-</ul>
+<div class="container">
+	<ul class="nav nav-tabs">
+		<li class="nav-item">
+			<a class="nav-link <?php if( $subgroup == "air" ) {?>active<?php }?>" href="/grimoires/mage/air">Air</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link <?php if( $subgroup == "combat" ) {?>active<?php }?>" href="/grimoires/mage/combat">Combat</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link <?php if( $subgroup == "eau" ) {?>active<?php }?>" href="/grimoires/mage/eau">Eau / Glace</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link <?php if( $subgroup == "feu" ) {?>active<?php }?>" href="/grimoires/mage/feu">Feu</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link <?php if( $subgroup == "generaliste" ) {?>active<?php }?>" href="/grimoires/mage/generaliste">Généraliste</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link <?php if( $subgroup == "invocateur" ) {?>active<?php }?>" href="/grimoires/mage/invocateur">Invocateur</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link <?php if( $subgroup == "metamorphe" ) {?>active<?php }?>" href="/grimoires/mage/metamorphe">Métamorphe</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link <?php if( $subgroup == "necromancien" ) {?>active<?php }?>" href="/grimoires/mage/necromancien">Nécromancien</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link <?php if( $subgroup == "terre" ) {?>active<?php }?>" href="/grimoires/mage/terre">Terre</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link <?php if( $subgroup == "thermo" ) {?>active<?php }?>" href="/grimoires/mage/thermo">Thermo</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link <?php if( $subgroup == "tzinntch" ) {?>active<?php }?>" href="/grimoires/mage/tzinntch">Tzinntch</a>
+		</li>
+	</ul>
+</div>
 
 <?php if( isset( $subgroup ) and $subgroup != "" ) {?>
 <br>

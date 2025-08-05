@@ -3,15 +3,16 @@
 	<p class="lead">Pack de personnages bas niveau<br>Source : <a href="http://naheulbeuk.com/doc-magie.htm" target="_bank">https://www.naheulbeuk.com/doc-aidesdejeu.htm#Pretires</a></p>
 </div>
 
-<ul class="nav nav-tabs">
-	<li class="nav-item">
-		<a class="nav-link <?php if( $subgroup == "officiels" ) {?>active<?php }?>" href="/pnj/pretires/officiels">Officiels</a>
-	</li>
-	<li class="nav-item">
-		<a class="nav-link <?php if( $subgroup == "contributions" ) {?>active<?php }?>" href="/pnj/pretires/contributions">Contributions</a>
-	</li>
-</ul>
-
+<div class="container">
+	<ul class="nav nav-tabs">
+		<li class="nav-item">
+			<a class="nav-link <?php if( $subgroup == "officiels" ) {?>active<?php }?>" href="/pnj/pretires/officiels">Officiels</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link <?php if( $subgroup == "contributions" ) {?>active<?php }?>" href="/pnj/pretires/contributions">Contributions</a>
+		</li>
+	</ul>
+</div>
 <?php if( isset( $subgroup ) and $subgroup != "" ) {?>
 <br>
 <div class="container">

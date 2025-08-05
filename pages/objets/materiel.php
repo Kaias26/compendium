@@ -3,33 +3,34 @@
 	<p class="lead">Equipement d'aventure, Instruments, libres... <br>Source : <a href="http://naheulbeuk.com/doc-equipement.htm" target="_blank">http://naheulbeuk.com/doc-equipement.htm</a></p>
 </div>
 
-<ul class="nav nav-tabs">	
-	<li class="nav-item">
-		<a class="nav-link <?php if( $subgroup == "materiel" ) {?>active<?php }?>" href="/objets/materiel/materiel">Matériel</a>
-	</li>
-	<li class="nav-item">
-		<a class="nav-link <?php if( $subgroup == "livres" ) {?>active<?php }?>" href="/objets/materiel/livres">Livres</a>
-	</li>
-	<li class="nav-item">
-		<a class="nav-link <?php if( $subgroup == "instruments" ) {?>active<?php }?>" href="/objets/materiel/instruments">Instruments</a>
-	</li>
-	<li class="nav-item">
-		<a class="nav-link <?php if( $subgroup == "objets" ) {?>active<?php }?>" href="/objets/materiel/objets">Objets magiques</a>
-	</li>
-	<li class="nav-item">
-		<a class="nav-link <?php if( $subgroup == "butins" ) {?>active<?php }?>" href="/objets/materiel/butins">Butins (inutiles)</a>
-	</li>
-	<li class="nav-item">
-		<a class="nav-link <?php if( $subgroup == "gemmes" ) {?>active<?php }?>" href="/objets/materiel/gemmes">Gemmes</a>
-	</li>
-	<li class="nav-item">
-		<a class="nav-link <?php if( $subgroup == "reliques" ) {?>active<?php }?>" href="/objets/materiel/reliques">Reliques</a>
-	</li>
-	<li class="nav-item">
-		<a class="nav-link <?php if( $subgroup == "montures" ) {?>active<?php }?>" href="/objets/materiel/montures">Montures</a>
-	</li>
-</ul>
-
+<div class="container">
+	<ul class="nav nav-tabs">	
+		<li class="nav-item">
+			<a class="nav-link <?php if( $subgroup == "materiel" ) {?>active<?php }?>" href="/objets/materiel/materiel">Matériel</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link <?php if( $subgroup == "livres" ) {?>active<?php }?>" href="/objets/materiel/livres">Livres</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link <?php if( $subgroup == "instruments" ) {?>active<?php }?>" href="/objets/materiel/instruments">Instruments</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link <?php if( $subgroup == "objets" ) {?>active<?php }?>" href="/objets/materiel/objets">Objets magiques</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link <?php if( $subgroup == "butins" ) {?>active<?php }?>" href="/objets/materiel/butins">Butins (inutiles)</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link <?php if( $subgroup == "gemmes" ) {?>active<?php }?>" href="/objets/materiel/gemmes">Gemmes</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link <?php if( $subgroup == "reliques" ) {?>active<?php }?>" href="/objets/materiel/reliques">Reliques</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link <?php if( $subgroup == "montures" ) {?>active<?php }?>" href="/objets/materiel/montures">Montures</a>
+		</li>
+	</ul>
+</div>
 <?php if( isset( $subgroup ) and $subgroup != "" ) {?>
 <br>
 <div class="container">	

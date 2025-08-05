@@ -3,21 +3,22 @@
 	<p class="lead">Liste de sorts pour les paladins.<br>Source : <a href="http://naheulbeuk.com/doc-magie.htm" target="_blank">http://naheulbeuk.com/doc-magie.htm</a></p>
 </div>
 
-<ul class="nav nav-tabs">
-	<li class="nav-item">
-		<a class="nav-link <?php if( $subgroup == "braav" ) {?>active<?php }?>" href="/grimoires/paladin/braav">Braav</a>
-	</li>
-	<li class="nav-item">
-		<a class="nav-link <?php if( $subgroup == "dlul" ) {?>active<?php }?>" href="/grimoires/paladin/dlul">Dlul</a>
-	</li>
-	<li class="nav-item">
-		<a class="nav-link <?php if( $subgroup == "khornettoh" ) {?>active<?php }?>" href="/grimoires/paladin/khornettoh">Khornettoh</a>
-	</li>
-	<li class="nav-item">
-		<a class="nav-link <?php if( $subgroup == "slanoush" ) {?>active<?php }?>" href="/grimoires/paladin/slanoush">Slanoush</a>
-	</li>
-</ul>
-
+<div class="container">
+	<ul class="nav nav-tabs">
+		<li class="nav-item">
+			<a class="nav-link <?php if( $subgroup == "braav" ) {?>active<?php }?>" href="/grimoires/paladin/braav">Braav</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link <?php if( $subgroup == "dlul" ) {?>active<?php }?>" href="/grimoires/paladin/dlul">Dlul</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link <?php if( $subgroup == "khornettoh" ) {?>active<?php }?>" href="/grimoires/paladin/khornettoh">Khornettoh</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link <?php if( $subgroup == "slanoush" ) {?>active<?php }?>" href="/grimoires/paladin/slanoush">Slanoush</a>
+		</li>
+	</ul>
+</div>
 <?php if( isset( $subgroup ) and $subgroup != "" ) {?>
 <br>
 <div class="container">

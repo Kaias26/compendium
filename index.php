@@ -16,7 +16,7 @@
 	<?php include_once("includes/header.php");?>
 
 	<!-- Begin page content -->
-	<main role="main" class="container">
+	<main role="main" class="container-fluid">
 		<?php include "$page.php";?>
 		<?php 
 			// Fallback for flash messages if not displayed in the included page

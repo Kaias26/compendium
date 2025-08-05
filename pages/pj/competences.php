@@ -3,15 +3,16 @@
 	<p class="lead">Liste des compétences pour les personnages joueurs.<br>Source : <a href="http://www.naheulbeuk.com/jdr-docs/ecran-resumecompetences.pdf" target="_bank">http://www.naheulbeuk.com/jdr-docs/ecran-resumecompetences.pdf</a></p>
 </div>
 
-<ul class="nav nav-tabs">
-	<li class="nav-item">
-		<a class="nav-link <?php if( $subgroup == "classiques" ) {?>active<?php }?>" href="/pj/competences/classiques">Classiques</a>
-	</li>
-	<li class="nav-item">
-		<a class="nav-link <?php if( $subgroup == "supplements" ) {?>active<?php }?>" href="/pj/competences/supplements">Suppléments</a>
-	</li>
-</ul>
-
+<div class="container">
+	<ul class="nav nav-tabs">
+		<li class="nav-item">
+			<a class="nav-link <?php if( $subgroup == "classiques" ) {?>active<?php }?>" href="/pj/competences/classiques">Classiques</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link <?php if( $subgroup == "supplements" ) {?>active<?php }?>" href="/pj/competences/supplements">Suppléments</a>
+		</li>
+	</ul>
+</div>
 <?php if( isset( $subgroup ) and $subgroup != "" ) {?>
 <br>
 <div class="container">

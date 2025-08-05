@@ -3,15 +3,16 @@
 	<p class="lead">Liste des traits spéciaux pour les monstres.</p>
 </div>
 
-<ul class="nav nav-tabs">
-	<li class="nav-item">
-		<a class="nav-link <?php if( $subgroup == "niveaux" ) {?>active<?php }?>" href="/pnj/traitsspeciaux/niveaux">A niveaux de puissance</a>
-	</li>
-	<li class="nav-item">
-		<a class="nav-link <?php if( $subgroup == "simples" ) {?>active<?php }?>" href="/pnj/traitsspeciaux/simples">Simples</a>
-	</li>
-</ul>
-
+<div class="container">
+	<ul class="nav nav-tabs">
+		<li class="nav-item">
+			<a class="nav-link <?php if( $subgroup == "niveaux" ) {?>active<?php }?>" href="/pnj/traitsspeciaux/niveaux">A niveaux de puissance</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link <?php if( $subgroup == "simples" ) {?>active<?php }?>" href="/pnj/traitsspeciaux/simples">Simples</a>
+		</li>
+	</ul>
+</div>
 <?php if( isset( $subgroup ) and $subgroup != "" ) {?>
 <br>
 <div class="container">

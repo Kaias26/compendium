@@ -3,30 +3,31 @@
 	<p class="lead">Liste des Aptitudes Parfois Étranges pour les personnages joueurs.<br>Source : <a href="https://www.naheulbeuk.com/doc-personnages.htm" target="_bank">https://www.naheulbeuk.com/doc-personnages.htm</a></p>
 </div>
 
-<ul class="nav nav-tabs">
-	<li class="nav-item">
-		<a class="nav-link <?php if( $subgroup == "barbare" ) {?>active<?php }?>" href="/pj/ape/barbare">Barbare</a>
-	</li>
-	<li class="nav-item">
-		<a class="nav-link <?php if( $subgroup == "elfe" ) {?>active<?php }?>" href="/pj/ape/elfe">Elfe</a>
-	</li>
-	<li class="nav-item">
-		<a class="nav-link <?php if( $subgroup == "elfenoir" ) {?>active<?php }?>" href="/pj/ape/elfenoir">Elfe noir</a>
-	</li>
-	<li class="nav-item">
-		<a class="nav-link <?php if( $subgroup == "gnome" ) {?>active<?php }?>" href="/pj/ape/gnome">Gnome</a>
-	</li>
-	<li class="nav-item">
-		<a class="nav-link <?php if( $subgroup == "humain" ) {?>active<?php }?>" href="/pj/ape/humain">Humain</a>
-	</li>
-	<li class="nav-item">
-		<a class="nav-link <?php if( $subgroup == "nain" ) {?>active<?php }?>" href="/pj/ape/nain">Nain</a>
-	</li>
-	<li class="nav-item">
-		<a class="nav-link <?php if( $subgroup == "peauverte" ) {?>active<?php }?>" href="/pj/ape/peauverte">Peau verte</a>
-	</li>
-</ul>
-
+<div class="container">
+	<ul class="nav nav-tabs">
+		<li class="nav-item">
+			<a class="nav-link <?php if( $subgroup == "barbare" ) {?>active<?php }?>" href="/pj/ape/barbare">Barbare</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link <?php if( $subgroup == "elfe" ) {?>active<?php }?>" href="/pj/ape/elfe">Elfe</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link <?php if( $subgroup == "elfenoir" ) {?>active<?php }?>" href="/pj/ape/elfenoir">Elfe noir</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link <?php if( $subgroup == "gnome" ) {?>active<?php }?>" href="/pj/ape/gnome">Gnome</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link <?php if( $subgroup == "humain" ) {?>active<?php }?>" href="/pj/ape/humain">Humain</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link <?php if( $subgroup == "nain" ) {?>active<?php }?>" href="/pj/ape/nain">Nain</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link <?php if( $subgroup == "peauverte" ) {?>active<?php }?>" href="/pj/ape/peauverte">Peau verte</a>
+		</li>
+	</ul>
+</div>
 <?php if( isset( $subgroup ) and $subgroup != "" ) {?>
 <br>
 <div class="container">
