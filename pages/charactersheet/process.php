@@ -5,6 +5,7 @@
 	if( !isset( $_SESSION[ 'step' ] ) ) {
 		// Premiere page
 		$_SESSION[ 'step' ] = 1;
+		$_SESSION[ 'max_step_reached' ] = 1;
 
 		// Step 1
 		$_SESSION[ 'post' ][ 'dice_courage' ] = '';
@@ -49,6 +50,14 @@
 		$_SESSION[ 'post' ][ 'bonus_ingenieur' ] = "";
 	}
 
+	// Gestion du step par querystring
+	if (isset($_GET['step'])) {
+		$step = intval($_GET['step']);
+		if ($step >= 1 && $step <= $_SESSION['max_step_reached']) {
+			$_SESSION['step'] = $step;
+		}
+	}
+
 	// Post du formulaire
 	if( $_SERVER['REQUEST_METHOD'] == 'POST' ) {
 
@@ -65,6 +74,11 @@
 		if( isset( $_POST[ 'btnStep' ] ) ) {
 			$_SESSION[ 'step' ] = $_POST[ 'btnStep' ];
 		}
+	}
+
+	// Met à jour le pas maximum atteint
+	if ($_SESSION['step'] > $_SESSION['max_step_reached']) {
+		$_SESSION['max_step_reached'] = $_SESSION['step'];
 	}
 
 	if( $_SESSION[ 'step' ] == 3 ) {
@@ -205,8 +219,8 @@
 			}
 		}
 
-		if (isset($_SESSION['post']['bonus_adress'])) {
-			$targetStat = $_SESSION['post']['bonus_adress'];
+		if (isset($_SESSION['post']['bonus_adresse'])) {
+			$targetStat = $_SESSION['post']['bonus_adresse'];
 			if (isset($_SESSION['post'][$targetStat])) {
 				$_SESSION['post'][$targetStat] += 1;
 			}
