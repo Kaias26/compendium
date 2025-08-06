@@ -96,7 +96,7 @@
 					$class = "btn-outline-danger";
 				}
 				echo '<div data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true" title="' . $oOrigine->tooltip. '">';
-				echo '<input type="radio" required class="btn-check" name="origine" id="origine-' . $oOrigine->id . '" autocomplete="off" value="' . $oOrigine->id . '"' . $disabled .' ' . $checked .'>';
+				echo '<input type="radio" required class="btn-check" name="origine" id="origine-' . $oOrigine->id . '" autocomplete="off" value="' . $oOrigine->id . '"' . $disabled .' ' . $checked .' data-pratique-magie="' . $oOrigine->pratiqueMagie . '">';
 				echo '<label class="btn '. $class . '" for="origine-' . $oOrigine->id . '">' . $oOrigine->label . '</label>';
 				echo '</div>';
 				echo ' ';
@@ -122,7 +122,7 @@
 					$class = "btn-outline-danger";
 				}				
 				echo '<div data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true" title="' . $oMetier->tooltip. '">';
-				echo '<input type="radio" required class="btn-check" name="metier" id="metier-' . $oMetier->id . '" autocomplete="off" value="' . $oMetier->id . '"' . $disabled .' ' . $checked .'>';
+				echo '<input type="radio" required class="btn-check" name="metier" id="metier-' . $oMetier->id . '" autocomplete="off" value="' . $oMetier->id . '"' . $disabled .' ' . $checked .' data-pratique-magie="' . $oMetier->pratiqueMagie . '">';
 				echo '<label class="btn '. $class . '" for="metier-' . $oMetier->id . '">' . $oMetier->label . '</label>';
 				echo '</div>';
 				echo ' ';
@@ -148,7 +148,7 @@
 					$class = "btn-outline-danger";
 				}				
 				echo '<div data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true" title="' . $oMetier->tooltip. '">';
-				echo '<input type="radio" required class="btn-check" name="metier" id="metier-' . $oMetier->id . '" autocomplete="off" value="' . $oMetier->id . '"' . $disabled .' ' . $checked .'>';
+				echo '<input type="radio" required class="btn-check" name="metier" id="metier-' . $oMetier->id . '" autocomplete="off" value="' . $oMetier->id . '"' . $disabled .' ' . $checked .' data-pratique-magie="' . $oMetier->pratiqueMagie . '">';
 				echo '<label class="btn '. $class . '" for="metier-' . $oMetier->id . '">' . $oMetier->label . '</label>';
 				echo '</div>';
 				echo ' ';
@@ -174,7 +174,7 @@
 					$class = "btn-outline-danger";
 				}				
 				echo '<div data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true" title="' . $oMetier->tooltip. '">';
-				echo '<input type="radio" required class="btn-check" name="metier" id="metier-' . $oMetier->id . '" autocomplete="off" value="' . $oMetier->id . '"' . $disabled .' ' . $checked .'>';
+				echo '<input type="radio" required class="btn-check" name="metier" id="metier-' . $oMetier->id . '" autocomplete="off" value="' . $oMetier->id . '"' . $disabled .' ' . $checked .' data-pratique-magie="' . $oMetier->pratiqueMagie . '">';
 				echo '<label class="btn '. $class . '" for="metier-' . $oMetier->id . '">' . $oMetier->label . '</label>';
 				echo '</div>';
 				echo ' ';
@@ -183,7 +183,7 @@
 			</div>
 
 			<p>Ou encore ne pas choisir de métier et attendre qu'une occasion se présente (avec l'accord du MJ) :</p>			
-			<input type="radio" required class="btn-check" name="metier" id="metier-23" autocomplete="off" value="23" <?php if( $_SESSION[ 'post' ][ 'metier' ] == 23 or $_SESSION[ 'post' ][ 'metier' ] == -1 ) { echo 'checked'; } ?>>
+			<input type="radio" required class="btn-check" name="metier" id="metier-23" autocomplete="off" value="23" data-pratique-magie="0" <?php if( $_SESSION[ 'post' ][ 'metier' ] == 23 or $_SESSION[ 'post' ][ 'metier' ] == -1 ) { echo 'checked'; } ?>>
 			<label class="btn btn-outline-primary" for="metier-23" data-bs-toggle="tooltip" data-bs-placement="top" title="">Sans métier</label>
 		</div>
 	</fieldset>
@@ -195,3 +195,53 @@
 	</form>
 	<button class="nxt__btn btn btn-success float-end" type="submit" name="btnStep" value="3" form="charactersheet"> Suivant</button>
 </div>
+
+<script>
+	$( document ).ready(function() {
+		var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+		var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+			return new bootstrap.Tooltip(tooltipTriggerEl)
+		})
+
+		// Store initial disabled state for metiers
+		var initialMetierDisabledState = {};
+		$('input[name="metier"]').each(function() {
+			initialMetierDisabledState[$(this).attr('id')] = $(this).is(':disabled');
+		});
+
+		$('input[name="origine"]').change(function() {
+			var selectedOrigine = $('input[name="origine"]:checked');
+			if (selectedOrigine.length === 0) {
+				return; // No origin selected yet
+			}
+			var originePratiqueMagie = selectedOrigine.data('pratique-magie');
+
+			$('input[name="metier"]').each(function() {
+				var metierInput = $(this);
+				var metierId = metierInput.attr('id');
+				var metierLabel = $('label[for="' + metierId + '"]');
+				var metierPratiqueMagie = metierInput.data('pratique-magie');
+
+				// Was this metier disabled by stats initially?
+				var initiallyDisabled = initialMetierDisabledState[metierId];
+
+				if (originePratiqueMagie == 0 && metierPratiqueMagie == 1) {
+					// Origin has no magic, Metier has magic -> Disable it
+					metierInput.prop('disabled', true);
+					metierInput.prop('checked', false);
+					metierLabel.addClass('btn-outline-danger').removeClass('btn-outline-primary');
+				} else {
+					// Origin has magic OR Metier has no magic -> Enable it if it wasn't disabled by stats
+					if (!initiallyDisabled) {
+						metierInput.prop('disabled', false);
+						// Restore original class
+						metierLabel.removeClass('btn-outline-danger').addClass('btn-outline-primary');
+					}
+				}
+			});
+		});
+
+		// Trigger the change event on page load in case an origin is already selected (e.g., from session)
+		$('input[name="origine"]:checked').trigger('change');
+	});
+</script>

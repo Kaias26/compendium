@@ -20,6 +20,8 @@ class Origine
 	public $competencesNaissance;
 	public $competencesAuChoix;
 	public $poids;
+	public $pratiqueMagie;
+	public $metiersIncompatibles;
 	
 	public function isAvailable() {
 		$availaible = 0;
@@ -67,6 +69,7 @@ $humain->prd = [10,null];
 $humain->competencesNaissance = [0];
 $humain->competencesAuChoix = [1,2,3,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49];
 $humain->poids = [0];
+$humain->pratiqueMagie = 1;
 
 $barbare = new Origine();
 $barbare->id = 1;
@@ -84,6 +87,7 @@ $barbare->prd = [9,null];
 $barbare->competencesNaissance = [1,14,44,46];
 $barbare->competencesAuChoix = [7,10,15,23,30,35,38,47,49];
 $barbare->poids = [0];
+$barbare->pratiqueMagie = 0;
 
 $nain = new Origine();
 $nain->id = 2;
@@ -101,6 +105,7 @@ $nain->prd = [10,null];
 $nain->competencesNaissance = [5,29,37,40];
 $nain->competencesAuChoix = [3,8,10,11,14,26,24,33,47,49];
 $nain->poids = [0];
+$nain->pratiqueMagie = 0;
 
 $hautElfe = new Origine();
 $hautElfe->id = 3;
@@ -118,6 +123,7 @@ $hautElfe->prd = [10,null];
 $hautElfe->competencesNaissance = [22,43,48];
 $hautElfe->competencesAuChoix = [13,15,31,35,39,47];
 $hautElfe->poids = [10];
+$hautElfe->pratiqueMagie = 1;
 
 $demiElfe = new Origine();
 $demiElfe->id = 4;
@@ -135,6 +141,7 @@ $demiElfe->prd = [10,null];
 $demiElfe->competencesNaissance = [3,21,16,33];
 $demiElfe->competencesAuChoix = [11,15,22,23,27,34,35,47];
 $demiElfe->poids = [15];
+$demiElfe->pratiqueMagie = 1;
 
 $elfeSylvain = new Origine();
 $elfeSylvain->id = 5;
@@ -152,6 +159,7 @@ $elfeSylvain->prd = [10,null];
 $elfeSylvain->competencesNaissance = [15,36,39,47,48];
 $elfeSylvain->competencesAuChoix = [17,19,31,35,38,46];
 $elfeSylvain->poids = [10];
+$elfeSylvain->pratiqueMagie = 1;
 
 $elfeNoir = new Origine();
 $elfeNoir->id = 6;
@@ -169,6 +177,7 @@ $elfeNoir->prd = [10,null];
 $elfeNoir->competencesNaissance = [2,19,21,47];
 $elfeNoir->competencesAuChoix = [1,16,22,23,24,25,33,38,43];
 $elfeNoir->poids = [15];
+$elfeNoir->pratiqueMagie = 1;
 
 $orque = new Origine();
 $orque->id = 7;
@@ -186,6 +195,7 @@ $orque->prd = [9,null];
 $orque->competencesNaissance = [2,4,5,10,28,44,46];
 $orque->competencesAuChoix = [7,14,27,30,49];
 $orque->poids = [0];
+$orque->pratiqueMagie = 0;
 
 $demiOrque = new Origine();
 $demiOrque->id = 8;
@@ -203,6 +213,7 @@ $demiOrque->prd = [10,null];
 $demiOrque->competencesNaissance = [2,14,28,44,46];
 $demiOrque->competencesAuChoix = [7,10,23,27,30,35,47,49];
 $demiOrque->poids = [0];
+$demiOrque->pratiqueMagie = 0;
 
 $gobelin = new Origine();
 $gobelin->id = 9;
@@ -220,6 +231,7 @@ $gobelin->prd = [10,null];
 $gobelin->competencesNaissance = [2,3,4,9,28,29,44,46];
 $gobelin->competencesAuChoix = [11,20,23,24];
 $gobelin->poids = [10];
+$gobelin->pratiqueMagie = 0;
 
 $ogre = new Origine();
 $ogre->id = 10;
@@ -237,6 +249,7 @@ $ogre->prd = [9,null];
 $ogre->competencesNaissance = [6,5,7,28,30,44,46];
 $ogre->competencesAuChoix = [10,14,27,32,49];
 $ogre->poids = [0];
+$ogre->pratiqueMagie = 0;
 
 $hobbit = new Origine();
 $hobbit->id = 11;
@@ -254,6 +267,7 @@ $hobbit->prd = [10,null];
 $hobbit->competencesNaissance = [5,9,18,28,42];
 $hobbit->competencesAuChoix = [3,16,22,26,27,25,29,34,47];
 $hobbit->poids = [10];
+$hobbit->pratiqueMagie = 1;
 
 $gnome = new Origine();
 $gnome->id = 12;
@@ -271,6 +285,7 @@ $gnome->prd = [8,null];
 $gnome->competencesNaissance = [1,3,15,16,19,29];
 $gnome->competencesAuChoix = [17,20,21,23,31,34,35,45];
 $gnome->poids = [2];
+$gnome->pratiqueMagie = 0;
 
 $aOrigines = [ $humain, $barbare, $nain, $hautElfe, $demiElfe, $elfeSylvain, $elfeNoir, $orque, $demiOrque, $gobelin, $ogre, $hobbit, $gnome ];
 
@@ -292,6 +307,7 @@ class Metier
 	public $competencesNaissance;
 	public $competencesAuChoix;
 	public $poids;
+	public $pratiqueMagie;
 
 	public function isAvailable() {
 		$availaible = 0;
@@ -340,6 +356,7 @@ $guerrier->at = [0,null];
 $guerrier->prd = [0,null];
 $guerrier->competencesNaissance = [7,10];
 $guerrier->competencesAuChoix = [1,14,15,24,30,47,49];
+$guerrier->pratiqueMagie = 0;
 
 $ninja = new Metier();
 $ninja->id = 1;
@@ -356,6 +373,7 @@ $ninja->at = [11,"Fixe"];
 $ninja->prd = [8,"Fixe"];
 $ninja->competencesNaissance = [19,25,47];
 $ninja->competencesAuChoix = [1,14,15,22,23,33,35,42];
+$ninja->pratiqueMagie = 0;
 
 $voleur = new Metier();
 $voleur->id = 2;
@@ -372,6 +390,7 @@ $voleur->at = [0,null];
 $voleur->prd = [0,null];
 $voleur->competencesNaissance = [3,16,19,21,45];
 $voleur->competencesAuChoix = [8,20,22,23,27,25,33,42];
+$voleur->pratiqueMagie = 0;
 
 $pretre = new Metier();
 $pretre->id = 3;
@@ -388,6 +407,7 @@ $pretre->at = [0,null];
 $pretre->prd = [0,null];
 $pretre->competencesNaissance = [22,33,41];
 $pretre->competencesAuChoix = [8,15,18,26,39,40,43];
+$pretre->pratiqueMagie = 1;
 
 $mage = new Metier();
 $mage->id = 4;
@@ -404,6 +424,7 @@ $mage->at = [0,null];
 $mage->prd = [0,null];
 $mage->competencesNaissance = [22,41,43];
 $mage->competencesAuChoix = [3,13,15,26,32,39];
+$mage->pratiqueMagie = 1;
 
 $paladin = new Metier();
 $paladin->id = 5;
@@ -420,6 +441,7 @@ $paladin->at = [0,null];
 $paladin->prd = [0,null];
 $paladin->competencesNaissance = [15,30,41];
 $paladin->competencesAuChoix = [7,14,22,26,39];
+$paladin->pratiqueMagie = 1;
 
 $ranger = new Metier();
 $ranger->id = 6;
@@ -436,6 +458,7 @@ $ranger->at = [0,null];
 $ranger->prd = [0,null];
 $ranger->competencesNaissance = [21,15,19,35,38];
 $ranger->competencesAuChoix = [1,13,17,20,22,23,33,39,47];
+$ranger->pratiqueMagie = 0;
 
 $menestrel = new Metier();
 $menestrel->id = 7;
@@ -452,6 +475,7 @@ $menestrel->at = [0,null];
 $menestrel->prd = [0,null];
 $menestrel->competencesNaissance = [9,15,22,26,31,36];
 $menestrel->competencesAuChoix = [33,34,39,43,47];
+$menestrel->pratiqueMagie = 0;
 
 $pirate = new Metier();
 $pirate->id = 8;
@@ -468,6 +492,7 @@ $pirate->at = [0,null];
 $pirate->prd = [0,null];
 $pirate->competencesNaissance = [3,5,8,16,23,35];
 $pirate->competencesAuChoix = [21,27,33,34,29,47];
+$pirate->pratiqueMagie = 0;
 
 $marchand = new Metier();
 $marchand->id = 9;
@@ -484,6 +509,7 @@ $marchand->at = [0,null];
 $marchand->prd = [0,null];
 $marchand->competencesNaissance = [3,8,22,26,33];
 $marchand->competencesAuChoix = [13,15,18,24,29,43];
+$marchand->pratiqueMagie = 0;
 
 $ingenieur = new Metier();
 $ingenieur->id = 10;
@@ -500,6 +526,7 @@ $ingenieur->at = [0,null];
 $ingenieur->prd = [0,null];
 $ingenieur->competencesNaissance = [11,20,24,42,45];
 $ingenieur->competencesAuChoix = [3,18,15,22,35,39];
+$ingenieur->pratiqueMagie = 0;
 
 $bourgeois = new Metier();
 $bourgeois->id = 11;
@@ -516,6 +543,7 @@ $bourgeois->at = [7,"Fixe"];
 $bourgeois->prd = [9,"Fixe"];
 $bourgeois->competencesNaissance = [3,9,15,22,37];
 $bourgeois->competencesAuChoix = [8,13,31,33,35,43];
+$bourgeois->pratiqueMagie = 0;
 
 $aMetiers = [ $guerrier, $ninja, $voleur, $pretre, $mage, $paladin, $ranger, $menestrel, $pirate, $marchand, $ingenieur, $bourgeois ];
 
@@ -535,6 +563,7 @@ $officier->at = [9,"Fixe"];
 $officier->prd = [10,"Fixe"];
 $officier->competencesNaissance = [13,33,32,3,15];
 $officier->competencesAuChoix = [];
+$officier->pratiqueMagie = 0;
 
 $eclaireur = new Metier();
 $eclaireur->id = 13;
@@ -550,6 +579,7 @@ $eclaireur->at = [11,"Fixe"];
 $eclaireur->prd = [9,"Fixe"];
 $eclaireur->competencesNaissance = [15,19,47,23,35,21,38];
 $eclaireur->competencesAuChoix = [];
+$eclaireur->pratiqueMagie = 0;
 
 $soldatLourd = new Metier();
 $soldatLourd->id = 14;
@@ -565,6 +595,7 @@ $soldatLourd->at = [10,"Fixe"];
 $soldatLourd->prd = [11,"Fixe"];
 $soldatLourd->competencesNaissance = [10,7,30,14,49];
 $soldatLourd->competencesAuChoix = [];
+$soldatLourd->pratiqueMagie = 0;
 
 $medecin = new Metier();
 $medecin->id = 15;
@@ -580,6 +611,7 @@ $medecin->at = [9,"Fixe"];
 $medecin->prd = [11,"Fixe"];
 $medecin->competencesNaissance = [22,39,3,35,15,18,43];
 $medecin->competencesAuChoix = [];
+$medecin->pratiqueMagie = 0;
 
 $armurierArtificer = new Metier();
 $armurierArtificer->id = 16;
@@ -595,6 +627,7 @@ $armurierArtificer->at = [9,"Fixe"];
 $armurierArtificer->prd = [10,null];
 $armurierArtificer->competencesNaissance = [22,11,20,45,21,24];
 $armurierArtificer->competencesAuChoix = [];
+$armurierArtificer->pratiqueMagie = 0;
 
 $volontaire = new Metier();
 $volontaire->id = 17;
@@ -610,6 +643,7 @@ $volontaire->at = [0,null];
 $volontaire->prd = [0,null];
 $volontaire->competencesNaissance = [];
 $volontaire->competencesAuChoix = [];
+$volontaire->pratiqueMagie = 0;
 
 $aSoldats=[ $officier, $eclaireur, $soldatLourd, $medecin, $armurierArtificer, $volontaire ];
 
@@ -628,6 +662,7 @@ $bourreau->at = [10,"Fixe"];
 $bourreau->prd = [8,"Fixe"];
 $bourreau->competencesNaissance = [7,5,25,30,32,33,2088,2089,2090];
 $bourreau->competencesAuChoix = [21,11,24,47,35,23,15,14,39,49];
+$bourreau->pratiqueMagie = 0;
 
 $sbire = new Metier();
 $sbire->id = 19;
@@ -643,6 +678,7 @@ $sbire->at = [9,"Fixe"];
 $sbire->prd = [9,"Fixe"];
 $sbire->competencesNaissance = [3,25,32,26,33,34,42,27,2091,2092,2093];
 $sbire->competencesAuChoix = [1,2,3,5,6,7,8,9,10,11,12,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49];
+$sbire->pratiqueMagie = 0;
 
 $nainDeLaMafia = new Metier();
 $nainDeLaMafia->id = 20;
@@ -658,6 +694,7 @@ $nainDeLaMafia->at = [10,"Fixe"];
 $nainDeLaMafia->prd = [9,"Fixe"];
 $nainDeLaMafia->competencesNaissance = [5,29,40,1,10,16,42,2094,2095];
 $nainDeLaMafia->competencesAuChoix = [45,3,38,21,8,11,26,33,47,20];
+$nainDeLaMafia->pratiqueMagie = 0;
 
 $amazoneSylderienne = new Metier();
 $amazoneSylderienne->id = 21;
@@ -673,6 +710,7 @@ $amazoneSylderienne->at = [10,"Fixe"];
 $amazoneSylderienne->prd = [8,"Fixe"];
 $amazoneSylderienne->competencesNaissance = [9,14,10,15,46,49,2096,2097,2098,2099];
 $amazoneSylderienne->competencesAuChoix = [23,30,35,38,47,28];
+$amazoneSylderienne->pratiqueMagie = 0;
 
 $chaman = new Metier();
 $chaman->id = 22;
@@ -688,6 +726,7 @@ $chaman->at = [10,"Fixe"];
 $chaman->prd = [9,"Fixe"];
 $chaman->competencesNaissance = [2,10,19,23,35,38,39,47,28,2100,2101];
 $chaman->competencesAuChoix = [7,3,14,15,17,18,21,30];
+$chaman->pratiqueMagie = 1;
 
 $jobless = new Metier();
 $jobless->id = 23;
@@ -703,6 +742,7 @@ $jobless->at = [0,null];
 $jobless->prd = [0,null];
 $jobless->competencesNaissance = [];
 $jobless->competencesAuChoix = [];
+$jobless->pratiqueMagie = 0;
 
 $aSupplements = [ $bourreau, $sbire, $nainDeLaMafia, $amazoneSylderienne, $chaman ] ;
 
