@@ -3,7 +3,7 @@
 		<div class="sub__title__container ">
 			<p>Etape 8/<?php echo $maxStep ?></p>
 			<h2>Résumé</h2>
-			<p>Votre fiche est presque prête. Une petite relecture, quelques ajustements et vous pourrez (enfin ?) récupérer votre personnage.</p>
+			<p>Une petite relecture, quelques ajustements et vous pourrez (enfin ?) récupérer votre personnage.</p>
 			<p>
 				<a class="btn btn-info" data-bs-toggle="collapse" href="#collapseTips" role="button" aria-expanded="false" aria-controls="collapseTips">
 					Conseil
@@ -56,7 +56,7 @@
 					<div class="form-floating">
 						<input type="text" class="form-control" name="attr_Personnage_Sex" id="attr_Personnage_Sex" 
 							placeholder="Sexe :"
-							value="<?php //echo $_SESSION[ 'post' ][ 'attr_Personnage_Sex' ] ?>"							
+							value="<?php echo $_SESSION[ 'post' ][ 'attr_Personnage_Sex' ] ?>"							
 						>
 						<label for="attr_Personnage_Sex">Sexe :</label>
 					</div>
@@ -65,7 +65,7 @@
 					<div class="form-floating">
 						<input type="text" class="form-control" name="attr_Personnage_Age" id="attr_Personnage_Age" 
 							placeholder="Âge :"
-							value="<?php //echo $_SESSION[ 'post' ][ 'attr_Personnage_Age' ] ?>"							
+							value="<?php echo $_SESSION[ 'post' ][ 'attr_Personnage_Age' ] ?>"							
 						>
 						<label for="attr_Personnage_Age">Âge :</label>
 					</div>
@@ -74,7 +74,7 @@
 					<div class="form-floating">
 						<input type="text" class="form-control" name="attr_Personnage_Taille" id="attr_Personnage_Taille" 
 							placeholder="Taille : "
-							value="<?php //echo $_SESSION[ 'post' ][ 'attr_Personnage_Taille' ] ?>"							
+							value="<?php echo $_SESSION[ 'post' ][ 'attr_Personnage_Taille' ] ?>"							
 						>
 						<label for="attr_Personnage_Taille">Taille : </label>
 					</div>
@@ -83,7 +83,7 @@
 					<div class="form-floating">
 						<input type="text" class="form-control" name="attr_Personnage_Poids" id="attr_Personnage_Poids" 
 							placeholder="Poids : "
-							value="<?php //echo $_SESSION[ 'post' ][ 'attr_Personnage_Poids' ] ?>"							
+							value="<?php echo $_SESSION[ 'post' ][ 'attr_Personnage_Poids' ] ?>"							
 						>
 						<label for="attr_Personnage_Poids">Poids : </label>
 					</div>
@@ -283,6 +283,7 @@
 			</div>
 		</div>
 	</fieldset>
+	<br>
 </form>
 
 <div class="buttons">

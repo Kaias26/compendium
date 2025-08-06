@@ -3,19 +3,19 @@
 		<div class="sub__title__container ">
 			<p>Etape 7/<?php echo $maxStep ?></p>
 			<h2>Subtilités</h2>
-			<p>Votre fiche est presque prête. Quelques spécifités peuvent s'appliquer en fonction de vos statistiques, origine ou métier.</p>
-			
+			<p>Votre fiche est presque prête. Quelques spécifités peuvent s'appliquer en fonction de vos statistiques, origine ou métier.</p>			
 		</div>
 		<div class="input__container">
+			<br>
 			<?php if( $_SESSION[ 'post' ][ 'dice_adresse' ] <= 8 ) { // adresse- ?>
 			<div class="card mb-1">
 					<div class="card-body">
 					<p>Un score d'Adresse <b>inférieur ou égal</b> à 8 <b>diminue</b> de 1 soit votre Attaque, soit votre Parade (au choix) :</p>
 		
 					<div class="col-md-4 offset-md-4">
-						<select class="form-control" name="malus_adress" required>
-							<option value="attr_Stats_Attaque" <?php if( $_SESSION[ 'post' ][ 'malus_adress' ] == "attr_Stats_Attaque"  ) { echo 'selected'; } ?>>Diminuer l'Attaque de 1</option>
-							<option value="attr_Stats_Parade" <?php if( $_SESSION[ 'post' ][ 'malus_adress' ] == "attr_Stats_Parade"  ) { echo 'selected'; } ?>>Diminuer la Parade de 1</option>
+						<select class="form-control" name="malus_adresse" required>
+							<option value="attr_Stats_Attaque" <?php if( $_SESSION[ 'post' ][ 'malus_adresse' ] == "attr_Stats_Attaque"  ) { echo 'selected'; } ?>>Diminuer l'Attaque de 1</option>
+							<option value="attr_Stats_Parade" <?php if( $_SESSION[ 'post' ][ 'malus_adresse' ] == "attr_Stats_Parade"  ) { echo 'selected'; } ?>>Diminuer la Parade de 1</option>
 						</select>
 					</div>
 				</div>
@@ -238,6 +238,6 @@
 	<form method="post" action="/charactersheet/charactersheet">
 		<button class="nxt__btn btn btn-secondary float-start" type="submit" name="btnStep" value="6"> Retour</button>
 	</form>
-	<button class="nxt__btn btn btn-success float-end" type="submit" name="btnStep" value="8" form="charactersheet">
+	<button class="nxt__btn btn btn-success float-end" type="submit" name="btnStep" value="8" form="charactersheet"> Suivant</button>
 	<!--- Fin</button>--->
 </div>

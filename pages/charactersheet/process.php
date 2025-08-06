@@ -36,7 +36,7 @@
 		$_SESSION[ 'post' ][ 'attr_Personnage_Taille' ] = '';
 		$_SESSION[ 'post' ][ 'attr_Personnage_Poids' ] = '';
 		$_SESSION[ 'post' ][ 'bonus_adresse' ] = "";
-		$_SESSION[ 'post' ][ 'malus_adress' ] = "";
+		$_SESSION[ 'post' ][ 'malus_adresse' ] = "";
 		$_SESSION[ 'post' ][ 'grimoire_mage' ] = '';
 		$_SESSION[ 'post' ][ 'grimoire_pretre' ] = "";
 		$_SESSION[ 'post' ][ 'malus_ogre_at' ] = "";
