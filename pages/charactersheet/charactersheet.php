@@ -36,6 +36,10 @@
 						<p>Votre richesse de départ</p>
 					</div>
 					<div class="title__name">
+						<h3>Subtilités</h3>
+						<p>Bonus / Malus / Options</p>
+					</div>
+					<div class="title__name">
 						<h3>Résumé</h3>
 						<p>Validez votre personnage</p>
 					</div>
@@ -61,6 +65,9 @@
 							<span class="fa fa-tshirt"></span>
 						</li>
 						<li <?php if( $_SESSION[ 'step' ] >= 7 ) { ?>class="active"<?php } ?> id="icon7">
+							<span class="fa fa-scale-balanced"></span>
+						</li>
+						<li <?php if( $_SESSION[ 'step' ] >= 8 ) { ?>class="active"<?php } ?> id="icon8">
 							<span class="fa fa-book-reader"></span>
 						</li>
 					</ul>

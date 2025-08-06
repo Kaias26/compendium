@@ -1,6 +1,6 @@
 <?php
 
-	$maxStep = 7;
+	$maxStep = 8;
 	
 	if( !isset( $_SESSION[ 'step' ] ) ) {
 		// Premiere page
@@ -127,6 +127,10 @@
 	}
 
 	if( $_SESSION[ 'step' ] == 7 )
+	{
+	}
+
+	if( $_SESSION[ 'step' ] == 8 )
 	{
 		// Points de vie
 		$ev_origine = $aOrigines[ $_SESSION['post']['origine'] ]->ev[ 0 ];		
