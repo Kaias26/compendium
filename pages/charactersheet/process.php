@@ -71,6 +71,13 @@
 			$_SESSION['post'][$key] = $value;
 		}
 
+		// --- Origine ET Métier ---		
+		if (isset($_SESSION['post']['metier']) && in_array($_SESSION['post']['metier'], $special_ids)) {
+			// If a special metier is chosen, force the origin to match.
+			$_SESSION['post']['origine'] = $_SESSION['post']['metier'];
+		}
+
+
 		if( isset( $_POST[ 'btnStep' ] ) ) {
 			$_SESSION[ 'step' ] = $_POST[ 'btnStep' ];
 		}

@@ -1,6 +1,7 @@
 <?php 
 
 $aStats = [ "courage", "intelligence", "charisme", "adresse", "force" ];
+$special_ids = [20, 21, 22]; // Nain de la Mafia, Amazone, Chaman
 
 //=== Origines =======================================================================================================
 class Origine
@@ -648,10 +649,13 @@ $supplementsData = [
         'competencesAuChoix' => [1,2,3,5,6,7,8,9,10,11,12,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49],
         'pratiqueMagie' => 0,
     ],
+];
+
+$pairsData = [
     [
         'id' => 20,
         'label' => 'Nain de la Mafia',
-        'tooltip' => '...',
+        'tooltip' => 'Origine ET Métier',
         'courage' => [10, 'Non'],
         'intelligence' => [11, 'Non'],
         'charisme' => ['Non', 'Non'],
@@ -668,7 +672,7 @@ $supplementsData = [
     [
         'id' => 21,
         'label' => 'Amazone Sylderienne',
-        'tooltip' => '...',
+        'tooltip' => 'Origine ET Métier',
         'courage' => [12, 'Non'],
         'intelligence' => ['Non', 'Non'],
         'charisme' => [12, 'Non'],
@@ -685,7 +689,7 @@ $supplementsData = [
     [
         'id' => 22,
         'label' => 'Chaman de Jungle',
-        'tooltip' => '...',
+        'tooltip' => 'Origine ET Métier',
         'courage' => ['Non', 'Non'],
         'intelligence' => [11, 'Non'],
         'charisme' => [11, 'Non'],
@@ -697,7 +701,7 @@ $supplementsData = [
         'prd' => [9,'Fixe'],
         'competencesNaissance' => [2,10,19,23,35,38,39,47,28,2100,2101],
         'competencesAuChoix' => [7,3,14,15,17,18,21,30],
-        'pratiqueMagie' => 1,
+        'pratiqueMagie' => 0,
     ],
 ];
 
@@ -742,9 +746,13 @@ foreach ($supplementsData as $data) {
 	$aSupplements[] = new Metier($data);
 }
 
+foreach ($pairsData as $data) {
+	$aOrigines[] = new Origine($data);
+	$aSupplements[] = new Metier($data);
+}
+
 $jobless = new Metier($joblessData);
 
 $aJobs = array_merge($aMetiers, $aSoldats, $aSupplements);
 $aJobs[] = $jobless;
-
 ?>

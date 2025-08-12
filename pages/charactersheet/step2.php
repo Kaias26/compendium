@@ -95,6 +95,11 @@
 					$checked = "";
 					$class = "btn-outline-danger";
 				}
+
+				if( in_array($oOrigine->id, $special_ids) ) {
+					$class = "d-none";
+				}
+
 				echo '<div data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true" title="' . $oOrigine->tooltip. '">';
 				echo '<input type="radio" required class="btn-check" name="origine" id="origine-' . $oOrigine->id . '" autocomplete="off" value="' . $oOrigine->id . '"' . $disabled .' ' . $checked .' data-pratique-magie="' . $oOrigine->pratiqueMagie . '">';
 				echo '<label class="btn '. $class . '" for="origine-' . $oOrigine->id . '">' . $oOrigine->label . '</label>';
@@ -201,18 +206,42 @@
 		var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
 		var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
 			return new bootstrap.Tooltip(tooltipTriggerEl)
-		})
+		});
 
-		// Store initial disabled state for metiers
+		// --- Origine ET Métier ---
+		const specialIds = ['20', '21', '22']; // Nain de la Mafia, Amazone, Chaman
+
+		// Changement de métier
+		$('input[name="metier"]').change(function() {
+			var selectedMetierId = $(this).val();
+
+			if (specialIds.includes(selectedMetierId)) {
+				// Métier spécial = Origine identique
+				$('#origine-' + selectedMetierId).prop('checked', true);
+			} else {
+				var selectedOrigine = $('input[name="origine"]:checked');
+				if (selectedOrigine.length > 0 && specialIds.includes(selectedOrigine.val())) {
+					selectedOrigine.prop('checked', false);
+				}
+			}
+
+			$('input[name="origine"]:checked').trigger('change');
+		});
+
+
+		// --- EXISTING LOGIC FOR MAGIC COMPATIBILITY ---
+
+		// Store initial disabled state for metiers based on stats
 		var initialMetierDisabledState = {};
 		$('input[name="metier"]').each(function() {
 			initialMetierDisabledState[$(this).attr('id')] = $(this).is(':disabled');
 		});
 
+		// When an ORIGIN is chosen (or forced by metier choice)
 		$('input[name="origine"]').change(function() {
 			var selectedOrigine = $('input[name="origine"]:checked');
 			if (selectedOrigine.length === 0) {
-				return; // No origin selected yet
+				return; // No origin selected, do nothing
 			}
 			var originePratiqueMagie = selectedOrigine.data('pratique-magie');
 
@@ -221,27 +250,30 @@
 				var metierId = metierInput.attr('id');
 				var metierLabel = $('label[for="' + metierId + '"]');
 				var metierPratiqueMagie = metierInput.data('pratique-magie');
-
-				// Was this metier disabled by stats initially?
 				var initiallyDisabled = initialMetierDisabledState[metierId];
 
+				// If a metier was disabled by stats, it stays disabled no matter what.
+				if (initiallyDisabled) {
+					return;
+				}
+
+				// If origin can't use magic, disable magic-using metiers
 				if (originePratiqueMagie == 0 && metierPratiqueMagie == 1) {
-					// Origin has no magic, Metier has magic -> Disable it
 					metierInput.prop('disabled', true);
-					metierInput.prop('checked', false);
+					if (metierInput.is(':checked')) {
+						metierInput.prop('checked', false);
+					}
 					metierLabel.addClass('btn-outline-danger').removeClass('btn-outline-primary');
 				} else {
-					// Origin has magic OR Metier has no magic -> Enable it if it wasn't disabled by stats
-					if (!initiallyDisabled) {
-						metierInput.prop('disabled', false);
-						// Restore original class
-						metierLabel.removeClass('btn-outline-danger').addClass('btn-outline-primary');
-					}
+					// Otherwise, enable it
+					metierInput.prop('disabled', false);
+					metierLabel.removeClass('btn-outline-danger').addClass('btn-outline-primary');
 				}
 			});
 		});
 
-		// Trigger the change event on page load in case an origin is already selected (e.g., from session)
+		// Trigger both change events on page load to set the correct initial state
 		$('input[name="origine"]:checked').trigger('change');
+		$('input[name="metier"]:checked').trigger('change');
 	});
 </script>

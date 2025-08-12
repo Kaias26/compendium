@@ -41,6 +41,9 @@
 					</div>
 				</div>
 				<div class="col">
+					<?php 
+						if( !in_array($_SESSION['post']['metier'], $special_ids) ) {
+					?>
 					<div class="card">
 						<div class="card-header">
 							<b><?php echo $aJobs[ $_SESSION['post']['metier'] ]->label ?></b><br>
@@ -59,6 +62,9 @@
 							?>
 						</ul>
 					</div>
+					<?php 
+						}
+					?>
 				</div>
 			</div>
 			<div class="row">
