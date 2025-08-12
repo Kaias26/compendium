@@ -49,8 +49,8 @@
 		$_SESSION[ 'post' ][ 'malus_adresse' ] = "";
 		$_SESSION[ 'post' ][ 'grimoire_mage' ] = '';
 		$_SESSION[ 'post' ][ 'grimoire_pretre' ] = "";
-		$_SESSION[ 'post' ][ 'malus_ogre_at' ] = "";
-		$_SESSION[ 'post' ][ 'malus_ogre_prd' ] = "";
+		$_SESSION[ 'post' ][ 'malus_ogre_at' ] = 0;
+		$_SESSION[ 'post' ][ 'malus_ogre_prd' ] = 0;
 		$_SESSION[ 'post' ][ 'malus_ranger' ] = "";
 		$_SESSION[ 'post' ][ 'bonus_ranger' ] = "";
 		$_SESSION[ 'post' ][ 'malus_marchand' ] = "";
@@ -74,6 +74,7 @@
 		if( ( isset( $_POST['origine'] ) and $_SESSION['post']['origine'] != $_POST['origine'] )
 		 OR ( isset( $_POST['metier'] ) and $_SESSION['post']['metier'] != $_POST['metier'] ) ) {
 			$_SESSION[ 'post' ][ 'competences' ] = [];
+			$_SESSION[ 'max_step_reached' ] = 3;
 		}
 
 		foreach( $_POST AS $key => $value ) {
@@ -249,8 +250,25 @@
 			}
 		}
 
-		// Apply Ingénieur malus/bonus
-		if ($oCurrentMetier->id == 10) { // Ingénieur
+		// Marchand
+		if ($oCurrentMetier->id == 9) { 
+			$malus_marchand_stat = isset($_SESSION['post']['malus_marchand']) ? $_SESSION['post']['malus_marchand'] : '';
+			$bonus_marchand_stat = isset($_SESSION['post']['bonus_marchand']) ? $_SESSION['post']['bonus_marchand'] : '';
+
+			if (!empty($malus_marchand_stat)) {
+				$targetStat = $malus_marchand_stat;
+				if (isset($_SESSION['post'][$targetStat])) {
+					$_SESSION['post'][$targetStat] -= 1;
+				}
+			}
+
+			if (!empty($bonus_marchand_stat)) {
+				$_SESSION['post']['attr_Stats_' . ucfirst($bonus_marchand_stat)] += 1;
+			}
+		}
+
+		// Ingénieur
+		if ($oCurrentMetier->id == 10) { 
 			$malus_ingenieur_stat = isset($_SESSION['post']['malus_ingenieur']) ? $_SESSION['post']['malus_ingenieur'] : '';
 			$bonus_ingenieur_stat = isset($_SESSION['post']['bonus_ingenieur']) ? $_SESSION['post']['bonus_ingenieur'] : '';
 
@@ -266,8 +284,8 @@
 			}
 		}
 
-		// Apply Ogre malus/bonus
-		if ($oCurrentOrigine->id == 10) { // Ogre
+		// Ogre
+		if ($oCurrentOrigine->id == 10) { 
 			$malus_at = isset($_SESSION['post']['malus_ogre_at']) ? intval($_SESSION['post']['malus_ogre_at']) : 0;
 			$malus_prd = isset($_SESSION['post']['malus_ogre_prd']) ? intval($_SESSION['post']['malus_ogre_prd']) : 0;
 
@@ -275,8 +293,8 @@
 			$_SESSION['post']['attr_Stats_Parade'] -= $malus_prd;
 		}
 
-		// Apply Ranger malus/bonus
-		if ($oCurrentMetier->id == 6) { // Ranger
+		// Ranger
+		if ($oCurrentMetier->id == 6) { 
 			$malus_ranger_stat = isset($_SESSION['post']['malus_ranger']) ? $_SESSION['post']['malus_ranger'] : '';
 			$bonus_ranger_stat = isset($_SESSION['post']['bonus_ranger']) ? $_SESSION['post']['bonus_ranger'] : '';
 

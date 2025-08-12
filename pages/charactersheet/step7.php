@@ -10,10 +10,11 @@
 			<?php if( $_SESSION[ 'post' ][ 'dice_adresse' ] <= 8 ) { // adresse- ?>
 			<div class="card mb-1">
 					<div class="card-body">
-					<p>Un score d'Adresse <b>inférieur ou égal</b> à 8 <b>diminue</b> de 1 soit votre Attaque, soit votre Parade (au choix) :</p>
+					<p>Un score d'Adresse <b>inférieur ou égal</b> à 8 <b>diminue</b> de 1 soit votre Attaque, soit votre Parade :</p>
 		
 					<div class="col-md-4 offset-md-4">
 						<select class="form-control" name="malus_adresse" required>
+							<option value="">(au choix)</option>
 							<option value="attr_Stats_Attaque" <?php if( $_SESSION[ 'post' ][ 'malus_adresse' ] == "attr_Stats_Attaque"  ) { echo 'selected'; } ?>>Diminuer l'Attaque de 1</option>
 							<option value="attr_Stats_Parade" <?php if( $_SESSION[ 'post' ][ 'malus_adresse' ] == "attr_Stats_Parade"  ) { echo 'selected'; } ?>>Diminuer la Parade de 1</option>
 						</select>
@@ -24,10 +25,11 @@
 			<?php if( $_SESSION[ 'post' ][ 'dice_adresse' ] >= 13 ) { // adresse+ ?>
 				<div class="card mb-1">
   					<div class="card-body">
-						<p>Un score d'Adresse <b>supérieur ou égal</b> à 13 <b>augmente</b> de 1 soit votre Attaque, soit votre Parade (au choix) :</p>					
+						<p>Un score d'Adresse <b>supérieur ou égal</b> à 13 <b>augmente</b> de 1 soit votre Attaque, soit votre Parade :</p>					
 
 						<div class="col-md-4 offset-md-4">
 							<select class="form-control" name="bonus_adresse" id="bonus_adresse" required>
+								<option value="">(au choix)</option>
 								<option value="attr_Stats_Attaque" <?php if( $_SESSION[ 'post' ][ 'bonus_adresse' ] == "attr_Stats_Attaque"  ) { echo 'selected'; } ?>>Augmenter l'Attaque de 1</option>
 								<option value="attr_Stats_Parade" <?php if( $_SESSION[ 'post' ][ 'bonus_adresse' ] == "attr_Stats_Parade"  ) { echo 'selected'; } ?>>Augmenter la Parade de 1</option>
 							</select>
@@ -59,12 +61,12 @@
 			<?php if( $oCurrentOrigine->id == 10 ) { // Ogre ?>
 				<div class="card mb-1">
   					<div class="card-body">
-						<p><b>SUPER-BOURRIN :</b>< L'ogre a le droit de retrancher jusqu'à 3 points à son score de base en ATTAQUE et/ou en PARADE pour en faire un bonus de dégâts (au corps à corps, toutes armes confondues). Ainsi il peut avoir +3 en dégâts en plus de ses autres bonus de FORCE, mais son côté bourrin le rend maladroit. Le bonus est à choisir en début de carrière et ne pourra être modifié par la suite.</p>
-						<div class="row">
+						<p><b>SUPER-BOURRIN :</b> L'ogre a le droit de retrancher jusqu'à 3 points à son score de base en ATTAQUE et/ou en PARADE pour en faire un bonus de dégâts (au corps à corps, toutes armes confondues).<br />Ainsi il peut avoir +3 en dégâts en plus de ses autres bonus de FORCE, mais son côté bourrin le rend maladroit.<br />Le bonus est à choisir en début de carrière et ne pourra être modifié par la suite.</p>
+						<div class="row mb-3">
 	  						<div class="col-md-3 offset-md-3">
 	  							<p class="text-center">Je diminue mon Attaque :</p>
 								<select class="form-control" name="malus_ogre_at" id="malus_ogre_at">
-									<option></option>
+									<option value="0">de 0</option>
 									<option value="1" <?php if( $_SESSION[ 'post' ][ 'malus_ogre_at' ] == "1"  ) { echo 'selected'; } ?>>de 1</option>
 									<option value="2" <?php if( $_SESSION[ 'post' ][ 'malus_ogre_at' ] == "2"  ) { echo 'selected'; } ?>>de 2</option>
 									<option value="3" <?php if( $_SESSION[ 'post' ][ 'malus_ogre_at' ] == "3"  ) { echo 'selected'; } ?>>de 3</option>
@@ -73,15 +75,21 @@
 							<div class="col-md-3">
 	  							<p class="text-center">Je diminue ma Parade :</p>
 								<select class="form-control" name="malus_ogre_prd" id="malus_ogre_prd">
-									<option></option>
+									<option value="0">de 0</option>
 									<option value="1" <?php if( $_SESSION[ 'post' ][ 'malus_ogre_prd' ] == "1"  ) { echo 'selected'; } ?>>de 1</option>
 									<option value="2" <?php if( $_SESSION[ 'post' ][ 'malus_ogre_prd' ] == "2"  ) { echo 'selected'; } ?>>de 2</option>
 									<option value="3" <?php if( $_SESSION[ 'post' ][ 'malus_ogre_prd' ] == "3"  ) { echo 'selected'; } ?>>de 3</option>
 								</select>
 							</div>
-							<div class="col-md-3">
+						</div>
+						<div class="row">
+							<div class="col-md-6 offset-md-3">
 	  							<p class="text-center">Pour augmenter mes dégats de :</p>
-								<input type="number" name="bonus_ogre" id="bonus_ogre" value="0" required readonly min="0" max="3">
+	  						</div>
+	  					</div>
+	  					<div class="row">
+	  						<div class="col-md-2 offset-md-5">
+								<input type="number" class="form-control" name="bonus_ogre" id="bonus_ogre" value="0" required readonly min="0" max="3">
 							</div>
 						</div>
   					</div>
@@ -188,14 +196,16 @@
 				<div class="card mb-1">
   					<div class="card-body">
   						<p>En raison de son érudition, au niveau 1 le Marchand doit retirer 1 point à l'attaque ou à la parade, qu'il pourra ajouter au choix à l'intelligence ou au charisme</p>
-  						<div class="row">
-	  						<div class="col-md-3 offset-md-3">
+  						<div class="row mb-3">
+	  						<div class="col-md-6 offset-md-3">
 	  							<select class="form-control" name="malus_marchand" id="malus_marchand" required>
-								<option value="attr_Stats_Attaque" <?php if( $_SESSION[ 'post' ][ 'malus_marchand' ] == "attr_Stats_Attaque"  ) { echo 'selected'; } ?>>Diminuer l'Attaque de 1</option>
-								<option value="attr_Stats_Parade" <?php if( $_SESSION[ 'post' ][ 'malus_marchand' ] == "attr_Stats_Parade"  ) { echo 'selected'; } ?>>Diminuer la Parade de 1</option>
-							</select>
+									<option value="attr_Stats_Attaque" <?php if( $_SESSION[ 'post' ][ 'malus_marchand' ] == "attr_Stats_Attaque"  ) { echo 'selected'; } ?>>Diminuer l'Attaque de 1</option>
+									<option value="attr_Stats_Parade" <?php if( $_SESSION[ 'post' ][ 'malus_marchand' ] == "attr_Stats_Parade"  ) { echo 'selected'; } ?>>Diminuer la Parade de 1</option>
+								</select>
 							</div>
-							<div class="col-md-3">
+						</div>
+						<div class="row">
+							<div class="col-md-3 offset-md-4">
 								<p class="text-center">Pour gagner 1 :</p>
 								<select class="form-control" name="bonus_marchand" id="bonus_marchand">
 									<option value="intelligence" <?php if( $_SESSION[ 'post' ][ 'bonus_marchand' ] == "intelligence"  ) { echo 'selected'; } ?>>Intelligence</option>
@@ -211,14 +221,16 @@
 				<div class="card mb-1">
   					<div class="card-body">
   						<p>En raison de sa spécialisation technique, au niveau 1 l'Ingénieur doit retirer 1 point à l'attaque ou à la parade, qu'il pourra ajouter au choix à l'intelligence ou à l'adresse</p>
-  						<div class="row">
-	  						<div class="col-md-3 offset-md-3">
+  						<div class="row mb-3">
+	  						<div class="col-md-6 offset-md-3">
 	  							<select class="form-control" name="malus_ingenieur" id="malus_ingenieur" required>
 								<option value="attr_Stats_Attaque" <?php if( $_SESSION[ 'post' ][ 'malus_ingenieur' ] == "attr_Stats_Attaque"  ) { echo 'selected'; } ?>>Diminuer l'Attaque de 1</option>
 								<option value="attr_Stats_Parade" <?php if( $_SESSION[ 'post' ][ 'malus_ingenieur' ] == "attr_Stats_Parade"  ) { echo 'selected'; } ?>>Diminuer la Parade de 1</option>
 							</select>
 							</div>
-							<div class="col-md-3">
+						</div>
+						<div class="row">
+							<div class="col-md-3 offset-md-4">
 								<p class="text-center">Pour gagner 1 :</p>
 								<select class="form-control" name="bonus_ingenieur" id="bonus_ingenieur">
 									<option value="intelligence" <?php if( $_SESSION[ 'post' ][ 'bonus_ingenieur' ] == "intelligence"  ) { echo 'selected'; } ?>>Intelligence</option>
@@ -241,3 +253,44 @@
 	<button class="nxt__btn btn btn-success float-end" type="submit" name="btnStep" value="8" form="charactersheet"> Suivant</button>
 	<!--- Fin</button>--->
 </div>
+
+<script>
+$(document).ready(function() {
+    // Store previous values, initialized from session or 0
+    var prev_at = <?php echo intval($_SESSION['post']['malus_ogre_at']) ?>;
+    var prev_prd = <?php echo intval($_SESSION['post']['malus_ogre_prd']) ?>;
+
+    function updateTotal() {
+        var at_val = parseInt($('#malus_ogre_at').val()) || 0;
+        var prd_val = parseInt($('#malus_ogre_prd').val()) || 0;
+        var total = at_val + prd_val;
+        $('#bonus_ogre').val(total);
+    }
+
+    // Set initial value on page load
+    updateTotal();
+
+    $('#malus_ogre_at, #malus_ogre_prd').on('change', function() {
+        var at_val = parseInt($('#malus_ogre_at').val()) || 0;
+        var prd_val = parseInt($('#malus_ogre_prd').val()) || 0;
+        var total = at_val + prd_val;
+
+        if (total > 3) {
+            alert('Le bonus total ne peut pas dépasser 3.');
+            // Revert the one that was changed
+            if (this.id === 'malus_ogre_at') {
+                $(this).val(prev_at);
+            } else {
+                $(this).val(prev_prd);
+            }
+            // Recalculate total after reverting
+            updateTotal(); 
+        } else {
+            // If valid, update the previous values
+            prev_at = at_val;
+            prev_prd = prd_val;
+            updateTotal();
+        }
+    });
+});
+</script>
