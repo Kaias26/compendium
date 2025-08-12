@@ -1,3 +1,9 @@
+<?php
+	$checklimit = 2;
+	if( $oCurrentOrigine->id === 0 && $oCurrentMetier->id === 23 ) {
+		$checklimit = 3;
+	}
+?>
 <form method="post" action="/charactersheet/charactersheet" id="charactersheet">
 	<fieldset id="form1">
 		<div class="sub__title__container ">
@@ -5,7 +11,7 @@
 			<h2>Les compétences</h2>
 			<p>Maintenant que vous avez l'ossature de votre personnage, il vous faut noter ses compétences, qui sont ses points forts (ou ses points faibles).</p>
 
-			<p>Vous disposez de celles de votre Origine (Compétences de naissance) et celles de votre Métier (Compétences héritées), mais aussi de 2 autres compétences au choix parmi celles qui vous sont proposées, soit par votre Origine, soit par votre Métier.</p>			
+			<p>Vous disposez de celles de votre Origine (Compétences de naissance) et celles de votre Métier (Compétences héritées), mais aussi de <?php echo $checklimit ?> autres compétences au choix parmi celles qui vous sont proposées, soit par votre Origine, soit par votre Métier.</p>			
 			<p>
 				<a class="btn btn-info" data-bs-toggle="collapse" href="#collapseTips" role="button" aria-expanded="false" aria-controls="collapseTips">
 					Conseils
@@ -69,7 +75,7 @@
 			</div>
 			<div class="row">
 				<div class="col">
-					<br><p>Votre Origine et votre Métier permettent de choisir deux des compétences suivantes :</p>
+					<br><p>Votre Origine et votre Métier permettent de choisir <?php echo $checklimit ?> des compétences suivantes :</p>
 				</div>
 			</div>
 			<div class="d-flex flex-wrap gap-1">
@@ -80,7 +86,7 @@
 						$checked = "checked";
 					}
 
-					echo '<input type="checkbox" class="btn-check" data-checklimit="2" name="competences[]" id="competence-' . $row[ 'id' ] . '" autocomplete="off" value="' . $row[ 'id' ] . '"' . $checked .'>';
+					echo '<input type="checkbox" class="btn-check" data-checklimit="' . $checklimit . '" name="competences[]" id="competence-' . $row[ 'id' ] . '" autocomplete="off" value="' . $row[ 'id' ] . '"' . $checked .'>';
 					echo '<label class="btn btn-outline-primary" for="competence-' . $row[ 'id' ] . '" data-bs-toggle="tooltip" data-bs-placement="top" title="' . $row[ 'value' ] . '">' . $row[ 'name' ] . '</label>';
 					echo ' ';
 				}
