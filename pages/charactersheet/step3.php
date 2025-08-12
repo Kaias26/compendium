@@ -23,7 +23,7 @@
 				<div class="col">
 					<div class="card">
 						<div class="card-header">
-							<b><?php echo $aOrigines[ $_SESSION['post']['origine'] ]->label ?></b><br>
+							<b><?php echo $oCurrentOrigine->label ?></b><br>
 							Compétences de naissance
 						</div>
 						<ul class="list-group list-group-flush">
@@ -46,7 +46,7 @@
 					?>
 					<div class="card">
 						<div class="card-header">
-							<b><?php echo $aJobs[ $_SESSION['post']['metier'] ]->label ?></b><br>
+							<b><?php echo $oCurrentMetier->label ?></b><br>
 							Compétences héritées
 						</div>
 						<ul class="list-group list-group-flush">

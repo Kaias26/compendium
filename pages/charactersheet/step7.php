@@ -56,7 +56,7 @@
 					</div>
 				</div>
 			<?php } ?>
-			<?php if( $aOrigines[ $_SESSION['post']['origine'] ]->id == 10 ) { // Ogre ?>
+			<?php if( $oCurrentOrigine->id == 10 ) { // Ogre ?>
 				<div class="card mb-1">
   					<div class="card-body">
 						<p><b>SUPER-BOURRIN :</b>< L'ogre a le droit de retrancher jusqu'à 3 points à son score de base en ATTAQUE et/ou en PARADE pour en faire un bonus de dégâts (au corps à corps, toutes armes confondues). Ainsi il peut avoir +3 en dégâts en plus de ses autres bonus de FORCE, mais son côté bourrin le rend maladroit. Le bonus est à choisir en début de carrière et ne pourra être modifié par la suite.</p>
@@ -88,7 +88,7 @@
   				</div>
 			<?php } ?>
 
-			<?php if( $aJobs[ $_SESSION['post']['metier'] ]->id == 3 ) { // Pretre  ?>
+			<?php if( $oCurrentMetier->id == 3 ) { // Pretre  ?>
 				<div class="card mb-1">
   					<div class="card-body">
   						<p>Un Prêtre doit choisir un dieu, et un seul, en début de carrière :</p>
@@ -107,7 +107,7 @@
   				</div>
 			<?php } ?>
 
-			<?php if( $aJobs[ $_SESSION['post']['metier'] ]->id == 4 ) { // Mage  ?>
+			<?php if( $oCurrentMetier->id == 4 ) { // Mage  ?>
 				<div class="card mb-1">
   					<div class="card-body">
   						<p>Les mages qui désirent faire carrière doivent se spécialiser dans une école de magie :</p>
@@ -133,7 +133,7 @@
   				</div>
 			<?php } ?>
 
-			<?php if( $aJobs[ $_SESSION['post']['metier'] ]->id == 5 ) { // Pretre  ?>
+			<?php if( $oCurrentMetier->id == 5 ) { // Pretre  ?>
 				<div class="card mb-1">
   					<div class="card-body">
   						<p>Un Paladin doit choisir un dieu, et un seul, en début de carrière :</p>
@@ -152,7 +152,7 @@
   				</div>
 			<?php } ?>
 
-			<?php if( $aJobs[ $_SESSION['post']['metier'] ]->id == 6 ) { // Ranger  ?>
+			<?php if( $oCurrentMetier->id == 6 ) { // Ranger  ?>
 				<div class="card mb-1">
   					<div class="card-body">
   						<p>En raison de sa polyvalence, au niveau 1 le Ranger peut choisir de <b>soustraire</b> 1 point d'une CARAC pour l'<b>ajouter</b> à une autre (INT, CHA, COU, FO, AD)</p>
@@ -184,7 +184,7 @@
   				</div>
 			<?php } ?>
 
-			<?php if( $aJobs[ $_SESSION['post']['metier'] ]->id == 9 ) { // Marchand  ?>
+			<?php if( $oCurrentMetier->id == 9 ) { // Marchand  ?>
 				<div class="card mb-1">
   					<div class="card-body">
   						<p>En raison de son érudition, au niveau 1 le Marchand doit retirer 1 point à l'attaque ou à la parade, qu'il pourra ajouter au choix à l'intelligence ou au charisme</p>
@@ -207,7 +207,7 @@
   				</div>
 			<?php } ?>
 
-			<?php if( $aJobs[ $_SESSION['post']['metier'] ]->id == 10 ) { // Ingénieur  ?>
+			<?php if( $oCurrentMetier->id == 10 ) { // Ingénieur  ?>
 				<div class="card mb-1">
   					<div class="card-body">
   						<p>En raison de sa spécialisation technique, au niveau 1 l'Ingénieur doit retirer 1 point à l'attaque ou à la parade, qu'il pourra ajouter au choix à l'intelligence ou à l'adresse</p>

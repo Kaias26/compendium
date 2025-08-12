@@ -1,5 +1,14 @@
 <?php
 
+	function getObjectById($id, $aArray) {
+		foreach ($aArray as $oClass) {
+			if ($oClass->id == $id) {
+				return $oClass;
+			}
+		}
+		return null;
+	}
+
 	$maxStep = 8;
 	
 	if( !isset( $_SESSION[ 'step' ] ) ) {
@@ -88,10 +97,17 @@
 		$_SESSION['max_step_reached'] = $_SESSION['step'];
 	}
 
+	if( isset($_SESSION['post']['origine'])) {
+		$oCurrentOrigine = getObjectById($_SESSION['post']['origine'], $aOrigines);
+	}
+	if( isset($_SESSION['post']['metier'])) {
+		$oCurrentMetier = getObjectById($_SESSION['post']['metier'], $aJobs);
+	}
+
 	if( $_SESSION[ 'step' ] == 3 ) {
 		try {
 			// Affichage des compétences de l'Origine 
-			$origine_naissance_data = Database::createInClauseParams($aOrigines[$_SESSION['post']['origine']]->competencesNaissance, 'ori_naiss');
+			$origine_naissance_data = Database::createInClauseParams($oCurrentOrigine->competencesNaissance, 'ori_naiss');
 			$sql_origine = "SELECT c.id, c.name, cf.value
 					FROM `compendium` as c
 					INNER JOIN `compendium_fields` as cf ON cf.idCompendium = c.id
@@ -101,7 +117,7 @@
 			$statement_origine = $database->execute_query($sql_origine, $origine_naissance_data['params']);
 			
 			// Affichage des compétences du Métier 
-			$metier_naissance_data = Database::createInClauseParams($aJobs[$_SESSION['post']['metier']]->competencesNaissance, 'met_naiss');
+			$metier_naissance_data = Database::createInClauseParams($oCurrentMetier->competencesNaissance, 'met_naiss');
 			$params_metier = array_merge($metier_naissance_data['params'], $origine_naissance_data['params']);
 
 			$sql_metier = "SELECT c.id, c.name, cf.value
@@ -114,14 +130,14 @@
 			$statement_metier = $database->execute_query($sql_metier, $params_metier);
 
 			// Affichage des compétences Au choix
-			if ($aOrigines[$_SESSION['post']['origine']]->id == 0 && $aJobs[$_SESSION['post']['metier']]->id != 23) { // Humain
+			if ($oCurrentOrigine->id == 0 && $oCurrentMetier->id != 23) { // Humain
 				$origine_auchoix_data = Database::createInClauseParams([0], 'ori_choix');
 			} 
 			else
 			{
-				$origine_auchoix_data = Database::createInClauseParams($aOrigines[$_SESSION['post']['origine']]->competencesAuChoix, 'ori_choix');
+				$origine_auchoix_data = Database::createInClauseParams($oCurrentOrigine->competencesAuChoix, 'ori_choix');
 			}
-			$metier_auchoix_data = Database::createInClauseParams($aJobs[$_SESSION['post']['metier']]->competencesAuChoix, 'met_choix');
+			$metier_auchoix_data = Database::createInClauseParams($oCurrentMetier->competencesAuChoix, 'met_choix');
 
 			$not_in_combined_ids = array_merge($metier_naissance_data['ids'], $origine_naissance_data['ids']);
 			$not_in_combined_ids = array_unique($not_in_combined_ids);
@@ -154,20 +170,20 @@
 	if( $_SESSION[ 'step' ] == 8 )
 	{
 		// Points de vie
-		$ev_origine = $aOrigines[ $_SESSION['post']['origine'] ]->ev[ 0 ];		
-		$ev_metier_hasMod = $aJobs[ $_SESSION['post']['metier'] ]->ev[ 1 ];		
+		$ev_origine = $oCurrentOrigine->ev[ 0 ];		
+		$ev_metier_hasMod = $oCurrentMetier->ev[ 1 ];		
 
 		if( $ev_metier_hasMod == "Fixe" ) {
-			$ev_metier = $aJobs[ $_SESSION['post']['metier'] ]->ev[ 0 ];
+			$ev_metier = $oCurrentMetier->ev[ 0 ];
 
 			// Check si le mod s'applique à l'origine du joueur
-			$ev_metier_modOrigines = $aJobs[ $_SESSION['post']['origine'] ]->ev[ 2 ];
-			if( strpos( $ev_metier_modOrigines, $aJobs[ $_SESSION['post']['origine'] ]->label ) !== false or $ev_metier_modOrigines == "" ) {
+			$ev_metier_modOrigines = $oCurrentMetier->ev[ 2 ];
+			if( strpos( $ev_metier_modOrigines, $oCurrentOrigine->label ) !== false or $ev_metier_modOrigines == "" ) {
 				// On remplace les EV d'origine par les EV du métier
 				$_SESSION[ 'post' ][ 'attr_EV_max' ] = $ev_metier;
 			} else {
 				// Les EV Origine ne sont pas remplacés par les EV métiers, on applique un Mod.
-				$ev_metier_mod = $aJobs[ $_SESSION['post']['origine'] ]->ev[ 3 ];
+				$ev_metier_mod = $oCurrentMetier->ev[ 3 ];
 				
 				// On applique un mod % 
 				if( strpos( $ev_metier_mod, '%' ) !== false )
@@ -179,21 +195,21 @@
 				}
 			}
 		} else if ( $ev_metier_hasMod == "origine+" ) {
-			$ev_metier = $aJobs[ $_SESSION['post']['metier'] ]->ev[ 0 ];
+			$ev_metier = $oCurrentMetier->ev[ 0 ];
 			$_SESSION[ 'post' ][ 'attr_EV_max' ] = $ev_origine + $ev_metier;
 		} else {
 			$_SESSION[ 'post' ][ 'attr_EV_max' ] = $ev_origine;
 		}
 
 		// Points de mana
-		$_SESSION[ 'post' ][ 'attr_EA_max' ] = $aJobs[ $_SESSION['post']['metier'] ]->ea[ 0 ];
+		$_SESSION[ 'post' ][ 'attr_EA_max' ] = $oCurrentMetier->ea[ 0 ];
 
 		// Attaque
-		$at_origine = $aOrigines[ $_SESSION['post']['origine'] ]->at[ 0 ];		
-		$at_metier_hasMod = $aJobs[ $_SESSION['post']['metier'] ]->at[ 1 ];
+		$at_origine = $oCurrentOrigine->at[ 0 ];		
+		$at_metier_hasMod = $oCurrentMetier->at[ 1 ];
 
 		if( $at_metier_hasMod == "Fixe" ) {
-			$at_metier = $aJobs[ $_SESSION['post']['metier'] ]->at[ 0 ];
+			$at_metier = $oCurrentMetier->at[ 0 ];
 
 			$_SESSION[ 'post' ][ 'attr_Stats_Attaque' ] = $at_metier;
 		} else {
@@ -201,11 +217,11 @@
 		}
 
 		// Parade
-		$prd_origine = $aOrigines[ $_SESSION['post']['origine'] ]->prd[ 0 ];		
-		$prd_metier_hasMod = $aJobs[ $_SESSION['post']['metier'] ]->prd[ 1 ];
+		$prd_origine = $oCurrentOrigine->prd[ 0 ];		
+		$prd_metier_hasMod = $oCurrentMetier->prd[ 1 ];
 
 		if( $prd_metier_hasMod == "Fixe" ) {
-			$prd_metier = $aJobs[ $_SESSION['post']['metier'] ]->prd[ 0 ];
+			$prd_metier = $oCurrentMetier->prd[ 0 ];
 
 			$_SESSION[ 'post' ][ 'attr_Stats_Parade' ] = $prd_metier;
 		} else {
@@ -234,7 +250,7 @@
 		}
 
 		// Apply Ingénieur malus/bonus
-		if (isset($aJobs[$_SESSION['post']['metier']]) && $aJobs[$_SESSION['post']['metier']]->id == 10) { // Ingénieur
+		if ($oCurrentMetier->id == 10) { // Ingénieur
 			$malus_ingenieur_stat = isset($_SESSION['post']['malus_ingenieur']) ? $_SESSION['post']['malus_ingenieur'] : '';
 			$bonus_ingenieur_stat = isset($_SESSION['post']['bonus_ingenieur']) ? $_SESSION['post']['bonus_ingenieur'] : '';
 
@@ -251,7 +267,7 @@
 		}
 
 		// Apply Ogre malus/bonus
-		if (isset($aOrigines[$_SESSION['post']['origine']]) && $aOrigines[$_SESSION['post']['origine']]->id == 10) { // Ogre
+		if ($oCurrentOrigine->id == 10) { // Ogre
 			$malus_at = isset($_SESSION['post']['malus_ogre_at']) ? intval($_SESSION['post']['malus_ogre_at']) : 0;
 			$malus_prd = isset($_SESSION['post']['malus_ogre_prd']) ? intval($_SESSION['post']['malus_ogre_prd']) : 0;
 
@@ -260,7 +276,7 @@
 		}
 
 		// Apply Ranger malus/bonus
-		if (isset($aJobs[$_SESSION['post']['metier']]) && $aJobs[$_SESSION['post']['metier']]->id == 6) { // Ranger
+		if ($oCurrentMetier->id == 6) { // Ranger
 			$malus_ranger_stat = isset($_SESSION['post']['malus_ranger']) ? $_SESSION['post']['malus_ranger'] : '';
 			$bonus_ranger_stat = isset($_SESSION['post']['bonus_ranger']) ? $_SESSION['post']['bonus_ranger'] : '';
 

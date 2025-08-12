@@ -7,7 +7,7 @@
 			<p>Reportez le montant obtenu (entre 20 et 120 pièces d'Or), dans la case correspondante.<br>
 			Ceci est votre pécule de départ, indicateur de votre classe sociale au début de l'aventure.<br>
 			Vous pouvez vous équiper en armement, en protection, et en matériel divers d'une somme correspondant à ce pécule.</p>
-			<?php if( $aJobs[ $_SESSION['post']['metier'] ]->id == 11 ) { ?>		
+			<?php if( $oCurrentMetier->id == 11 ) { ?>		
 				<p>Au niveau 1, le Noble peut <b>tirer une deuxième fois</b> sa fortune et ajouter les pièces d'or à son pécule de base.</p>
 			<?php } ?>	
 			<p>
@@ -50,7 +50,7 @@
 							</div>
 						</div>						
 					</div>
-					<?php if( $aJobs[ $_SESSION['post']['metier'] ]->id == 11 ) { ?>
+					<?php if( $oCurrentMetier->id == 11 ) { ?>
 					<br>
 					<div class="row">
 						<div id="help_or" class="form-text">Bourgeois ou Noble !</div>

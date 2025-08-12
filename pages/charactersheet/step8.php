@@ -33,7 +33,7 @@
 					<div class="form-floating">
 						<input type="text" class="form-control" name="attr_Personnage_Origine" id="attr_Personnage_Origine" 
 							placeholder="Origine :"
-							value="<?php echo $aOrigines[ $_SESSION['post']['origine'] ]->label ?>"
+							value="<?php echo $oCurrentOrigine->label ?>"
 							required readonly
 						>
 						<label for="attr_Personnage_Origine">Origine :</label>
@@ -43,7 +43,7 @@
 					<div class="form-floating">
 						<input type="text" class="form-control" name="attr_Personnage_Metiers" id="attr_Personnage_Metiers" 
 							placeholder="Metier :"
-							value="<?php echo $aJobs[ $_SESSION['post']['metier'] ]->label ?>"
+							value="<?php echo $oCurrentMetier->label ?>"
 							required readonly
 						>
 						<label for="attr_Personnage_Metiers">Metier :</label>
