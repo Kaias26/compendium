@@ -27,7 +27,7 @@ if( !is_user_logged_in() ) {
 <?php if( isset( $subgroup ) and $subgroup != "" ) {?>
 <br>
 <div class="container">
-	<table class="table table-hover table-striped" id="myDatatable">
+	<table class="table table-hover table-striped dataTable" id="myDatatable">
 		<thead class="table-dark">
 		<tr>
 			<th scope="col">Nom</th>

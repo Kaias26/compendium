@@ -41,7 +41,7 @@
 			  <div>NOTE : une robe peut être portée à un niveau inférieur, mais la colonne BONUS n'est pas appliquée – l'armure seule demeure utilisable</div>
 		</div>
 	<?php }?>
-	<table class="table table-hover table-striped" id="myDatatable">
+	<table class="table table-hover table-striped dataTable" id="myDatatable">
 		<thead class="table-dark">
 		<tr>
 			<th scope="col">Type</th>

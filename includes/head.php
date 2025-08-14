@@ -21,6 +21,8 @@
 	var dataTables_options = {};
 </script>
 
+<script src="/js/functions.js?20220104"></script>
+
 <?php if( $folder == 'charactersheet' ) {?>
 	<link href="/css/charactersheet.css" rel="stylesheet" >
 	<script src="/js/charactersheet.js?20220104"></script>
@@ -35,5 +37,3 @@
 	<link href="/css/combatRapide.css" rel="stylesheet" >
 	<script src="/js/combatRapide.js?20250805"></script>
 <?php }?>
-
-<script src="/js/functions.js?20220104"></script>

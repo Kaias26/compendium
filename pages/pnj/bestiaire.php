@@ -4,7 +4,7 @@
 </div>
 
 <div class="container">
-	<table class="table table-hover table-striped" id="myDatatable">
+	<table class="table table-hover table-striped dataTable" id="myDatatable">
 		<thead class="table-dark">
 		<tr>
 			<th scope="col">Type</th>

@@ -44,7 +44,7 @@
 <?php if( isset( $subgroup ) and $subgroup != "" ) {?>
 <br>
 <div class="container">
-	<table class="table table-hover table-striped" id="myDatatable">
+	<table class="table table-hover table-striped dataTable" id="myDatatable">
 		<thead>
 		<tr class="table-dark">
 			<th scope="col">Niveau</th>

@@ -33,7 +33,7 @@ $(document).ready( function () {
 
 	var datatable_settings = $.extend( {}, dataTable_defaults, dataTables_options );
 
-	var myTable = $('#myDatatable').DataTable( datatable_settings );
+	var myTable = $('.dataTable').DataTable( datatable_settings );
 
 	$('#myDatatable').on( "click", "button", function() {
 		var $this = $( this );
@@ -55,7 +55,7 @@ $(document).ready( function () {
 	});
 
 	// Order by the grouping
-	$('#myDatatable tbody').on( 'click', 'tr.group', function () {
+	$('.dataTable tbody').on( 'click', 'tr.group', function () {
 		myTable.order( dataTables_options.order ).draw();
 	} );
 
