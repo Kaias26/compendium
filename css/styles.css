@@ -20,14 +20,14 @@ body {
 }
 
 #myDatatable input { width: 100px!important;  }
-#myDatatable .cell-min-width { width: 1%; white-space: nowrap; }
-#myDatatable tr.group {
+.dataTable .cell-min-width { width: 1%; white-space: nowrap; }
+.dataTable tr.group {
 	background-color: #99ccff !important;
 }
-#myDatatable tr.group:hover {
+.dataTable tr.group:hover {
     background-color: #79a2ff !important;
     cursor:pointer;
 }
-#myDatatable .dtr-data .form-control {
+.dataTable .dtr-data .form-control {
 	display: inline;
 }

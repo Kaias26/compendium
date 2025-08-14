@@ -34,8 +34,9 @@
 		$_SESSION[ 'post' ][ 'dice_pdt' ] = '';
 
 		// Step 5
-		$_SESSION[ 'post' ][ 'dice_or' ] = '';
-		$_SESSION[ 'post' ][ 'dice_orBonus' ] = '';
+		$_SESSION[ 'post' ][ 'dice_or' ] = 0;
+		$_SESSION[ 'post' ][ 'dice_orBonus' ] = 0;
+		$_SESSION[ 'post' ][ 'total_or' ] = 0;
 
 		// Step 6
 		
@@ -162,6 +163,40 @@
 			header('Location: /home');
 			exit;
 		}
+	}
+
+	if( $_SESSION[ 'step' ] == 6 ) {
+		$_SESSION[ 'post' ][ 'total_or' ] = intval($_SESSION[ 'post' ][ 'dice_or' ]) + intval($_SESSION[ 'post' ][ 'dice_orBonus' ]);
+
+		// Only fetch data if it's not already in the session
+	        try {
+	            $db = Database::getInstance();
+
+	            $_SESSION['step6_data']['armes'] = $db->fetch_items_by_category('armement');
+	            $_SESSION['step6_data']['protections'] = $db->fetch_items_by_category('protections');
+	            $_SESSION['step6_data']['materiel'] = $db->fetch_items_by_category('materiel');
+
+	            // TODO: The gold calculation should also be handled here based on previous steps data
+	            // For now, using placeholders.
+	            $_SESSION['post']['gold_arme'] = $_SESSION['character']['gold_arme'] ?? $_SESSION[ 'post' ][ 'total_or' ];
+	            $_SESSION['post']['gold_protection'] = $_SESSION['character']['gold_protection'] ?? $_SESSION[ 'post' ][ 'total_or' ];
+	            $_SESSION['post']['gold_materiel'] = $_SESSION['character']['gold_materiel'] ?? $_SESSION[ 'post' ][ 'total_or' ];
+
+	        } catch (Exception $e) {
+	            // Handle potential exceptions during data fetching
+	            // Maybe set an error message in the session to display on the page
+	            $_SESSION['error_message'] = "Erreur lors de la préparation de l'étape 6. " . $e->getMessage();
+	            // Log the full error for debugging
+	            error_log($e->getMessage());
+	        }
+
+	    $armes = $_SESSION['step6_data']['armes'] ?? [];
+		$protections = $_SESSION['step6_data']['protections'] ?? [];
+		$materiel = $_SESSION['step6_data']['materiel'] ?? [];
+
+		$gold_armes = $_SESSION['post']['gold_arme'] ?? $_SESSION[ 'post' ][ 'total_or' ];
+		$gold_protections = $_SESSION['post']['gold_protection'] ?? $_SESSION[ 'post' ][ 'total_or' ];
+		$gold_materiel = $_SESSION['post']['gold_materiel'] ?? $_SESSION[ 'post' ][ 'total_or' ];
 	}
 
 	if( $_SESSION[ 'step' ] == 7 )

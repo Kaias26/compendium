@@ -72,4 +72,47 @@ class Database
         }
         return ['placeholders' => implode(', ', $placeholders), 'params' => $params, 'ids' => $ids];
     }
+
+    public function fetch_items_by_category(string $categoryName): array
+    {
+        $sql = "SELECT c.id AS idObjet, c.name, cf.key, cf.value
+                FROM compendium_group AS cg
+                JOIN compendium AS c ON c.idGroup = cg.id
+                JOIN compendium_fields AS cf ON cf.idCompendium = c.id
+                WHERE cg.group = :category
+                ORDER BY c.id";
+
+        try {
+            $stmt = $this->execute_query($sql, ['category' => $categoryName]);
+            $results = $stmt->fetchAll();
+        } catch (Exception $e) {
+            error_log("Error fetching items for category '$categoryName': " . $e->getMessage());
+            return [];
+        }
+
+        $items = [];
+        foreach ($results as $row) {
+            $itemId = $row['idObjet'];
+            $itemName = $row['name'];
+            $key = $row['key'];
+            $value = $row['value'];
+
+            if (!isset($items[$itemId])) {
+                $items[$itemId] = ['id' => $itemId, 'name' => $itemName];
+            }
+
+            $safeKey = strtolower(trim($key));
+            $items[$itemId][$safeKey] = $value;
+        }
+        
+        foreach ($items as &$item) {
+            if (!isset($item['prix'])) {
+                $item['prix'] = 0;
+            }
+        }
+
+        usort($items, fn($a, $b) => (int)$a['prix'] <=> (int)$b['prix']);
+
+        return $items;
+    }
 }
