@@ -23,7 +23,7 @@
 			</div>
         </div>
 
-        <!-- Controls: Gold Purses & Inventory Button -->
+        <!-- Gold Purses -->
         <div class="row text-center my-4 align-items-center">        	
             <div class="col-md-4">
                 <h4>Bourse (Armes)</h4>
@@ -38,135 +38,37 @@
                 <p><span id="gold-materiel" data-initial="<?php echo $gold_materiel; ?>"><?php echo $gold_materiel; ?></span> PO</p>
             </div>
         </div>
-        <div class="row text-center mb-4 align-items-center">
-            <div class="col-md-4 offset-md-4">
-                <button class="btn btn-outline-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasInventory" aria-controls="offcanvasInventory">
-                	<i class="fa fa-shopping-cart"></i>
-                    <span>Mon Équipement</span>
+
+        <!-- Shop Modal Triggers -->
+        <div class="row text-center mb-4">
+            <div class="col-md-4">
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal-armes">
+                    <i class="fas fa-gavel"></i> Boutique d'Armes
+                </button>
+            </div>
+            <div class="col-md-4">
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal-protections">
+                    <i class="fas fa-shield-alt"></i> Boutique de Protections
+                </button>
+            </div>
+            <div class="col-md-4">
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal-materiel">
+                    <i class="fas fa-box-open"></i> Boutique de Matériel
                 </button>
             </div>
         </div>
 
-        <!-- Equipment Shops in Tabs -->
+        <!-- Main Content: Shopping List -->
         <div class="input__container mb-4">
-            <ul class="nav nav-tabs" id="shopTabs" role="tablist">
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link active" id="tab-armes" data-bs-toggle="tab" data-bs-target="#pane-armes" type="button" role="tab" aria-controls="pane-armes" aria-selected="true">Armement</button>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="tab-protections" data-bs-toggle="tab" data-bs-target="#pane-protections" type="button" role="tab" aria-controls="pane-protections" aria-selected="false">Protections</button>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="tab-materiel" data-bs-toggle="tab" data-bs-target="#pane-materiel" type="button" role="tab" aria-controls="pane-materiel" aria-selected="false">Matériel</button>
-                </li>
-            </ul>
-
-            <div class="tab-content" id="shopTabsContent">
-                <!-- Armes Pane -->
-                <div class="tab-pane fade show active" id="pane-armes" role="tabpanel" aria-labelledby="tab-armes">
-                    <div class="p-3 border border-top-0">
-                        <table class="table table-striped table-hover dataTable" id="table-armes" style="width:100%">
-                            <thead class="table-dark">
-								<tr>
-									<th scope="col">Type</th>
-									<th scope="col">Nom</th>
-									<th scope="col">Prix</th>
-									<th scope="col">Niveau</th>
-									<th scope="col">Dégats</th>
-									<th scope="col">Effets</th>
-									<th scope="col">Notes</th>
-									<th scope="col">Rup</th>
-									<th scope="col"></th>
-								</tr>
-							</thead>
-                            <tbody>
-                                <?php foreach ($armes as $item): ?>
-                                <tr id="item-armes-<?php echo $item['id']; ?>">
-                                	<td><?php echo htmlspecialchars($item['type'] ?? 'N/A'); ?></td>
-                                    <td><div class='d-none'><?php echo htmlspecialchars($item['type'] ?? 'N/A'); ?></div><?php echo htmlspecialchars($item['name'] ?? 'N/A'); ?></td>
-	                                <td class="cell-min-width text-center item-price"><?php echo htmlspecialchars($item['prix']); ?></td>
-	                                <td class='cell-min-width text-center'><?php echo htmlspecialchars($item['niveau'] ?? '-'); ?></td>
-	                                <td class='cell-min-width text-center'><?php echo htmlspecialchars($item['degats'] ?? '-'); ?></td>
-                                    <td><?php echo htmlspecialchars($item['effets'] ?? '-'); ?></td>
-                                    <td><?php echo htmlspecialchars($item['notes'] ?? '-'); ?></td>
-                                    <td class='cell-min-width'><?php echo htmlspecialchars($item['rup'] ?? '-'); ?></td>
-                                    <td><button type="button" class="btn btn-sm btn-primary btn-buy" data-item-id="<?php echo $item['id']; ?>" data-item-price="<?php echo $item['prix']; ?>" data-item-category="armes">Acheter</button></td>
-                                </tr>
-                                <?php endforeach; ?>
-                            </tbody>
-                        </table>
-                    </div>
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        <i class="fa fa-shopping-cart"></i> Mon Équipement
+                    </h5>
                 </div>
-
-                <!-- Protections Pane -->
-                <div class="tab-pane fade" id="pane-protections" role="tabpanel" aria-labelledby="tab-protections">
-                     <div class="p-3 border border-top-0">
-                        <table class="table table-striped table-hover dataTable" id="table-protections" style="width:100%">
-                            <thead class="table-dark">
-								<tr>
-									<th scope="col">Type</th>
-									<th scope="col">Nom</th>
-									<th scope="col">Prix</th>
-									<th scope="col">Niveau</th>
-									<th scope="col">Dégats</th>
-									<th scope="col">Effets</th>
-									<th scope="col">Notes</th>
-									<th scope="col">Rup</th>
-									<th scope="col"></th>
-								</tr>
-							</thead>
-                            <tbody>
-                                <?php foreach ($protections as $item): ?>
-                                <tr id="item-protections-<?php echo $item['id']; ?>">
-                                    <td><?php echo htmlspecialchars($item['type'] ?? 'N/A'); ?></td>
-                                    <td><div class='d-none'><?php echo htmlspecialchars($item['type'] ?? 'N/A'); ?></div><?php echo htmlspecialchars($item['name'] ?? 'N/A'); ?></td>
-	                                <td class="cell-min-width text-center item-price"><?php echo htmlspecialchars($item['prix']); ?></td>
-	                                <td class='cell-min-width text-center'><?php echo htmlspecialchars($item['niveau'] ?? '-'); ?></td>
-	                                <td class='cell-min-width text-center'><?php echo htmlspecialchars($item['degats'] ?? '-'); ?></td>
-                                    <td><?php echo htmlspecialchars($item['effets'] ?? '-'); ?></td>
-                                    <td><?php echo htmlspecialchars($item['notes'] ?? '-'); ?></td>
-                                    <td class='cell-min-width'><?php echo htmlspecialchars($item['rup'] ?? '-'); ?></td>
-                                    <td><button type="button" class="btn btn-sm btn-primary btn-buy" data-item-id="<?php echo $item['id']; ?>" data-item-price="<?php echo $item['prix']; ?>" data-item-category="protections">Acheter</button></td>
-                                </tr>
-                                <?php endforeach; ?>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
-                <!-- Matériel Pane -->
-                <div class="tab-pane fade" id="pane-materiel" role="tabpanel" aria-labelledby="tab-materiel">
-                     <div class="p-3 border border-top-0">
-                        <table class="table table-striped table-hover dataTable" id="table-materiel" style="width:100%">
-                            <thead class="table-dark">
-								<tr>
-									<th scope="col">Type</th>
-									<th scope="col">Nom</th>
-									<th scope="col">Prix</th>
-									<th scope="col">Niveau</th>
-									<th scope="col">Dégats</th>
-									<th scope="col">Effets</th>
-									<th scope="col">Notes</th>
-									<th scope="col">Rup</th>
-									<th scope="col"></th>
-								</tr>
-							</thead>
-                            <tbody>
-                                <?php foreach ($materiel as $item): ?>
-                                <tr id="item-materiel-<?php echo $item['id']; ?>">
-                                    <td><?php echo htmlspecialchars($item['type'] ?? 'N/A'); ?></td>
-                                    <td><div class='d-none'><?php echo htmlspecialchars($item['type'] ?? 'N/A'); ?></div><?php echo htmlspecialchars($item['name'] ?? 'N/A'); ?></td>
-	                                <td class="cell-min-width text-center item-price"><?php echo htmlspecialchars($item['prix']); ?></td>
-	                                <td class='cell-min-width text-center'><?php echo htmlspecialchars($item['niveau'] ?? '-'); ?></td>
-	                                <td class='cell-min-width text-center'><?php echo htmlspecialchars($item['degats'] ?? '-'); ?></td>
-                                    <td><?php echo htmlspecialchars($item['effets'] ?? '-'); ?></td>
-                                    <td><?php echo htmlspecialchars($item['notes'] ?? '-'); ?></td>
-                                    <td class='cell-min-width'><?php echo htmlspecialchars($item['rup'] ?? '-'); ?></td>
-                                    <td><button type="button" class="btn btn-sm btn-primary btn-buy" data-item-id="<?php echo $item['id']; ?>" data-item-price="<?php echo $item['prix']; ?>" data-item-category="materiel">Acheter</button></td>
-                                </tr>
-                                <?php endforeach; ?>
-                            </tbody>
-                        </table>
+                <div class="card-body">
+                    <div id="inventory-container">
+                        <p class="text-muted">Achetez des objets pour les voir apparaître ici.</p>
                     </div>
                 </div>
             </div>
@@ -179,19 +81,146 @@
     </fieldset>
 </form>
 
-<!-- Offcanvas Panel for Inventory -->
-<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasInventory" aria-labelledby="offcanvasInventoryLabel">
-    <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="offcanvasInventoryLabel">Votre Équipement</h5>
-        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-    </div>
-    <div class="offcanvas-body">
-        <div id="inventory-container">
-            <!-- Purchased items will appear here via JavaScript -->
-            <p class="text-muted">Achetez des objets pour les voir apparaître ici.</p>
+</form>
+
+<!-- Toast Container -->
+<div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 1100">
+    <!-- Toasts will be appended here -->
+</div>
+
+<!-- Modals for Shops -->
+<!-- Armes Modal -->
+<div class="modal fade" id="modal-armes" tabindex="-1" aria-labelledby="modalLabel-armes" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalLabel-armes">Boutique d'Armes</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <table class="table table-striped table-hover dataTable" id="table-armes" style="width:100%">
+                    <thead class="table-dark">
+                        <tr>
+                            <th scope="col">Type</th>
+                            <th scope="col">Nom</th>
+                            <th scope="col">Prix</th>
+                            <th scope="col">Niveau</th>
+                            <th scope="col">Dégats</th>
+                            <th scope="col">Effets</th>
+                            <th scope="col">Notes</th>
+                            <th scope="col">Rup</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($armes as $item): ?>
+                        <tr id="item-armes-<?php echo $item['id']; ?>">
+                            <td><?php echo htmlspecialchars($item['type'] ?? 'N/A'); ?></td>
+                            <td><div class='d-none'><?php echo htmlspecialchars($item['type'] ?? 'N/A'); ?></div><div class="item-name"><?php echo htmlspecialchars($item['name'] ?? 'N/A'); ?></div></td>
+                            <td class="cell-min-width text-center item-price"><?php echo htmlspecialchars($item['prix']); ?></td>
+                            <td class='cell-min-width text-center'><?php echo htmlspecialchars($item['niveau'] ?? '-'); ?></td>
+                            <td class='cell-min-width text-center'><?php echo htmlspecialchars($item['degats'] ?? '-'); ?></td>
+                            <td><?php echo htmlspecialchars($item['effets'] ?? '-'); ?></td>
+                            <td><?php echo htmlspecialchars($item['notes'] ?? '-'); ?></td>
+                            <td class='cell-min-width'><?php echo htmlspecialchars($item['rup'] ?? '-'); ?></td>
+                            <td><button type="button" class="btn btn-sm btn-primary btn-buy" data-item-id="<?php echo $item['id']; ?>" data-item-price="<?php echo $item['prix']; ?>" data-item-category="armes">Acheter</button></td>
+                        </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </div>
+
+<!-- Protections Modal -->
+<div class="modal fade" id="modal-protections" tabindex="-1" aria-labelledby="modalLabel-protections" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalLabel-protections">Boutique de Protections</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <table class="table table-striped table-hover dataTable" id="table-protections" style="width:100%">
+                    <thead class="table-dark">
+                        <tr>
+                            <th scope="col">Type</th>
+                            <th scope="col">Nom</th>
+                            <th scope="col">Prix</th>
+                            <th scope="col">Niveau</th>
+                            <th scope="col">Dégats</th>
+                            <th scope="col">Effets</th>
+                            <th scope="col">Notes</th>
+                            <th scope="col">Rup</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($protections as $item): ?>
+                        <tr id="item-protections-<?php echo $item['id']; ?>">
+                            <td><?php echo htmlspecialchars($item['type'] ?? 'N/A'); ?></td>
+                            <td><div class='d-none'><?php echo htmlspecialchars($item['type'] ?? 'N/A'); ?></div><div class="item-name"><?php echo htmlspecialchars($item['name'] ?? 'N/A'); ?></div></td>
+                            <td class="cell-min-width text-center item-price"><?php echo htmlspecialchars($item['prix']); ?></td>
+                            <td class='cell-min-width text-center'><?php echo htmlspecialchars($item['niveau'] ?? '-'); ?></td>
+                            <td class='cell-min-width text-center'><?php echo htmlspecialchars($item['degats'] ?? '-'); ?></td>
+                            <td><?php echo htmlspecialchars($item['effets'] ?? '-'); ?></td>
+                            <td><?php echo htmlspecialchars($item['notes'] ?? '-'); ?></td>
+                            <td class='cell-min-width'><?php echo htmlspecialchars($item['rup'] ?? '-'); ?></td>
+                            <td><button type="button" class="btn btn-sm btn-primary btn-buy" data-item-id="<?php echo $item['id']; ?>" data-item-price="<?php echo $item['prix']; ?>" data-item-category="protections">Acheter</button></td>
+                        </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Matériel Modal -->
+<div class="modal fade" id="modal-materiel" tabindex="-1" aria-labelledby="modalLabel-materiel" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalLabel-materiel">Boutique de Matériel</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <table class="table table-striped table-hover dataTable" id="table-materiel" style="width:100%">
+                    <thead class="table-dark">
+                        <tr>
+                            <th scope="col">Type</th>
+                            <th scope="col">Nom</th>
+                            <th scope="col">Prix</th>
+                            <th scope="col">Niveau</th>
+                            <th scope="col">Dégats</th>
+                            <th scope="col">Effets</th>
+                            <th scope="col">Notes</th>
+                            <th scope="col">Rup</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($materiel as $item): ?>
+                        <tr id="item-materiel-<?php echo $item['id']; ?>">
+                            <td><?php echo htmlspecialchars($item['type'] ?? 'N/A'); ?></td>
+                            <td><div class='d-none'><?php echo htmlspecialchars($item['type'] ?? 'N/A'); ?></div><div class="item-name"><?php echo htmlspecialchars($item['name'] ?? 'N/A'); ?></div></td>
+                            <td class="cell-min-width text-center item-price"><?php echo htmlspecialchars($item['prix']); ?></td>
+                            <td class='cell-min-width text-center'><?php echo htmlspecialchars($item['niveau'] ?? '-'); ?></td>
+                            <td class='cell-min-width text-center'><?php echo htmlspecialchars($item['degats'] ?? '-'); ?></td>
+                            <td><?php echo htmlspecialchars($item['effets'] ?? '-'); ?></td>
+                            <td><?php echo htmlspecialchars($item['notes'] ?? '-'); ?></td>
+                            <td class='cell-min-width'><?php echo htmlspecialchars($item['rup'] ?? '-'); ?></td>
+                            <td><button type="button" class="btn btn-sm btn-primary btn-buy" data-item-id="<?php echo $item['id']; ?>" data-item-price="<?php echo $item['prix']; ?>" data-item-category="materiel">Acheter</button></td>
+                        </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <div class="buttons">
     <form method="post" action="/charactersheet/charactersheet">
@@ -201,46 +230,46 @@
 </div>
 
 <script>
-	// Init DataTables
-	var groupColumn = 0;
+// Init DataTables
+var groupColumn = 0;
 
-	var dataTables_options = {
-		rowGroup: {
-			dataSrc: groupColumn
-		},
-		"columnDefs": [
-			{ "targets": groupColumn,"visible": false },
-			{ "orderable": false, "targets": [ -1, -2 ] }
-		],
-		"order": [[ 0, "asc" ], [ 2, "asc" ]],
-		"initComplete": function (settings, json) {
-			var api = this.api();
-			var typeColumn = api.column(groupColumn);
+var dataTables_options = {
+    rowGroup: {
+        dataSrc: groupColumn
+    },
+    "columnDefs": [
+        { "targets": groupColumn, "visible": false },
+        { "orderable": false, "targets": [ -1, -2 ] }
+    ],
+    "order": [[ 0, "asc" ], [ 2, "asc" ]],
+    "initComplete": function (settings, json) {
+        var api = this.api();
+        var typeColumn = api.column(groupColumn);
 
-			var $container = $('#' + settings.sTableId + '_wrapper > .row > .col-md-auto.me-auto').first();
+        var $container = $('#' + settings.sTableId + '_wrapper > .row > .col-md-auto.me-auto').first();
 
-			var $label = $('<label class="ms-2">Type:</label>');
-			var $select = $('<select class="form-select form-select-sm ms-1" style="width: 200px; display: inline-block;"><option value="">Tous</option></select>')
-				.on('change', function () {
-					var val = $.fn.dataTable.util.escapeRegex($(this).val());
-					typeColumn.search(val ? '^' + val + '$' : '', true, false).draw();
-				});
+        var $label = $('<label class="ms-2">Type:</label>');
+        var $select = $('<select class="form-select form-select-sm ms-1" style="width: 200px; display: inline-block;"><option value="">Tous</option></select>')
+            .on('change', function () {
+                var val = $.fn.dataTable.util.escapeRegex($(this).val());
+                typeColumn.search(val ? '^' + val + '$' : '', true, false).draw();
+            });
 
-			$container.append($label).append($select);
+        $container.append($label).append($select);
 
-			typeColumn.data().unique().sort().each(function (d, j) {
-				$select.append($('<option></option>').attr('value', d).text(d));
-			});
-		}
-	};
-
-    // Redraw DataTables when their tab is shown to fix column alignment
-    document.querySelectorAll('button[data-bs-toggle="tab"]').forEach((tab) => {
-        tab.addEventListener('shown.bs.tab', event => {
-            const table = document.querySelector(event.target.dataset.bsTarget).querySelector('.dataTable');
-            if (table && $.fn.DataTable.isDataTable(table)) {
-                $(table).DataTable().columns.adjust();
-            }
+        typeColumn.data().unique().sort().each(function (d, j) {
+            $select.append( '<option value="'+d+'">'+d+'</option>' );
         });
+    }
+};
+
+// Redraw DataTables when their modal is shown to fix column alignment
+document.querySelectorAll('.modal').forEach((modal) => {
+    modal.addEventListener('shown.bs.modal', event => {
+        const table = modal.querySelector('.dataTable');
+        if (table && $.fn.DataTable.isDataTable(table)) {
+            $(table).DataTable().columns.adjust();
+        }
     });
+});
 </script>

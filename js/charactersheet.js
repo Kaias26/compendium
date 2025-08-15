@@ -49,8 +49,8 @@ $(document).ready( function () {
 	});
 
     // Shop logic for step6
-    if ($('#table-armes').length) {
-        
+    if ($('#inventory-container').length) {
+
         const purses = {
             armes: $('#gold-armes'),
             protections: $('#gold-protections'),
@@ -67,14 +67,36 @@ $(document).ready( function () {
         };
 
         let purchasedItems = {
-            armes: [],
-            protections: [],
-            materiel: []
+            armes: {},
+            protections: {},
+            materiel: {}
         };
+
+        function showToast(message, title = 'Succès') {
+            const toastHtml = `
+                <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="3000">
+                    <div class="toast-header">
+                        <strong class="me-auto">${title}</strong>
+                        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                    </div>
+                    <div class="toast-body">
+                        ${message}
+                    </div>
+                </div>`;
+            const toastElement = $(toastHtml);
+            $('.toast-container').append(toastElement);
+            const toast = new bootstrap.Toast(toastElement);
+            toast.show();
+            toastElement.on('hidden.bs.toast', function () {
+                $(this).remove();
+            });
+        }
 
         function updateHiddenInputs() {
             for (const category in purchasedItems) {
-                hiddenInputs[category].val(purchasedItems[category].join(','));
+                const items = purchasedItems[category];
+                const formattedItems = Object.keys(items).map(id => `${id}:${items[id].quantity}`).join(',');
+                hiddenInputs[category].val(formattedItems);
             }
         }
 
@@ -83,34 +105,51 @@ $(document).ready( function () {
             let hasItems = false;
 
             for (const category in purchasedItems) {
-                if (purchasedItems[category].length > 0) {
+                if (Object.keys(purchasedItems[category]).length > 0) {
                     hasItems = true;
                     const categoryTitle = $('<h5>').text(category.charAt(0).toUpperCase() + category.slice(1));
                     inventoryContainer.append(categoryTitle);
                     const list = $('<ul class="list-unstyled">');
-                    purchasedItems[category].forEach(itemId => {
-                        const shopRow = $(`#item-${category}-${itemId}`);
-                        const buyButton = shopRow.find('.btn-buy');
-                        const itemName = shopRow.find('td:first').clone().children().remove().end().text();
-                        const itemPrice = buyButton.data('item-price');
+
+                    for (const itemId in purchasedItems[category]) {
+                        const item = purchasedItems[category][itemId];
+                        const { name, quantity } = item;
 
                         const listItem = $('<li>', {
-                            'class': 'd-flex justify-content-between align-items-center mb-1',
-                            'html': `<span>${itemName}</span>`
+                            'class': 'd-flex justify-content-between align-items-center mb-1'
                         });
 
-                        const sellButton = $('<button>', {
+                        const nameSpan = $('<span>').text(`${name} (x${quantity})`);
+                        const buttonGroup = $('<div class="btn-group">');
+
+                        const decreaseButton = $('<button>', {
                             'type': 'button',
-                            'class': 'btn btn-sm btn-warning btn-sell',
+                            'class': 'btn btn-sm btn-secondary btn-decrease',
                             'data-item-id': itemId,
-                            'data-item-price': itemPrice,
                             'data-item-category': category,
-                            'text': 'Vendre'
+                            'html': '<i class="fas fa-minus"></i>'
                         });
 
-                        listItem.append(sellButton);
+                        const increaseButton = $('<button>', {
+                            'type': 'button',
+                            'class': 'btn btn-sm btn-secondary btn-increase',
+                            'data-item-id': itemId,
+                            'data-item-category': category,
+                            'html': '<i class="fas fa-plus"></i>'
+                        });
+
+                        const removeButton = $('<button>', {
+                            'type': 'button',
+                            'class': 'btn btn-sm btn-danger btn-remove-stack',
+                            'data-item-id': itemId,
+                            'data-item-category': category,
+                            'html': '<i class="fas fa-trash"></i>'
+                        });
+
+                        buttonGroup.append(decreaseButton, increaseButton, removeButton);
+                        listItem.append(nameSpan, buttonGroup);
                         list.append(listItem);
-                    });
+                    }
                     inventoryContainer.append(list);
                 }
             }
@@ -120,48 +159,95 @@ $(document).ready( function () {
             }
         }
 
-        // Buy event
-        $('.input__container').on('click', '.btn-buy', function() {
+        $(document).on('click', '.btn-buy', function() {
             const button = $(this);
             const itemId = button.data('item-id');
-            const price = parseInt(button.data('item-price'));
             const category = button.data('item-category');
-            
+            const shopRow = button.closest('tr');
+            const price = parseFloat(shopRow.find('.item-price').text()) || 0;
             const purse = purses[category];
-            let currentGold = parseInt(purse.text());
+            let currentGold = parseFloat(purse.text()) || 0;
 
             if (currentGold >= price) {
                 currentGold -= price;
                 purse.text(currentGold);
 
-                purchasedItems[category].push(itemId);
-                
-                button.closest('tr').hide();
+                let name;
+                if (purchasedItems[category][itemId]) {
+                    purchasedItems[category][itemId].quantity++;
+                    name = purchasedItems[category][itemId].name;
+                } else {
+                    name = shopRow.find('.item-name').clone().children().remove().end().text();
+                    purchasedItems[category][itemId] = { name: name, price: price, quantity: 1 };
+                }
+
                 updateHiddenInputs();
                 updateInventoryDisplay();
+                showToast(`Acheté : ${name}.<br>Bourse restante : ${currentGold} PO`);
             } else {
-                alert('Pas assez d\'or dans cette bourse !');
+                showToast('Pas assez d\'or dans cette bourse !', 'Erreur');
             }
         });
 
-        // Sell event
-        inventoryContainer.on('click', '.btn-sell', function() {
+        inventoryContainer.on('click', '.btn-increase', function() {
             const button = $(this);
             const itemId = button.data('item-id');
-            const price = parseInt(button.data('item-price'));
             const category = button.data('item-category');
-
+            const item = purchasedItems[category][itemId];
             const purse = purses[category];
-            let currentGold = parseInt(purse.text());
+            let currentGold = parseFloat(purse.text()) || 0;
 
-            currentGold += price;
+            if (currentGold >= item.price) {
+                currentGold -= item.price;
+                purse.text(currentGold);
+                item.quantity++;
+                updateHiddenInputs();
+                updateInventoryDisplay();
+                showToast(`Acheté : ${item.name}.<br>Bourse restante : ${currentGold} PO`);
+            } else {
+                showToast('Pas assez d\'or dans cette bourse !', 'Erreur');
+            }
+        });
+
+        inventoryContainer.on('click', '.btn-decrease', function() {
+            const button = $(this);
+            const itemId = button.data('item-id');
+            const category = button.data('item-category');
+            const item = purchasedItems[category][itemId];
+            const purse = purses[category];
+            let currentGold = parseFloat(purse.text()) || 0;
+
+            currentGold += item.price;
             purse.text(currentGold);
 
-            purchasedItems[category] = purchasedItems[category].filter(id => id != itemId);
+            item.quantity--;
+            let itemName = item.name;
+            if (item.quantity === 0) {
+                delete purchasedItems[category][itemId];
+            }
 
-            $(`#item-${category}-${itemId}`).show();
             updateHiddenInputs();
             updateInventoryDisplay();
+            showToast(`Vendu : ${itemName}.<br>Bourse restante : ${currentGold} PO`);
         });
-    }
+
+        inventoryContainer.on('click', '.btn-remove-stack', function() {
+            const button = $(this);
+            const itemId = button.data('item-id');
+            const category = button.data('item-category');
+            const item = purchasedItems[category][itemId];
+            const purse = purses[category];
+            let currentGold = parseFloat(purse.text()) || 0;
+
+            currentGold += item.price * item.quantity;
+            purse.text(currentGold);
+            let itemName = item.name;
+
+            delete purchasedItems[category][itemId];
+
+            updateHiddenInputs();
+            updateInventoryDisplay();
+            showToast(`Vendu (x${item.quantity}) : ${itemName}.<br>Bourse restante : ${currentGold} PO`);
+        });
+    };
 });
