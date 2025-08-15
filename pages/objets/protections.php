@@ -17,9 +17,6 @@
 		<li class="nav-item">
 			<a class="nav-link <?php if( $subgroup == "tete" ) {?>active<?php }?>" href="/objets/protections/tete">Chapeaux et couvre-chefs</a>
 		</li>
-		<li class="nav-item">
-			<a class="nav-link <?php if( $subgroup == "vetements" ) {?>active<?php }?>" href="/objets/protections/vetements">Vêtements</a>
-		</li>
 	</ul>
 </div>
 <?php if( isset( $subgroup ) and $subgroup != "" ) {?>
@@ -51,14 +48,10 @@
 			<?php if( $subgroup == "karma" or $subgroup == "astral" ) {?>
 				<th scope="col">Niveau</th>
 			<?php }?>
-			<?php if( $subgroup != "vetements" ) {?>
-				<th scope="col">PR&nbsp;Phy</th>
-				<th scope="col">PR&nbsp;Mag.</th>
-			<?php }?>
-				<th scope="col">Effets</th>
-			<?php if( $subgroup != "vetements" ) {?>
-				<th scope="col">Rup</th>
-			<?php }?>
+			<th scope="col">PR&nbsp;Phy</th>
+			<th scope="col">PR&nbsp;Mag.</th>
+			<th scope="col">Effets</th>
+			<th scope="col">Rup</th>
 			<th scope="col">Roll20</th>
 			<th scope="col"></th>
 		</tr>
@@ -66,13 +59,8 @@
 		<tbody>
 			<?php
 			foreach ($aRows as $row ) {
-
-				if( $subgroup != "vetements" ) {
-					$macro = '{"repeating_armures_rowID_armure_nom":"' . $row['name'] . '","repeating_armures_rowID_armure_prphy":"' . $row['PRPhy'] . '","repeating_armures_rowID_armure_prmag":"' . $row['PRMag'] . '","repeating_armures_rowID_armure_rup":"' . $row['rup'] . '","repeating_armures_rowID_armure_effet":"' . $row['effet'] . '"}';					
-				} else {
-					$macro = '{"repeating_vetements_rowID_vetement_nom":"' . $row['name'] . '","repeating_vetements_rowID_vetement_effet":"' . $row['effet'] . '"}';
-					
-				}
+				
+				$macro = '{"repeating_armures_rowID_armure_nom":"' . $row['name'] . '","repeating_armures_rowID_armure_prphy":"' . $row['PRPhy'] . '","repeating_armures_rowID_armure_prmag":"' . $row['PRMag'] . '","repeating_armures_rowID_armure_rup":"' . $row['rup'] . '","repeating_armures_rowID_armure_effet":"' . $row['effet'] . '"}';				
 
 				echo "<tr>";
 					echo "<td>" . $row['type'] . "</td>";
@@ -82,14 +70,10 @@
 					if( $subgroup == "karma" or $subgroup == "astral" ) {
 						echo "<td class='cell-min-width text-center'>" . $row['niveau'] . "</td>";
 					}
-					if( $subgroup != "vetements" ) {
-						echo "<td class='cell-min-width text-center'>" . $row['PRPhy'] . "</td>";
-						echo "<td class='cell-min-width text-center'>" . $row['PRMag'] . "</td>";
-					}
+					echo "<td class='cell-min-width text-center'>" . $row['PRPhy'] . "</td>";
+					echo "<td class='cell-min-width text-center'>" . $row['PRMag'] . "</td>";
 					echo "<td>" . $row['effet'] . "</td>";
-					if( $subgroup != "vetements" ) {
-						echo "<td class='cell-min-width'>" . $row['rup'] . "</td>";
-					}
+					echo "<td class='cell-min-width'>" . $row['rup'] . "</td>";
 					echo "<td class='cell-min-width'>";
 						echo "<input type='text' id='text_" . $row['id'] . "' class='form-control' value='" . $macro . "' />";
 					echo "</td>";
@@ -109,16 +93,6 @@
 			  </svg>
 			<div>*Bonus ou malus de charisme ne pouvant être utilisé que sur épreuve de charisme, ne modifiant pas la valeur MagiePsy<br>
 			**le bonus de charisme d'une robe enchantée PEUT être utilisé pour augmenter la valeur MagiePsy</div>
-		</div>
-	<?php }?>
-
-	<br>
-	<?php if( $subgroup == "vetements" ) {?>
-		<div class="alert alert-primary d-flex align-items-center" role="alert">
-			<svg xmlns="http://www.w3.org/2000/svg" class="bi flex-shrink-0 me-2" width="24" height="24" viewBox="0 0 16 16" fill="currentColor" role="img" aria-label="Info:">
-				<path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"></path>
-			  </svg>
-			<div>*Les bonus et malus de CHARISME des vêtements s'appliquent si on ne porte rien dessus - ne modifient pas la valeur MagiePsy</div>
 		</div>
 	<?php }?>
 </div>
