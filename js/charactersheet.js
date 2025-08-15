@@ -73,8 +73,9 @@ $(document).ready( function () {
         };
 
         function showToast(message, title = 'Succès') {
+            const toastClass = title === 'Erreur' ? 'bg-danger text-white' : '';
             const toastHtml = `
-                <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="3000">
+                <div class="toast ${toastClass}" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="3000">
                     <div class="toast-header">
                         <strong class="me-auto">${title}</strong>
                         <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
