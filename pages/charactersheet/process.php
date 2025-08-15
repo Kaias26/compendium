@@ -78,6 +78,15 @@
 			$_SESSION[ 'max_step_reached' ] = 3;
 		}
 
+		// Changement de Gold
+		if( ( isset( $_POST['dice_or'] ) and $_SESSION['post']['dice_or'] != $_POST['dice_or'] )
+		 OR ( isset( $_POST['dice_orBonus'] ) and $_SESSION['post']['dice_orBonus'] != $_POST['dice_orBonus'] ) ) {
+			$_SESSION[ 'post' ][ 'total_or' ] = null;
+			$_SESSION[ 'post' ][ 'gold_arme' ] = null;
+			$_SESSION[ 'post' ][ 'gold_protection' ] = null;
+			$_SESSION[ 'post' ][ 'gold_materiel' ] = null;
+		}
+
 		foreach( $_POST AS $key => $value ) {
 			$_SESSION['post'][$key] = $value;
 		}
@@ -166,7 +175,10 @@
 	}
 
 	if( $_SESSION[ 'step' ] == 6 ) {
-		$_SESSION[ 'post' ][ 'total_or' ] = intval($_SESSION[ 'post' ][ 'dice_or' ]) + intval($_SESSION[ 'post' ][ 'dice_orBonus' ]);
+		$_SESSION[ 'post' ][ 'total_or' ] = intval($_SESSION[ 'post' ][ 'dice_or' ]) + intval($_SESSION[ 'post' ][ 'dice_orBonus' ]);		
+		$_SESSION['post']['gold_arme'] = $_SESSION['post']['gold_arme'] ?? $_SESSION[ 'post' ][ 'total_or' ];
+		$_SESSION['post']['gold_protection'] = $_SESSION['post']['gold_protection'] ?? $_SESSION[ 'post' ][ 'total_or' ];
+		$_SESSION['post']['gold_materiel'] = $_SESSION['post']['gold_materiel'] ?? $_SESSION[ 'post' ][ 'total_or' ];
 
 		$cacheFile = __DIR__ . '/../../cache/items_by_category.json';
 		$cacheLifetime = 3600; // Cache for 1 hour (in seconds)
@@ -202,11 +214,6 @@
 		$armes = $itemsByCategory['armes'] ?? [];
 		$protections = $itemsByCategory['protections'] ?? [];
 		$materiel = $itemsByCategory['materiel'] ?? [];
-
-		// Gold calculation (keep existing logic)
-		$_SESSION['post']['gold_arme'] = $_SESSION['post']['gold_arme'] ?? $_SESSION[ 'post' ][ 'total_or' ];
-		$_SESSION['post']['gold_protection'] = $_SESSION['post']['gold_protection'] ?? $_SESSION[ 'post' ][ 'total_or' ];
-		$_SESSION['post']['gold_materiel'] = $_SESSION['post']['gold_materiel'] ?? $_SESSION[ 'post' ][ 'total_or' ];
 
 		$gold_armes = $_SESSION['post']['gold_arme'] ?? $_SESSION[ 'post' ][ 'total_or' ];
 		$gold_protections = $_SESSION['post']['gold_protection'] ?? $_SESSION[ 'post' ][ 'total_or' ];
