@@ -6,7 +6,7 @@
 			<p><b>Tirez 2D6 et multipliez le résultat par 10.</b></p>
 			<p>Reportez le montant obtenu (entre 20 et 120 pièces d'Or), dans la case correspondante.<br>
 			Ceci est votre pécule de départ, indicateur de votre classe sociale au début de l'aventure.<br>
-			Vous pouvez vous équiper en armement, en protection, et en matériel divers d'une somme correspondant à ce pécule.</p>
+			Vous pouvez vous équiper en armement, en protection, et en matériel divers à hauteur d'une somme correspondant à ce pécule.</p>
 			<?php if( $oCurrentMetier->id == 11 ) { ?>		
 				<p>Au niveau 1, le Noble peut <b>tirer une deuxième fois</b> sa fortune et ajouter les pièces d'or à son pécule de base.</p>
 			<?php } ?>	
@@ -17,14 +17,13 @@
 			</p>
 			<div class="collapse" id="collapseTips">
 				<div class="card card-body">
-					<p>Si <b>vous avez tiré 70 pièces d'Or</b> de départ :</p>
+					<p>Si <b>vous avez tiré 70 pièces d'Or</b> de départ, vous pourrez dépenser l’équivalent de :</p>
 				    <ul>
-				    	<li>Vous pourrez dépenser l’équivalent de 70 pièces d'Or pour vos armes,</li>
-				    	<li>puis 70 pièces d'Or pour vos protections,</li>
-				    	<li>puis 70 pièces d'Or pour votre matériel,</li>
-				    	<li>puis noter 70 pièces d'Or dans votre bourse</li>
+			    		<li>70 pièces d'Or pour vos armes ;/li>
+				    	<li>70 pièces d'Or pour vos protections ;</li>
+				    	<li>70 pièces d'Or pour votre matériel.</li>
 				    </ul>
-				    <p>L'or dépensé <b>n'est pas déduit</b> de votre pécule de base, et vous <b>ne gardez pas non plus</b> la monnaie sur ce que vous ne dépensez pas.</p>
+				    <p>Vous garderez ensuite 70 pièces d'Or dans votre bourse : L'or dépensé <b>n'est pas déduit</b> de votre pécule de base, et vous <b>ne gardez pas non plus</b> la monnaie sur ce que vous ne dépensez pas.</p>
 				</div>
 			</div>
 		</div>

@@ -11,7 +11,7 @@
 			<h2>Les compétences</h2>
 			<p>Maintenant que vous avez l'ossature de votre personnage, il vous faut noter ses compétences, qui sont ses points forts (ou ses points faibles).</p>
 
-			<p>Vous disposez de celles de votre Origine (Compétences de naissance) et celles de votre Métier (Compétences héritées), mais aussi de <?php echo $checklimit ?> autres compétences au choix parmi celles qui vous sont proposées, soit par votre Origine, soit par votre Métier.</p>			
+			<p>Vous disposez de celles de votre Origine (Compétences de naissance) et de celles de votre Métier (Compétences héritées), mais aussi de <?php echo $checklimit ?> autres compétences au choix parmi celles qui vous sont proposées, soit par votre Origine, soit par votre Métier.</p>			
 			<p>
 				<a class="btn btn-info" data-bs-toggle="collapse" href="#collapseTips" role="button" aria-expanded="false" aria-controls="collapseTips">
 					Conseils

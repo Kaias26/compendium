@@ -123,7 +123,7 @@ $originesData = [
 	[
 		'id' => 3,
 		'label' => 'Haut Elfe',
-		'tooltip' => 'Très beau et plutôt adroit mais surtout...modeste',
+		'tooltip' => 'Très beau et plutôt adroit mais surtout... modeste',
 		'courage' => ['Non', 'Non'],
 		'intelligence' => [11, 'Non'],
 		'charisme' => [12, 'Non'],
@@ -374,7 +374,7 @@ $metiersData = [
     [
         'id' => 4,
         'label' => 'Mage',
-        'tooltip' => 'Abracadab...woups',
+        'tooltip' => 'Abracadab... woups',
         'courage' => ['Non', 'Non'],
         'intelligence' => [12, 'Non'],
         'charisme' => ['Non', 'Non'],
@@ -459,7 +459,7 @@ $metiersData = [
     [
         'id' => 9,
         'label' => 'Marchand',
-        'tooltip' => 'Son métier ? le profit',
+        'tooltip' => 'Son métier ? Le profit',
         'courage' => ['Non', 'Non'],
         'intelligence' => [12, 'Non'],
         'charisme' => [11, 'Non'],
@@ -476,7 +476,7 @@ $metiersData = [
     [
         'id' => 10,
         'label' => 'Ingénieur',
-        'tooltip' => "Des années d'études pour en arriver la",
+        'tooltip' => "Des années d'études pour en arriver là",
         'courage' => ['Non', 'Non'],
         'intelligence' => ['Non', 'Non'],
         'charisme' => ['Non', 'Non'],
@@ -671,7 +671,7 @@ $pairsData = [
     ],
     [
         'id' => 21,
-        'label' => 'Amazone Sylderienne',
+        'label' => 'Amazone Syldérienne',
         'tooltip' => 'Origine ET Métier',
         'courage' => [12, 'Non'],
         'intelligence' => ['Non', 'Non'],

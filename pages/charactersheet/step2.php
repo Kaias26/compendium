@@ -14,7 +14,7 @@
 			</p>
 			<div class="collapse" id="collapseTips">
 				<div class="card card-body">
-					<p>N’hésitez pas à vous reporter au Manuel des <a href="http://www.naheulbeuk.com/jdr-docs/origines-metiers-naheulbeuk-jdr.pdf" target="_blank">Origines et Métiers</a> afin de voir les valeurs minimum et maximum requises pour votre personnage...ou laissez le destin décider.</p>
+					<p>N’hésitez pas à vous reporter au Manuel des <a href="http://www.naheulbeuk.com/jdr-docs/origines-metiers-naheulbeuk-jdr.pdf" target="_blank">Origines et Métiers</a> afin de voir les valeurs minimales et maximales requises pour votre personnage... ou laissez le destin décider.</p>
 					<p>Si le héros est un Humain sans métier, il peut choisir 2 compétences dans la liste de toutes les compétences !</p>
 				</div>
 			</div>
@@ -109,7 +109,7 @@
 			?>
 			</div>
 
-			<p>Et les métiers suivant :</p>	
+			<p>Et les métiers suivants :</p>	
 
 			<div class="d-flex flex-wrap gap-1">
 			<?php 			
