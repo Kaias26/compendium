@@ -42,11 +42,11 @@
 				<div class="col-md-4">
 					<div class="form-floating">
 						<input type="text" class="form-control" name="attr_Personnage_Metiers" id="attr_Personnage_Metiers" 
-							placeholder="Metier :"
+							placeholder="Métier :"
 							value="<?php echo $oCurrentMetier->label ?>"
 							required readonly
 						>
-						<label for="attr_Personnage_Metiers">Metier :</label>
+						<label for="attr_Personnage_Metiers">Métier :</label>
 					</div>
 				</div>
 			</div>	
@@ -182,21 +182,21 @@
 						<div class="col-md-6">
 							<div class="form-floating">
 								<input type="text" class="form-control" name="attr_EV_max" id="attr_EV_max" 
-									placeholder="Energie Vitale :"
+									placeholder="Énergie Vitale :"
 									value="<?php echo $_SESSION[ 'post' ][ 'attr_EV_max' ] ?>"
 									required readonly						
 								>
-								<label for="attr_EV_max">Energie Vitale :</label>
+								<label for="attr_EV_max">Énergie Vitale :</label>
 							</div>
 						</div>
 						<div class="col-md-6">
 							<div class="form-floating">
 								<input type="text" class="form-control" name="attr_EA_max" id="attr_EA_max" 
-									placeholder="Energie Astrale :"
+									placeholder="Énergie Astrale :"
 									value="<?php echo $_SESSION[ 'post' ][ 'attr_EA_max' ] ?>"
 									required readonly						
 								>
-								<label for="attr_EA_max">Energie Astrale :</label>
+								<label for="attr_EA_max">Énergie Astrale :</label>
 							</div>
 						</div>						
 					</div>
@@ -270,7 +270,7 @@
 								<?php if (!empty($playerCompetences)) { ?>
 									<?php foreach ($playerCompetences as $competence) { ?>
 										<li class="list-group-item">
-											<b><?php echo htmlspecialchars($competence['name']); ?></b>: <?php echo htmlspecialchars($competence['value']); ?>
+											<b><?php echo htmlspecialchars($competence['name']); ?></b> : <?php echo htmlspecialchars($competence['value']); ?>
 										</li>
 									<?php } ?>
 								<?php } else { ?>
