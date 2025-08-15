@@ -93,6 +93,11 @@ $(document).ready( function () {
             });
         }
 
+        // Helper function to format gold amounts for display
+        function formatGold(amount) {
+            return amount.toFixed(2); // Format to 2 decimal places
+        }
+
         function updateHiddenInputs() {
             for (const category in purchasedItems) {
                 const items = purchasedItems[category];
@@ -177,13 +182,13 @@ $(document).ready( function () {
             const itemId = button.data('item-id');
             const category = button.data('item-category');
             const shopRow = button.closest('tr');
-            const price = parseFloat(shopRow.find('.item-price').text()) || 0;
+            const price = parseFloat($(`#item-${category}-${itemId}`).find('.item-price').text().replace(',', '.')) || 0;
             const purse = purses[category];
             let currentGold = parseFloat(purse.text()) || 0;
 
             if (currentGold >= price) {
                 currentGold -= price;
-                purse.text(currentGold);
+                purse.text(formatGold(currentGold));
                 updateGoldHiddenInputs();
 
                 let name;
@@ -197,7 +202,7 @@ $(document).ready( function () {
 
                 updateHiddenInputs();
                 updateInventoryDisplay();
-                showToast(`Acheté : ${name}.<br>Bourse restante : ${currentGold} PO`);
+                showToast(`Acheté : ${name}.<br>Bourse restante : ${formatGold(currentGold)} PO`);
             } else {
                 showToast('Pas assez d\'or dans cette bourse !', 'Erreur');
             }
@@ -213,12 +218,12 @@ $(document).ready( function () {
 
             if (currentGold >= item.price) {
                 currentGold -= item.price;
-                purse.text(currentGold);
+                purse.text(formatGold(currentGold));
                 updateGoldHiddenInputs();
                 item.quantity++;
                 updateHiddenInputs();
                 updateInventoryDisplay();
-                showToast(`Acheté : ${item.name}.<br>Bourse restante : ${currentGold} PO`);
+                showToast(`Acheté : ${item.name}.<br>Bourse restante : ${formatGold(currentGold)} PO`);
             } else {
                 showToast('Pas assez d\'or dans cette bourse !', 'Erreur');
             }
@@ -233,7 +238,7 @@ $(document).ready( function () {
             let currentGold = parseFloat(purse.text()) || 0;
 
             currentGold += item.price;
-            purse.text(currentGold);
+            purse.text(formatGold(currentGold));
             updateGoldHiddenInputs();
 
             item.quantity--;
@@ -244,7 +249,7 @@ $(document).ready( function () {
 
             updateHiddenInputs();
             updateInventoryDisplay();
-            showToast(`Vendu : ${itemName}.<br>Bourse restante : ${currentGold} PO`);
+            showToast(`Vendu : ${itemName}.<br>Bourse restante : ${formatGold(currentGold)} PO`);
         });
 
         inventoryContainer.on('click', '.btn-remove-stack', function() {
@@ -256,7 +261,7 @@ $(document).ready( function () {
             let currentGold = parseFloat(purse.text()) || 0;
 
             currentGold += item.price * item.quantity;
-            purse.text(currentGold);
+            purse.text(formatGold(currentGold));
             updateGoldHiddenInputs();
             let itemName = item.name;
 
@@ -264,7 +269,7 @@ $(document).ready( function () {
 
             updateHiddenInputs();
             updateInventoryDisplay();
-            showToast(`Vendu (x${item.quantity}) : ${itemName}.<br>Bourse restante : ${currentGold} PO`);
+            showToast(`Vendu (x${item.quantity}) : ${itemName}.<br>Bourse restante : ${formatGold(currentGold)} PO`);
         });
 
         // Initial display of purchased items on page load
