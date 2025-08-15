@@ -228,7 +228,6 @@
 			$('input[name="origine"]:checked').trigger('change');
 		});
 
-
 		// --- EXISTING LOGIC FOR MAGIC COMPATIBILITY ---
 
 		// Store initial disabled state for metiers based on stats
@@ -243,7 +242,15 @@
 			if (selectedOrigine.length === 0) {
 				return; // No origin selected, do nothing
 			}
-			var originePratiqueMagie = selectedOrigine.data('pratique-magie');
+
+			if (!specialIds.includes(selectedOrigine.val())) {
+				var selectedMetier = $('input[name="metier"]:checked');
+				if (selectedMetier.length > 0 && specialIds.includes(selectedMetier.val())) {
+					selectedMetier.prop('checked', false);
+				}					
+			}
+
+			var originePratiqueMagie = selectedOrigine.data('pratique-magie');		
 
 			$('input[name="metier"]').each(function() {
 				var metierInput = $(this);
