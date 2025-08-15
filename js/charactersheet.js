@@ -269,5 +269,8 @@ $(document).ready( function () {
 
         // Initial display of purchased items on page load
         updateInventoryDisplay();
+
+        // Hide loading overlay
+        $('#loading-overlay').hide();
     };
 });

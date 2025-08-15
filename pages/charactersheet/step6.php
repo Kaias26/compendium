@@ -1,3 +1,8 @@
+<!-- Loading Overlay -->
+<div id="loading-overlay" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(255, 255, 255, 0.8); z-index: 9999; display: flex; justify-content: center; align-items: center;">
+    <i class="fas fa-spinner fa-spin fa-3x text-primary"></i>
+</div>
+
 <form method="post" action="/charactersheet/charactersheet" id="charactersheet">
     <fieldset id="form1">
         <div class="sub__title__container">
