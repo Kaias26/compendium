@@ -168,31 +168,45 @@
 	if( $_SESSION[ 'step' ] == 6 ) {
 		$_SESSION[ 'post' ][ 'total_or' ] = intval($_SESSION[ 'post' ][ 'dice_or' ]) + intval($_SESSION[ 'post' ][ 'dice_orBonus' ]);
 
-		// Only fetch data if it's not already in the session
-	        try {
-	            $db = Database::getInstance();
+		$cacheFile = __DIR__ . '/../../cache/items_by_category.json';
+		$cacheLifetime = 3600; // Cache for 1 hour (in seconds)
 
-	            $_SESSION['step6_data']['armes'] = $db->fetch_items_by_category('armement');
-	            $_SESSION['step6_data']['protections'] = $db->fetch_items_by_category('protections');
-	            $_SESSION['step6_data']['materiel'] = $db->fetch_items_by_category('materiel');
+		$itemsByCategory = [];
 
-	            // TODO: The gold calculation should also be handled here based on previous steps data
-	            // For now, using placeholders.
-	            $_SESSION['post']['gold_arme'] = $_SESSION['character']['gold_arme'] ?? $_SESSION[ 'post' ][ 'total_or' ];
-	            $_SESSION['post']['gold_protection'] = $_SESSION['character']['gold_protection'] ?? $_SESSION[ 'post' ][ 'total_or' ];
-	            $_SESSION['post']['gold_materiel'] = $_SESSION['character']['gold_materiel'] ?? $_SESSION[ 'post' ][ 'total_or' ];
+		// Check if cache file exists and is still fresh
+		if (file_exists($cacheFile) && (time() - filemtime($cacheFile) < $cacheLifetime)) {
+			// Read from cache
+			$itemsByCategory = json_decode(file_get_contents($cacheFile), true);
+		} else {
+			// Cache is stale or doesn't exist, fetch from DB and refresh cache
+			try {
+				$db = Database::getInstance();
+				$itemsByCategory['armes'] = $db->fetch_items_by_category('armement');
+				$itemsByCategory['protections'] = $db->fetch_items_by_category('protections');
+				$itemsByCategory['materiel'] = $db->fetch_items_by_category('materiel');
 
-	        } catch (Exception $e) {
-	            // Handle potential exceptions during data fetching
-	            // Maybe set an error message in the session to display on the page
-	            $_SESSION['error_message'] = "Erreur lors de la préparation de l'étape 6. " . $e->getMessage();
-	            // Log the full error for debugging
-	            error_log($e->getMessage());
-	        }
+				// Write to cache file
+				file_put_contents($cacheFile, json_encode($itemsByCategory));
 
-	    $armes = $_SESSION['step6_data']['armes'] ?? [];
-		$protections = $_SESSION['step6_data']['protections'] ?? [];
-		$materiel = $_SESSION['step6_data']['materiel'] ?? [];
+			} catch (Exception $e) {
+				$_SESSION['error_message'] = "Erreur lors de la préparation de l'étape 6. " . $e->getMessage();
+				error_log($e->getMessage());
+				// Fallback to empty arrays if DB fetch fails
+				$itemsByCategory['armes'] = [];
+				$itemsByCategory['protections'] = [];
+				$itemsByCategory['materiel'] = [];
+			}
+		}
+
+		// Assign to variables used in step6.php
+		$armes = $itemsByCategory['armes'] ?? [];
+		$protections = $itemsByCategory['protections'] ?? [];
+		$materiel = $itemsByCategory['materiel'] ?? [];
+
+		// Gold calculation (keep existing logic)
+		$_SESSION['post']['gold_arme'] = $_SESSION['post']['gold_arme'] ?? $_SESSION[ 'post' ][ 'total_or' ];
+		$_SESSION['post']['gold_protection'] = $_SESSION['post']['gold_protection'] ?? $_SESSION[ 'post' ][ 'total_or' ];
+		$_SESSION['post']['gold_materiel'] = $_SESSION['post']['gold_materiel'] ?? $_SESSION[ 'post' ][ 'total_or' ];
 
 		$gold_armes = $_SESSION['post']['gold_arme'] ?? $_SESSION[ 'post' ][ 'total_or' ];
 		$gold_protections = $_SESSION['post']['gold_protection'] ?? $_SESSION[ 'post' ][ 'total_or' ];
