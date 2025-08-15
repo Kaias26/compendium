@@ -98,6 +98,33 @@
 		}
 
 
+		// Handle inventory data from step 6
+		if (isset($_POST['inventaire'])) {
+			$_SESSION['post']['inventaire_final'] = [];
+			foreach ($_POST['inventaire'] as $category => $dataString) {
+				if (!empty($dataString)) {
+					$items = explode(',', $dataString);
+					foreach ($items as $itemString) {
+						list($itemId, $quantity) = explode(':', $itemString);
+						$_SESSION['post']['inventaire_final'][$category][$itemId] = [
+							'quantity' => (int)$quantity
+						];
+					}
+				}
+			}
+		}
+
+		// Save final gold amounts from step 6
+		if (isset($_POST['gold_armes_final'])) {
+			$_SESSION['post']['gold_arme'] = floatval($_POST['gold_armes_final']);
+		}
+		if (isset($_POST['gold_protections_final'])) {
+			$_SESSION['post']['gold_protection'] = floatval($_POST['gold_protections_final']);
+		}
+		if (isset($_POST['gold_materiel'])) {
+			$_SESSION['post']['gold_materiel'] = floatval($_POST['gold_materiel_final']);
+		}
+
 		if( isset( $_POST[ 'btnStep' ] ) ) {
 			$_SESSION[ 'step' ] = $_POST[ 'btnStep' ];
 		}
@@ -175,7 +202,7 @@
 	}
 
 	if( $_SESSION[ 'step' ] == 6 ) {
-		$_SESSION[ 'post' ][ 'total_or' ] = intval($_SESSION[ 'post' ][ 'dice_or' ]) + intval($_SESSION[ 'post' ][ 'dice_orBonus' ]);		
+		$_SESSION[ 'post' ][ 'total_or' ] = intval($_SESSION[ 'post' ][ 'dice_or' ]) + intval($_SESSION[ 'post' ][ 'dice_orBonus' ]);
 		$_SESSION['post']['gold_arme'] = $_SESSION['post']['gold_arme'] ?? $_SESSION[ 'post' ][ 'total_or' ];
 		$_SESSION['post']['gold_protection'] = $_SESSION['post']['gold_protection'] ?? $_SESSION[ 'post' ][ 'total_or' ];
 		$_SESSION['post']['gold_materiel'] = $_SESSION['post']['gold_materiel'] ?? $_SESSION[ 'post' ][ 'total_or' ];

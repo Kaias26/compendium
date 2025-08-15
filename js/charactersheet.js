@@ -67,9 +67,9 @@ $(document).ready( function () {
         };
 
         let purchasedItems = {
-            armes: {},
-            protections: {},
-            materiel: {}
+            armes: initialPurchasedItems.armes || {},
+            protections: initialPurchasedItems.protections || {},
+            materiel: initialPurchasedItems.materiel || {}
         };
 
         function showToast(message, title = 'Succès') {
@@ -101,11 +101,23 @@ $(document).ready( function () {
             }
         }
 
+        // Update hidden gold inputs
+        function updateGoldHiddenInputs() {
+            $('#gold-armes-final').val(purses.armes.text());
+            $('#gold-protections-final').val(purses.protections.text());
+            $('#gold-materiel-final').val(purses.materiel.text());
+        }
+
         function updateInventoryDisplay() {
             inventoryContainer.empty();
             let hasItems = false;
 
-            for (const category in purchasedItems) {
+            Object.keys(purchasedItems).forEach(category => {
+                // Ensure purchasedItems[category] is an object before iterating its keys
+                if (typeof purchasedItems[category] !== 'object' || purchasedItems[category] === null) {
+                    purchasedItems[category] = {}; // Initialize as empty object
+                }
+
                 if (Object.keys(purchasedItems[category]).length > 0) {
                     hasItems = true;
                     const categoryTitle = $('<h5>').text(category.charAt(0).toUpperCase() + category.slice(1));
@@ -153,7 +165,7 @@ $(document).ready( function () {
                     }
                     inventoryContainer.append(list);
                 }
-            }
+            });
 
             if (!hasItems) {
                 inventoryContainer.html(initialInventoryMessage);
@@ -172,6 +184,7 @@ $(document).ready( function () {
             if (currentGold >= price) {
                 currentGold -= price;
                 purse.text(currentGold);
+                updateGoldHiddenInputs();
 
                 let name;
                 if (purchasedItems[category][itemId]) {
@@ -201,6 +214,7 @@ $(document).ready( function () {
             if (currentGold >= item.price) {
                 currentGold -= item.price;
                 purse.text(currentGold);
+                updateGoldHiddenInputs();
                 item.quantity++;
                 updateHiddenInputs();
                 updateInventoryDisplay();
@@ -220,6 +234,7 @@ $(document).ready( function () {
 
             currentGold += item.price;
             purse.text(currentGold);
+            updateGoldHiddenInputs();
 
             item.quantity--;
             let itemName = item.name;
@@ -242,6 +257,7 @@ $(document).ready( function () {
 
             currentGold += item.price * item.quantity;
             purse.text(currentGold);
+            updateGoldHiddenInputs();
             let itemName = item.name;
 
             delete purchasedItems[category][itemId];
@@ -250,5 +266,8 @@ $(document).ready( function () {
             updateInventoryDisplay();
             showToast(`Vendu (x${item.quantity}) : ${itemName}.<br>Bourse restante : ${currentGold} PO`);
         });
+
+        // Initial display of purchased items on page load
+        updateInventoryDisplay();
     };
 });

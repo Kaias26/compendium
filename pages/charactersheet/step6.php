@@ -78,6 +78,9 @@
         <input type="hidden" name="inventaire[armes]" id="inventaire-armes-ids">
         <input type="hidden" name="inventaire[protections]" id="inventaire-protections-ids">
         <input type="hidden" name="inventaire[materiel]" id="inventaire-materiel-ids">
+        <input type="hidden" name="gold_armes_final" id="gold-armes-final">
+        <input type="hidden" name="gold_protections_final" id="gold-protections-final">
+        <input type="hidden" name="gold_materiel_final" id="gold-materiel-final">
     </fieldset>
 </form>
 
@@ -229,7 +232,46 @@
     <button class="nxt__btn btn btn-success float-end" type="submit" name="btnStep" value="7" form="charactersheet"> Suivant</button>
 </div>
 
+<?php
+$initialPurchasedItemsJson = "{}"; // Default empty JSON
+if (isset($_SESSION['post']['inventaire_final']) && !empty($_SESSION['post']['inventaire_final'])) {
+    // We need to convert the PHP array to a format suitable for JS
+    // The PHP array is [category => [itemId => [quantity => X]]]
+    // The JS needs [category => [itemId => {name: X, price: Y, quantity: Z}]]
+    // So, we need to fetch name and price for each item from the cached itemsByCategory
+    $jsFriendlyPurchasedItems = [];
+    foreach ($_SESSION['post']['inventaire_final'] as $category => $items) {
+        foreach ($items as $itemId => $data) {
+            $quantity = $data['quantity'];
+            // Find the item in the cached itemsByCategory to get name and price
+            $foundItem = null;
+            // Assuming $armes, $protections, $materiel are available from process.php
+            $sourceArray = [];
+            if ($category === 'armes') $sourceArray = $armes;
+            else if ($category === 'protections') $sourceArray = $protections;
+            else if ($category === 'materiel') $sourceArray = $materiel;
+
+            foreach ($sourceArray as $cachedItem) {
+                if ($cachedItem['id'] == $itemId) {
+                    $foundItem = $cachedItem;
+                    break;
+                }
+            }
+            if ($foundItem) {
+                $jsFriendlyPurchasedItems[$category][$itemId] = [
+                    'name' => htmlspecialchars($foundItem['name'] ?? 'N/A'),
+                    'price' => htmlspecialchars($foundItem['prix'] ?? '0'),
+                    'quantity' => $quantity
+                ];
+            }
+        }
+    }
+    $initialPurchasedItemsJson = json_encode($jsFriendlyPurchasedItems);
+}
+?>
 <script>
+var initialPurchasedItems = <?php echo $initialPurchasedItemsJson; ?>;
+
 // Init DataTables
 var groupColumn = 0;
 
