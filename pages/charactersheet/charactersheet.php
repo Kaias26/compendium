@@ -33,7 +33,7 @@
 					</div>
 					<div class="title__name">
 						<h3><a class="nav-link <?php if ($_SESSION['max_step_reached'] < 6) echo 'disabled'; ?>" <?php if ($_SESSION['max_step_reached'] >= 6) echo 'href="?step=6"'; ?>>Équipement et Matériel</a></h3>
-						<p>Votre richesse de départ</p>
+						<p>Passer moins pour un baltringue</p>
 					</div>
 					<div class="title__name">
 						<h3><a class="nav-link <?php if ($_SESSION['max_step_reached'] < 7) echo 'disabled'; ?>" <?php if ($_SESSION['max_step_reached'] >= 7) echo 'href="?step=7"'; ?>>Subtilités</a></h3>
